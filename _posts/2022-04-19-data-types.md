@@ -1,5 +1,5 @@
 ---
-toc: true
+toc: false
 layout: post
 description: Data Types
 categories: [data, maths, statistics, ML]
@@ -8,7 +8,7 @@ title: Types of Data
 
 # Types
 
-Taxonomy of data types when considering machine learning:
+Taxonomy of data types when considering machine learning
 
 - **Categorical**: _qualitative_
 
