@@ -12,13 +12,7 @@ Test post
 
 ## Introduction
 
-Testing
-$\overleftrightarrow{AB}$
-
-```python
-# Prints '2'
-print(1+1)
-```
+T
 
 ## Topics to cover
 
@@ -34,15 +28,10 @@ Ch 1 Barber [^3]
 
 ### Calculus
 
-Appdx 2 Barber [^3]
+Appendix 2 Barber [^3]
 
-[^1]:
-    Gilbert Strang. Introduction to linear algebra. Cambridge Press, Wellesley, MA, 2016.
+#### References
 
-[^2]:
-    Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep learning. MIT
-    press, 2016.
-
-[^3]:
-    David Barber. Bayesian reasoning and machine learning. Cambridge University
-    Press, 2012.
+- [^1]: Gilbert Strang. Introduction to linear algebra. Cambridge Press, Wellesley, MA, 2016.
+- [^2]: Ian Goodfellow et Al. Deep learning. MIT press, 2016.
+- [^3]: David Barber. Bayesian reasoning and machine learning. Cambridge University Press, 2012.
