@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: Rescaling, normalisation, standardisation
-categories: [data, maths, statistics, ML]
+categories: [data, maths, statistics, ML, feature-scaling]
 title: Feature Scaling in ML
 ---
 
@@ -25,8 +25,12 @@ definition here
 - Methods:
   - Z-Score: for population mean and std.dev.
     - $\LARGE z = \frac{x - \mu}{\sigma}$
-  - Z-Score (estmiated): for sample mean and std.dev.($\large S$)
+  - Z-Score (estimated): for sample mean and std.dev.($\large S$)
     - $\LARGE z = \frac{x - \bar x}{S}$
 - Usages:
   - Standardising regression coefficients
   - Standardising variables prior to PCA
+
+### References
+
+-
