@@ -41,10 +41,10 @@ Generally, normalisation is applied when the distribution of the data is known t
 ## Scaling to Unit Length
 
 - Scale the components of a feature vector such that the overall vector has length 1
-- e.g. dividing by the Euclidean length of the vector
-- $x'= \frac {x} {||x||}$
+- e.g. dividing by the Euclidean length of the vector  
+  $\large x'= \frac {x} {||x||}$
 
-### References
+## References
 
 - Wikipedia - [Feature Scaling](https://en.wikipedia.org/wiki/Feature_scaling#Methods)
 - KDNuggets - [Feature Scaling](https://www.kdnuggets.com/2020/04/data-transformation-standardization-normalization.html)

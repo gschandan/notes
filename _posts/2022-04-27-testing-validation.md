@@ -3,12 +3,12 @@ toc: true
 layout: post
 description: Defining the concepts of testing, training and validation sets
 categories: [data, ML, training, testing, validation, cross-validation]
-title: Training, Testing & Validation Datasets
+title: Training, Testing, Validation Datasets and Cross-Validation
 ---
 
 # Datasets
 
-To build a mathematical model to make predictions, data is needed to train and test the model, for which three data sets are usually used. Typically, the data is split into a training set and testing set (80-20 or 70-30 etc.), or a training, testing and validation set.
+To build a mathematical model to make predictions, data is needed to train and test the model, for which three data sets are usually used. Typically, the data is split into a training set and testing set (80-20 or 70-30 etc.), or a training, testing and validation set. Cross-Validation can be particularly helpful for smaller datasets, helping to avoid over-fitting and hyperparameter tuning.
 
 ## Training Set
 
@@ -26,7 +26,7 @@ Another holdout dataset can be used is the validation set. It provides an unbias
 
 ## Cross-Validation
 
-If the dataset size is relatively smaller to begin with, to avoid issues with trying to train a model on less data, cross-validation can be used. The training dataset can be split up into subsets or subsamples. Each model can be trained against combinations of these and validated against the remaining ones. Then the final model can be trained, using the best performing hyperparameters, on the complete training set.
+If the dataset size is relatively smaller to begin with, to avoid issues with trying to train a model on less data, cross-validation can be used. The training dataset can be split up into subsets or subsamples. Each model can be trained against combinations of these and validated against the remaining ones. Then the final model can be trained, using the best performing hyperparameters, on the complete training set, so all observations have been used.
 
 ### Forms of Cross-Validation
 
@@ -41,7 +41,9 @@ If the dataset size is relatively smaller to begin with, to avoid issues with tr
 - **Stratified k-fold**
   - Ensure that each fold is a representative sample of the whole population of observations e.g. mean is similar in all the subsets or proportions for binary classifiers
 - **Repeated random sub-sampling**
-  -
+  - Monte Carlo cross validation - create multiple random training and validation subsets, then for each split, fit the model to the training subset and assess the accuracy on the validation subset. Then average the results over the subsets.
+  - Validation subsets may overlap, or some data points may never be used due to the random sampling.
+  - Can also be stratified by the mean of the subsets
 
 #### References
 

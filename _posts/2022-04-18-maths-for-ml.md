@@ -32,6 +32,6 @@ Appendix 2 Barber [^3]
 
 #### References
 
-- [^1]: Gilbert Strang. Introduction to linear algebra. Cambridge Press, Wellesley, MA, 2016.
-- [^2]: Ian Goodfellow et Al. Deep learning. MIT press, 2016.
-- [^3]: David Barber. Bayesian reasoning and machine learning. Cambridge University Press, 2012.
+[^1]: Gilbert Strang. Introduction to linear algebra. Cambridge Press, Wellesley, MA, 2016.
+[^2]: Ian Goodfellow et Al. Deep learning. MIT press, 2016.
+[^3]: David Barber. Bayesian reasoning and machine learning. Cambridge University Press, 2012.

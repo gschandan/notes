@@ -39,7 +39,8 @@ Common taxonomy of data types when considering machine learning
 
 # References & Further Reading
 
-- [^1]: http://economistjourney.blogspot.com/2018/06/what-is-sampling-noise.html.
+[^1]: http://economistjourney.blogspot.com/2018/06/what-is-sampling-noise.html.
+
 - Banko, M. and Eric Brill. 2001. [Scaling to very very large corpora for natural language disambiguation.](https://doi.org/10.3115/1073012.1073017) Association for Computational Linguistics, USA, 26–33.
 - Halevy, A., Norvig, P. and Fernando, N. (2009). [The Unreasonable Effectiveness of Data.](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/35179.pdf) Intelligent Systems, IEEE. 24. 8 - 12. 10.1109/MIS.2009.36.
 - Geron, A. (2017) Hands-On Machine Learning with Scikit-Learn & TensorFlow : concepts, tools, and techniques to build intelligent systems.
