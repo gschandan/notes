@@ -45,7 +45,11 @@ If the dataset size is relatively smaller to begin with, to avoid issues with tr
   - Validation subsets may overlap, or some data points may never be used due to the random sampling.
   - Can also be stratified by the mean of the subsets
 
-#### References
+## No Free Lunch Theorem
+
+- t
+
+# References
 
 - Burkov, A. (2019) The Hundred-Page Machine Learning Book.
 - Geron, A. (2017) Hands-On Machine Learning with Scikit-Learn & TensorFlow : concepts, tools, and techniques to build intelligent systems.
