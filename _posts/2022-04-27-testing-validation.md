@@ -45,11 +45,13 @@ If the dataset size is relatively smaller to begin with, to avoid issues with tr
   - Validation subsets may overlap, or some data points may never be used due to the random sampling.
   - Can also be stratified by the mean of the subsets
 
-## No Free Lunch Theorem
+## No Free Lunch Theorem[^1]
 
-- t
+- Any two optimisation algorithms are equivalent when their performance is averaged across all possible problems, if no assumptions are made about the data.
 
 # References
+
+[^1] Wolpert, D.H., Macready, W.G. (1997). No Free Lunch Theorems for Optimization. IEEE Transactions on Evolutionary Computation 1, 67
 
 - Burkov, A. (2019) The Hundred-Page Machine Learning Book.
 - Geron, A. (2017) Hands-On Machine Learning with Scikit-Learn & TensorFlow : concepts, tools, and techniques to build intelligent systems.
