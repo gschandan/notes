@@ -32,6 +32,24 @@ $
 
 This is a set (denoted by square brackets) of linear equations.
 
+## Tensors
+
+Tensors are a generalisation of vectors and matrices to any number of dimensions.
+
+| Dimension | Name       | Description       |
+| --------- | ---------- | ----------------- |
+| 0         | Scalar     | magnitude (value) |
+| 1         | Vector     | array             |
+| 2         | Matrix     | 2d array (square) |
+| 3         | 3-Tensor   | 3d array (cube)   |
+| $n$       | $n$-Tensor | multidimensional  |
+
+### Scalar Tensors
+
+Single value, no dimensions, denoted by lower case italic variable names e.g. $x$
+
+[Scalar Tensors notebook](../_notebooks/2022-04-30-scalar-tensors.ipynb)
+
 ### Linear Algebra
 
 Ch 1-7 Strang [^1]
