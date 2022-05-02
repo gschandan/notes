@@ -75,7 +75,7 @@ Norms are functions that quantify vector magnitude (length).
 
 $$\large L{^2}$$ Norm $$||\boldsymbol{x}||{_2} = \sqrt{\sum_{\substack{i}}x{_i}{^2}}$$  
 Square each element in the vector, sum them, then take the square root.
-Measures euclidean distance from the origin. Also commonly denoted $$\large||\boldsymbol{x}||$$.
+Measures euclidean distance from the origin. Also commonly denoted $$\large||\boldsymbol{x}||$$
 
 $$\large L{^1}$$ Norm $$||\boldsymbol{x}||{_1} = \sum_{\substack{i}}|x{_i}|$$  
 Sum the absolute values in the vector. Varies linearly at all locations (not origin dependent).
