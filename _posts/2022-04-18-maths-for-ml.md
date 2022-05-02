@@ -15,8 +15,7 @@ Links to my notes on learning maths for ML.
 ### Linear Algebra
 
 1. [Introduction & Notation](2022-04-30-linear-algebra-01.md)
-2. [Matrices](2022-04-30-matrices.md)
-   1. [Operations](2022-04-30-matrix-operations.md)
+2. [Matrices](2022-02-05-matrices.md)
 3. [Tensors](2022-04-30-tensors.md)
 4. [Eigenvectors](2022-04-30-eigenvectors.md)
 

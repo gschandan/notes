@@ -18,16 +18,16 @@ $$y$$ = price, $$\alpha$$ = $$y$$-intercept, $$\beta$$ = number of rooms, $$\gam
 
 When dealing with linear systems of equations, there can only be three types of solutions, none, one or infinite. Plotting the equations, if the lines are parallel, they will never intersect i.e. no solution, if the lines are overlapping, there are infinite solutions, else the lines will intersect at one point only (it is impossible for straight lines to intersect multiple times).
 
-Using the house price regression model, we will have as many rows($$n$$) of these equations as we have house prices, each with its $$m$$ features($$x$$), and $$m+1$$ unknowns($$\alpha$$,$$\beta$$, $$\gamma$$) which is what we want to solve for:
+Using the house price regression model, we will have as many rows($$n$$) of these equations as we have house prices, each with its $$m_{-1}$$ features($$x$$) (m-1 due to alpha), and $$m+1$$ unknowns($$\alpha$$,$$\beta$$, $$\gamma$$) which is what we want to solve for:
 
-$$\large y = \alpha + \beta x{_1} + \gamma x{_2} + ... + mx{_m}$$
+$$ y = \alpha + \beta x{_1} + \gamma x{_2} + ... + m_{-1}x_{m_{-1}} $$
 
 $$
 \begin{bmatrix}
- y{_1} |\alpha + \beta x{_{1,1}} + \gamma x{_{1,2}} + ... + mx{_{1,m}} \\
- y{_2} | \alpha + \beta x{_{2,1}} + \gamma x{_{2,2}} + ... + mx{_{2,m}} \\
+ y{_1} |\alpha + \beta x{_{1,1}} + \gamma x{_{1,2}} + ... + m_{-1}x{_{1,m_{-1}}} \\
+ y{_2} | \alpha + \beta x{_{2,1}} + \gamma x{_{2,2}} + ... + m_{-1}x{_{2,m_{-1}}} \\
 \dots \\
- y{_n} |  \alpha + \beta x{_{n,1}} + \gamma x{_{n,2}} + ... + mx{_{n,m}}
+ y{_n} |  \alpha + \beta x{_{n,1}} + \gamma x{_{n,2}} + ... + m_{-1}x{_{n,m_{-1}}}
 \end{bmatrix}
 $$
 
@@ -73,7 +73,8 @@ Row vector of shape (1,3) transposed to a column vector shape (3,1).
 Norms are functions that quantify vector magnitude (length).  
  $$\begin{bmatrix}  x{_1} & x{_2} \end{bmatrix} = \begin{bmatrix}  5 & 7 \end{bmatrix}$$ also represents a magnitude and direction from the origin.
 
-$$\large L{^2}$$ Norm $$||\boldsymbol{x}||{_2} = \sqrt{\sum_{\substack{i}}x{_i}{^2}}$$  
+$$\large L{^2}$$ Norm 
+$$||\boldsymbol{x}||{_2} = \sqrt{\sum_{\substack{i}}x{_i}{^2}}$$  
 Square each element in the vector, sum them, then take the square root.
 Measures euclidean distance from the origin. Also commonly denoted $$\large||\boldsymbol{x}||$$
 
