@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.290">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2022-02-05">
+<meta name="description" content="Matrix properties and Operations">
+
+<title>notes - Matrix Properties and Operations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">notes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Matrix Properties and Operations</h1>
+                  <div>
+        <div class="description">
+          Matrix properties and Operations
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">math</div>
+                <div class="quarto-category">linear-algebra</div>
+                <div class="quarto-category">matrix</div>
+                <div class="quarto-category">introduction</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 5, 2022</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link active" data-scroll-target="#matrices">Matrices</a>
+  <ul class="collapse">
+  <li><a href="#norms---frobenius-norm" id="toc-norms---frobenius-norm" class="nav-link" data-scroll-target="#norms---frobenius-norm">Norms - Frobenius Norm</a></li>
+  <li><a href="#multiplication" id="toc-multiplication" class="nav-link" data-scroll-target="#multiplication">Multiplication</a></li>
+  <li><a href="#symmetric-identity-matrices" id="toc-symmetric-identity-matrices" class="nav-link" data-scroll-target="#symmetric-identity-matrices">Symmetric &amp; Identity Matrices</a>
+  <ul class="collapse">
+  <li><a href="#symmetric" id="toc-symmetric" class="nav-link" data-scroll-target="#symmetric">Symmetric</a></li>
+  <li><a href="#identity" id="toc-identity" class="nav-link" data-scroll-target="#identity">Identity</a></li>
+  </ul></li>
+  <li><a href="#matrix-inversion" id="toc-matrix-inversion" class="nav-link" data-scroll-target="#matrix-inversion">Matrix Inversion</a>
+  <ul class="collapse">
+  <li><a href="#diagonal-matrices" id="toc-diagonal-matrices" class="nav-link" data-scroll-target="#diagonal-matrices">Diagonal Matrices</a></li>
+  <li><a href="#orthogonal-matrices" id="toc-orthogonal-matrices" class="nav-link" data-scroll-target="#orthogonal-matrices">Orthogonal Matrices</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="matrices" class="level1">
+<h1>Matrices</h1>
+<section id="norms---frobenius-norm" class="level2">
+<h2 class="anchored" data-anchor-id="norms---frobenius-norm">Norms - Frobenius Norm</h2>
+<p><span class="math inline">\(||\boldsymbol{X}||{_F} = \sqrt{\displaystyle\sum_{i,j} X_{i,j}{^2} }\)</span></p>
+<p>For i rows, and j columns, sum the square of each element, then take the square root. This is analogous to the <span class="math inline">\(L^2\)</span> norm of vectors, and measures the Euclidean size of the matrix. Can also be thought of as the sum of the magnitude of all the vectors in <span class="math inline">\(\boldsymbol{X}\)</span>.</p>
+</section>
+<section id="multiplication" class="level2">
+<h2 class="anchored" data-anchor-id="multiplication">Multiplication</h2>
+<p>Number of columns in the first matrix must match the number of rows in the second, i.e.&nbsp;in the following example, m is the number of rows in the first matrix, n is the number of columns in the first matrix and the number of rows in the second, and p is the number of columns in the second matrix.</p>
+<p><span class="math display">\[ m\underset{n}{\begin{bmatrix} \, \\ A \\ \,\end{bmatrix}} \quad
+n\underset{p}{\begin{bmatrix}&amp; B &amp;\end{bmatrix}} = m\underset{p}{\begin{bmatrix} \, \\ C \\ \,\end{bmatrix}}
+\]</span></p>
+<p><span class="math display">\[ C_{i,k} = \displaystyle\sum_{j}A_{i,j}B_{j,k} \]</span></p>
+<p>Multiplying a matrix with a vector:</p>
+<p><span class="math display">\[
+\begin{bmatrix} 3 &amp; 4 \\ 5 &amp; 6 \\ 7 &amp; 8 \end{bmatrix}
+\begin{bmatrix} 1 \\ 2 \end{bmatrix} = \begin{bmatrix} 3*1 + 4*2\\ 5*1+6*2 \\ 7*1+8*2 \end{bmatrix} = \begin{bmatrix} 11 \\ 17 \\ 23\end{bmatrix}
+\]</span></p>
+<p>Multiplying a matrix with a matrix:</p>
+<p><span class="math display">\[
+\begin{bmatrix} 3 &amp; 4 \\ 5 &amp; 6 \\ 7 &amp; 8 \end{bmatrix}
+\begin{bmatrix} 1 &amp; 9\\ 2 &amp; 0 \end{bmatrix} = \begin{bmatrix} 3*1 + 4*2 &amp; 3*9+4*0\\ 5*1+6*2 &amp; 5*9+6*0\\ 7*1+8*2 &amp;7*9+8*0 \end{bmatrix} = \begin{bmatrix} 11 &amp; 27\\ 17 &amp; 45\\ 23&amp;63\end{bmatrix}
+\]</span></p>
+<p>Matrix multiplication is typically not commutative: <span class="math display">\[\boldsymbol{X}\boldsymbol{Y} \not= \boldsymbol{Y}\boldsymbol{X}\]</span></p>
+<p>If both matrices are square, multiplying either way will work, but the results will usually be different.</p>
+<p>Can represent the following regression as a matrix multiplication:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+y{_1} |\alpha + \beta x{_{1,1}} + \gamma x{_{1,2}} + ... + m_{-1}x{_{1,m_{-1}}} \\
+y{_2} | \alpha + \beta x{_{2,1}} + \gamma x{_{2,2}} + ... + m_{-1}x{_{2,m_{-1}}} \\
+\vdots \\
+y{_n} |  \alpha + \beta x{_{n,1}} + \gamma x{_{n,2}} + ... + m_{-1}x{_{n,m_{-1}}}
+\end{bmatrix} \\ \begin{bmatrix} y{_1} \\ y{_2} \\ \vdots \\ y{_n}\end{bmatrix} =\begin{bmatrix} 1 &amp; X_{1,1} &amp; X_{1,2} &amp; \dots &amp; X_{1,m_{-1}}\\ 1 &amp; X_{2,1} &amp; X_{2,2} &amp; \dots &amp; X_{2,m_{-1}} \\ \vdots \\ 1 &amp; X_{n,1} &amp; X_{n,2} &amp; \dots &amp; X_{n,m_{-1}} \end{bmatrix}
+\begin{bmatrix} \alpha \\ \beta \\ \vdots \\ m_{-1}\end{bmatrix}
+\]</span></p>
+<p><span class="math inline">\(n\)</span> cases tall, <span class="math inline">\(m\)</span> features wide.</p>
+</section>
+<section id="symmetric-identity-matrices" class="level2">
+<h2 class="anchored" data-anchor-id="symmetric-identity-matrices">Symmetric &amp; Identity Matrices</h2>
+<section id="symmetric" class="level3">
+<h3 class="anchored" data-anchor-id="symmetric">Symmetric</h3>
+<p>Number of rows = number of columns i.e.&nbsp;square Transpose is equal to itself i.e.&nbsp;any value on the diagonal but the values either side must be equal.</p>
+</section>
+<section id="identity" class="level3">
+<h3 class="anchored" data-anchor-id="identity">Identity</h3>
+<p>An identity matrix is a symmetric matrix where every element along the main diagonal is 1, all others are 0. This satisfies the condition of being an identity as, if an identity matrix is multiplied by a <span class="math inline">\(n\)</span> length vector, it will remain unchanged i.e.&nbsp;we get the same vector returned.</p>
+<p>Notation <span class="math inline">\(\boldsymbol{I}_n\)</span> where n = height or width.</p>
+<p>1 is the identity element for multiplication - the number which when operated on with any other number results in the other number. 0 is the identity element for addition, and 1 is the identity element for multiplication. Whenever the identity element for an operation is the solution, the two items operated on are inverses of each other e.g.&nbsp;<span class="math inline">\(5x = 15\)</span>, both sides can be multiplied by the multiplicative inverse i.e.&nbsp;<span class="math inline">\(\frac{1}{5}\)</span> or <span class="math inline">\(5^{-1}\)</span> to get <span class="math inline">\(x=3\)</span>. A number multiplied by its reciprocal or inverse always returns 1 e.g.&nbsp;<span class="math inline">\(\frac{1}{5} * 5 = 1\)</span>. Similarly, a matrix multiplied by its inverse, will return the identity matrix.</p>
+</section>
+</section>
+<section id="matrix-inversion" class="level2">
+<h2 class="anchored" data-anchor-id="matrix-inversion">Matrix Inversion</h2>
+<p>Used to computationally solve linear equations. Matrix inverse is denoted <span class="math inline">\(\boldsymbol{X}^{-1}\)</span>. It satisfies the following property:</p>
+<p><span class="math inline">\(\boldsymbol{X}^{-1} \boldsymbol{X} = \boldsymbol{X}\boldsymbol{X}^{-1} = \boldsymbol{I}_n\)</span></p>
+<p>2x2 Matrix inversion: <span class="math display">\[
+\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d &amp; -b \\ -c &amp; a \end{bmatrix}
+\]</span></p>
+<p>where <span class="math inline">\({ad-bc}\)</span> is the determinant (which cannot be 0).</p>
+<p>Can’t divide by a matrix, but can multiply by an inverse to get the same result e.g. we know matrix <span class="math inline">\(\boldsymbol{A}\)</span> and <span class="math inline">\(\boldsymbol{B}\)</span>, and want to get the values for matrix <span class="math inline">\(\boldsymbol{X}\)</span>:<br>
+<span class="math inline">\(\boldsymbol{X} \boldsymbol{A} = \boldsymbol{B}\)</span><br>
+We can’t divide by <span class="math inline">\(\boldsymbol{A}\)</span>, but can multiply both sides by the inverse of <span class="math inline">\(\boldsymbol{A}\)</span>:<br>
+$ ^{-1} = ^{-1}$ and we know that <span class="math inline">\(\boldsymbol{A}\boldsymbol{A}^{-1} = \boldsymbol{I}\)</span><br>
+which gives us<br>
+$ = ^{-1}$<br>
+and <span class="math inline">\(\boldsymbol{I}\)</span> can be ignored, just like 1 would be during multiplication:<br>
+$ = ^{-1}$</p>
+<p>If a matrix has no inverse i.e.&nbsp;the determinant is zero, then it is called singular.</p>
+<p>Matrix inversion can also only be calculated if the matrix is square i.e.&nbsp;the vector span (number of rows) is equal to the matrix range (number of cols). This avoids overdetermination (rows &gt; cols) i.e.&nbsp;number of equations &gt; number of dimensions (multiple points of overlap), and underdetermination (rows &lt; cols) i.e.&nbsp;number of equations are less than dimensions (no overlap as single line) - may still be able to solve these, but can’t invert a matrix as a solution.</p>
+<section id="example-usage" class="level4">
+<h4 class="anchored" data-anchor-id="example-usage">Example Usage</h4>
+<p><span class="math display">\[
+\begin{bmatrix} y{_1} \\ y{_2} \\ \vdots \\ y{_n}\end{bmatrix} =\begin{bmatrix} 1 &amp; X_{1,1} &amp; X_{1,2} &amp; \dots &amp; X_{1,m_{-1}}\\ 1 &amp; X_{2,1} &amp; X_{2,2} &amp; \dots &amp; X_{2,m_{-1}} \\ \vdots \\ 1 &amp; X_{n,1} &amp; X_{n,2} &amp; \dots &amp; X_{n,m_{-1}} \end{bmatrix}
+\begin{bmatrix} \alpha \\ \beta \\ \vdots \\ m_{-1}\end{bmatrix}
+\]</span> Would like to solve for the vector of variables on the right, in this regression model. This can be represented as: <span class="math inline">\(\boldsymbol{y} = \boldsymbol{X}\boldsymbol{w}\)</span> where <span class="math inline">\(\boldsymbol{w}\)</span> is the vector of weights, <span class="math inline">\(\alpha\)</span> to <span class="math inline">\(m_{-1}\)</span>, corresponding to the number of columns in our feature matrix.</p>
+<p>In this equation, <span class="math inline">\(\boldsymbol{y} = \boldsymbol{X}\boldsymbol{w}\)</span>, we know the outcomes <span class="math inline">\(\boldsymbol{y}\)</span>, and we know the features <span class="math inline">\(\boldsymbol{X}\)</span>, and we wish to work out the weights, <span class="math inline">\(\boldsymbol{w}\)</span>, which we can do using matrix inversion, assuming the inverse matrix exists i.e.&nbsp;it isn’t singular - all columns must be linearly independent e.g.&nbsp;one column should not be a multiple of another one like [1,2] - another can’t be [2,4] or [1,2] again as we would have paralell lines or overlapping lines respectively.</p>
+<p>We can multiply both sides by the inverse of <span class="math inline">\(\boldsymbol{X}\)</span>, <span class="math inline">\(\boldsymbol{X}^{-1}\)</span> to obtain:<br>
+$^{-1} = ^{-1} $ and given <span class="math inline">\(\boldsymbol{X}^{-1}\boldsymbol{X} = \boldsymbol{I}\)</span>, we can simplify this to:<br>
+$ = ^{-1} $ and given the property of the identity matrix, we can remove it to leave:<br>
+$ = ^{-1} $</p>
+<p>The order of operations is key to preserve, as matrix multiplication is not always commutative i.e.&nbsp;$ = $</p>
+</section>
+<section id="diagonal-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="diagonal-matrices">Diagonal Matrices</h3>
+<p>Non-zero elements along the main diagonal, zero elsewhere e.g.&nbsp;identity matrix. If it is square, denoted as <span class="math inline">\(diag(\boldsymbol{x})\)</span> where <span class="math inline">\(\boldsymbol{x}\)</span> is a vector of main diagonal elements e.g.&nbsp;<span class="math inline">\([1,1,1]\)</span> to represent <span class="math inline">\(\boldsymbol{I}_3\)</span>. Much more computationally efficient: - Multiplication: <span class="math inline">\(diag(\boldsymbol{x})\boldsymbol{y} = \boldsymbol{x}\odot{}\boldsymbol{y}\)</span> - Inversion: $diag()^{-1} = diag(,,)^T $ - Can’t divide by zero, so if any elemenet along the diagonal contains zero, the diagonal can’t be inverted - Can be non-square and computation can still be efficient e.g.&nbsp;by adding zeros to the product if height &gt; width, or by removing elements from the product if the width &gt; height</p>
+</section>
+<section id="orthogonal-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="orthogonal-matrices">Orthogonal Matrices</h3>
+<p>In orthogonal matrices, orthonormal vectors make up all rows and columns. This means that <span class="math inline">\(\boldsymbol{A}^{T} \boldsymbol{A} = \boldsymbol{A}\boldsymbol{A}^{T} = \boldsymbol{I}\)</span> and also that <span class="math inline">\(\boldsymbol{A}^{T} = \boldsymbol{A}^{-1}\boldsymbol{I} = \boldsymbol{A}^{-1}\)</span>. Calculating <span class="math inline">\(\boldsymbol{A}^{T}\)</span> is cheap, and therefore so is <span class="math inline">\(\boldsymbol{A}^{-1}\)</span> for orthogonal matrices.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
