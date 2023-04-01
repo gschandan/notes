@@ -147,7 +147,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#program-synthesis" id="toc-program-synthesis" class="nav-link active" data-scroll-target="#program-synthesis">Program Synthesis</a></li>
+  <li><a href="#program-synthesis" id="toc-program-synthesis" class="nav-link active" data-scroll-target="#program-synthesis">Program Synthesis</a>
+  <ul class="collapse">
+  <li><a href="#compilation-vs-synthesis" id="toc-compilation-vs-synthesis" class="nav-link" data-scroll-target="#compilation-vs-synthesis">Compilation vs Synthesis</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -159,6 +163,17 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="program-synthesis" class="level1">
 <h1>Program Synthesis</h1>
+<section id="compilation-vs-synthesis" class="level2">
+<h2 class="anchored" data-anchor-id="compilation-vs-synthesis">Compilation vs Synthesis</h2>
+<p>Generally, compilers transform source code from the source language to the target language, usually to create an executable program, whereas program synthesisers <em>search</em> for a program that will satisfy some stated requirements. They both take high-level specifications to generate software, but synthesisers can search over a solution space to discover how to generate a program to satisfy the requirements (some compiler optimisations also do this e.g.&nbsp;autotuning). ## Synthesis Program synthesis will generate a program that will solve the stated problem, within a specified program solution space i.e.&nbsp;with control over the space of programs, not just the intended behaviour. An example is flash fill (Excel) which derives and applies a small program to the rest of the data. The order can also be rveersed e.g.&nbsp;start with a program and search for the specification i.e.&nbsp;reverse engineering e.g.&nbsp;Verified Lifting - discovering a high level representation that is provably equivalent to an implementation which can then be used to generate a more efficient version of the program. Three major challenges: ### Intention - Semantic and syntactic constraints: form of user input will influence the synthesis system e.g.&nbsp;input-output examples like flash fill may not be suitable. May need a multimodal approach with some examples or abstract examples combined with logical specifications, to provide enough data about intended behaviour. - Under specification: if there are multiple solutions that satisfy requirements, which one should be chosen? ### Invention - Discovering the code to satisfy the requirements ### Adaptation - The application of synthesis to broader software development e.g.&nbsp;bug fixing, optimisation and other maintenance or non-greenfield tasks</p>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<p>[^1]</p>
+<ul>
+<li>A. Solar-Lezama, MIT 6.S981 <a href="https://people.csail.mit.edu/asolar/SynthesisCourse/index.htm">Introduction to Program Synthesis</a></li>
+</ul>
 
 
 </section>
