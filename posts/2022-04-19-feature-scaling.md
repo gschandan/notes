@@ -12,7 +12,9 @@ description: Rescaling, normalisation, standardisation
 layout: post
 title: Feature Scaling in ML
 toc: true
-
+format:
+  html:
+    html-math-method: katex
 ---
 
 # Feature Scaling

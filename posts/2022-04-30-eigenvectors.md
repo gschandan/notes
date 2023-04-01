@@ -12,7 +12,9 @@ description: Eigenvectors and Eigenvalues
 layout: post
 title: Eigenvectors and Eigenvalues
 toc: true
-
+format:
+  html:
+    html-math-method: katex
 ---
 
 # Eigenvectors and Eigenvalues

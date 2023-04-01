@@ -11,7 +11,9 @@ description: Links to notes for maths for ML
 layout: post
 title: Maths for ML
 toc: true
-
+format:
+  html:
+    html-math-method: katex
 ---
 
 # Index

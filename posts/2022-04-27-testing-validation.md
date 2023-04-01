@@ -13,7 +13,9 @@ description: Defining the concepts of testing, training and validation sets
 layout: post
 title: Training, Testing, Validation Datasets and Cross-Validation
 toc: true
-
+format:
+  html:
+    html-math-method: katex
 ---
 
 # Datasets

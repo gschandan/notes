@@ -10,7 +10,9 @@ description: Introduction and basic concepts of linear algebra
 layout: post
 title: Introduction to Linear Algebra
 toc: true
-
+format:
+  html:
+    html-math-method: katex
 ---
 
 # Introduction

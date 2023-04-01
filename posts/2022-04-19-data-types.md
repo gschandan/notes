@@ -11,7 +11,9 @@ description: Data Types, Quality & Quantity
 layout: post
 title: Data in ML
 toc: true
-
+format:
+  html:
+    html-math-method: katex
 ---
 
 # Types
