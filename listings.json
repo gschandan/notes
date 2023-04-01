@@ -2,13 +2,13 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/2022-04-30-linear-algebra-intro.html",
       "/posts/2022-04-30-eigenvectors.html",
-      "/posts/2022-04-30-tensors.html",
       "/posts/2022-04-30-intro-to-linear-algebra.html",
+      "/posts/2022-04-30-linear-algebra-intro.html",
+      "/posts/2022-04-30-tensors.html",
       "/posts/2022-04-27-testing-validation.html",
-      "/posts/2022-04-19-feature-scaling.html",
       "/posts/2022-04-19-data-types.html",
+      "/posts/2022-04-19-feature-scaling.html",
       "/posts/2022-04-19-ml-forms.html",
       "/posts/2022-04-18-maths-for-ml.html",
       "/posts/2022-02-05-matrices.html"
