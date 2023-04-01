@@ -6,11 +6,11 @@ about:
   links:
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://www.linkedin.com/in/gschandan/
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/gschandan
 
 ---
 
-Notes from my studies and interests.
+Notes from my studies and interests, work in progress 😄

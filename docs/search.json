@@ -4,14 +4,14 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Notes from my studies and interests."
+    "text": "Notes from my studies and interests, work in progress 😄"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "notes",
     "section": "",
-    "text": "Eigenvectors and Eigenvalues\n\n\n\n\n\n\n\nmath\n\n\nlinear-algebra\n\n\neigenvectors\n\n\neigenvalues\n\n\nintroduction\n\n\n\n\nEigenvectors and Eigenvalues\n\n\n\n\n\n\nApr 30, 2022\n\n\n\n\n\n\n  \n\n\n\n\nBasic Linear Algebra Concepts\n\n\n\n\n\n\n\njupyter\n\n\nmaths\n\n\nlinear-algebra\n\n\ntensors\n\n\nmatrices\n\n\n\n\nExamining some basic concepts of liner algebra using python libraries\n\n\n\n\n\n\nApr 30, 2022\n\n\n\n\n\n\n  \n\n\n\n\nIntroduction to Linear Algebra\n\n\n\n\n\n\n\nmath\n\n\nlinear-algebra\n\n\nintroduction\n\n\n\n\nIntroduction and basic concepts of linear algebra\n\n\n\n\n\n\nApr 30, 2022\n\n\n\n\n\n\n  \n\n\n\n\nTensors and Tensor Operations\n\n\n\n\n\n\n\nmath\n\n\nlinear-algebra\n\n\ntensors\n\n\n\n\nTensors\n\n\n\n\n\n\nApr 30, 2022\n\n\n\n\n\n\n  \n\n\n\n\nTraining, Testing, Validation Datasets and Cross-Validation\n\n\n\n\n\n\n\ndata\n\n\nML\n\n\ntraining\n\n\ntesting\n\n\nvalidation\n\n\ncross-validation\n\n\n\n\nDefining the concepts of testing, training and validation sets\n\n\n\n\n\n\nApr 27, 2022\n\n\n\n\n\n\n  \n\n\n\n\nData in ML\n\n\n\n\n\n\n\ndata\n\n\nmaths\n\n\nstatistics\n\n\nML\n\n\n\n\nData Types, Quality & Quantity\n\n\n\n\n\n\nApr 19, 2022\n\n\n\n\n\n\n  \n\n\n\n\nFeature Scaling in ML\n\n\n\n\n\n\n\ndata\n\n\nmaths\n\n\nstatistics\n\n\nML\n\n\nfeature-scaling\n\n\n\n\nRescaling, normalisation, standardisation\n\n\n\n\n\n\nApr 19, 2022\n\n\n\n\n\n\n  \n\n\n\n\nForms of ML\n\n\n\n\n\n\n\ndata\n\n\nmaths\n\n\nstatistics\n\n\nML\n\n\n\n\nML types\n\n\n\n\n\n\nApr 19, 2022\n\n\n\n\n\n\n  \n\n\n\n\nMaths for ML\n\n\n\n\n\n\n\nmath\n\n\nlinear-algebra\n\n\nstatistics\n\n\ncalculus\n\n\n\n\nLinks to notes for maths for ML\n\n\n\n\n\n\nApr 18, 2022\n\n\n\n\n\n\n  \n\n\n\n\nMatrix Properties and Operations\n\n\n\n\n\n\n\nmath\n\n\nlinear-algebra\n\n\nmatrix\n\n\nintroduction\n\n\n\n\nMatrix properties and Operations\n\n\n\n\n\n\nFeb 5, 2022\n\n\n\n\n\n\nNo matching items"
+    "text": "Introduction to Program Synthesis\n\n\n\n\n\n\n\nprogramming\n\n\nintroduction\n\n\nprogram-synthesis\n\n\n\n\nNotes about basic terms and concepts\n\n\n\n\n\n\nApr 1, 2023\n\n\n\n\n\n\n  \n\n\n\n\nEigenvectors and Eigenvalues\n\n\n\n\n\n\n\nmath\n\n\nlinear-algebra\n\n\neigenvectors\n\n\neigenvalues\n\n\nintroduction\n\n\n\n\nEigenvectors and Eigenvalues\n\n\n\n\n\n\nApr 30, 2022\n\n\n\n\n\n\n  \n\n\n\n\nBasic Linear Algebra Concepts\n\n\n\n\n\n\n\njupyter\n\n\nmaths\n\n\nlinear-algebra\n\n\ntensors\n\n\nmatrices\n\n\n\n\nExamining some basic concepts of liner algebra using python libraries\n\n\n\n\n\n\nApr 30, 2022\n\n\n\n\n\n\n  \n\n\n\n\nIntroduction to Linear Algebra\n\n\n\n\n\n\n\nmath\n\n\nlinear-algebra\n\n\nintroduction\n\n\n\n\nIntroduction and basic concepts of linear algebra\n\n\n\n\n\n\nApr 30, 2022\n\n\n\n\n\n\n  \n\n\n\n\nTensors and Tensor Operations\n\n\n\n\n\n\n\nmath\n\n\nlinear-algebra\n\n\ntensors\n\n\n\n\nTensors\n\n\n\n\n\n\nApr 30, 2022\n\n\n\n\n\n\n  \n\n\n\n\nTraining, Testing, Validation Datasets and Cross-Validation\n\n\n\n\n\n\n\ndata\n\n\nML\n\n\ntraining\n\n\ntesting\n\n\nvalidation\n\n\ncross-validation\n\n\n\n\nDefining the concepts of testing, training and validation sets\n\n\n\n\n\n\nApr 27, 2022\n\n\n\n\n\n\n  \n\n\n\n\nData in ML\n\n\n\n\n\n\n\ndata\n\n\nmaths\n\n\nstatistics\n\n\nML\n\n\n\n\nData Types, Quality & Quantity\n\n\n\n\n\n\nApr 19, 2022\n\n\n\n\n\n\n  \n\n\n\n\nFeature Scaling in ML\n\n\n\n\n\n\n\ndata\n\n\nmaths\n\n\nstatistics\n\n\nML\n\n\nfeature-scaling\n\n\n\n\nRescaling, normalisation, standardisation\n\n\n\n\n\n\nApr 19, 2022\n\n\n\n\n\n\n  \n\n\n\n\nForms of ML\n\n\n\n\n\n\n\ndata\n\n\nmaths\n\n\nstatistics\n\n\nML\n\n\n\n\nML types\n\n\n\n\n\n\nApr 19, 2022\n\n\n\n\n\n\n  \n\n\n\n\nMaths for ML\n\n\n\n\n\n\n\nmath\n\n\nlinear-algebra\n\n\nstatistics\n\n\ncalculus\n\n\n\n\nLinks to notes for maths for ML\n\n\n\n\n\n\nApr 18, 2022\n\n\n\n\n\n\n  \n\n\n\n\nMatrix Properties and Operations\n\n\n\n\n\n\n\nmath\n\n\nlinear-algebra\n\n\nmatrix\n\n\nintroduction\n\n\n\n\nMatrix properties and Operations\n\n\n\n\n\n\nFeb 5, 2022\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2022-02-05-matrices.html",
@@ -257,5 +257,12 @@
     "title": "Tensors and Tensor Operations",
     "section": "",
     "text": "Different to the Hadamard product as there is summation in the dot product (or scalar product) to produce a single scalar value.\nCan calculate the dot product if two vectors tensors x and y have the same length n and can be denoted as: \\boldsymbol X\\cdot \\boldsymbol Y ,\\boldsymbol X^T \\boldsymbol Y or \\lang \\boldsymbol X,\\boldsymbol Y \\rang. The product is calculated in an elemnent-wise pattern, then summed across the products to produce a scalar value:\n\\boldsymbol X \\cdot \\boldsymbol Y = \\sum_{i=1}^n x_iy_i"
+  },
+  {
+    "objectID": "posts/2023-04-01-introduction-program-synthesis.html",
+    "href": "posts/2023-04-01-introduction-program-synthesis.html",
+    "title": "Introduction to Program Synthesis",
+    "section": "",
+    "text": "Program Synthesis"
   }
 ]

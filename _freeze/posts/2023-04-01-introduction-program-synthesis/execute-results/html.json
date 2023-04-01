@@ -1,0 +1,11 @@
+{
+  "hash": "257119184eb6559e001c2e95edb4a312",
+  "result": {
+    "markdown": "---\ntitle: Introduction to Program Synthesis\nformat:\n  html:\n    code-fold: true\n---\n\n",
+    "supporting": [
+      "2023-04-01-introduction-program-synthesis_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
