@@ -63,7 +63,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -155,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#scalar-tensors" id="toc-scalar-tensors" class="nav-link" data-scroll-target="#scalar-tensors">Scalar Tensors</a></li>
   <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">Vectors</a></li>
   <li><a href="#matrices-2d-tensors" id="toc-matrices-2d-tensors" class="nav-link" data-scroll-target="#matrices-2d-tensors">Matrices (2D Tensors)</a></li>
-  <li><a href="#generalisation-for-n-dimensional-tensors" id="toc-generalisation-for-n-dimensional-tensors" class="nav-link" data-scroll-target="#generalisation-for-n-dimensional-tensors">Generalisation for <span class="math display">\[n\]</span>-dimensional Tensors</a></li>
+  <li><a href="#generalisation-for-n-dimensional-tensors" id="toc-generalisation-for-n-dimensional-tensors" class="nav-link" data-scroll-target="#generalisation-for-n-dimensional-tensors">Generalisation for <span class="math display">n</span>-dimensional Tensors</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -171,19 +186,19 @@ ul.task-list li input[type="checkbox"] {
 <h1>Introduction</h1>
 <p>Linear algebra deals with linear equations (no polynomial terms). However, it can still be used for approximations for non-linear systems. Uses in ML include solving for unknowns e.g.&nbsp;deep learning, dimensionality reduction e.g.&nbsp;PCA, ranking e.g.&nbsp;eigenvectors, associated recommendations and NLP e.g.&nbsp;SVD or matrix factorisation.</p>
 <p>An example linear equation with many unknowns in a regression model of house prices:</p>
-<p><span class="math display">\[\large y = \alpha + \beta x{_1} + \gamma x{_2} + ... + mx{_m}\]</span></p>
-<p><span class="math display">\[y\]</span> = price, <span class="math display">\[\alpha\]</span> = <span class="math display">\[y\]</span>-intercept, <span class="math display">\[\beta\]</span> = number of rooms, <span class="math display">\[\gamma\]</span> = area, <span class="math display">\[x\]</span> = feature</p>
+<p><span class="math display">\large y = \alpha + \beta x{_1} + \gamma x{_2} + ... + mx{_m}</span></p>
+<p><span class="math display">y</span> = price, <span class="math display">\alpha</span> = <span class="math display">y</span>-intercept, <span class="math display">\beta</span> = number of rooms, <span class="math display">\gamma</span> = area, <span class="math display">x</span> = feature</p>
 <p>When dealing with linear systems of equations, there can only be three types of solutions, none, one or infinite. Plotting the equations, if the lines are parallel, they will never intersect i.e.&nbsp;no solution, if the lines are overlapping, there are infinite solutions, else the lines will intersect at one point only (it is impossible for straight lines to intersect multiple times).</p>
-<p>Using the house price regression model, we will have as many rows(<span class="math display">\[n\]</span>) of these equations as we have house prices, each with its <span class="math display">\[m_{-1}\]</span> features(<span class="math display">\[x\]</span>) (m-1 due to alpha), and <span class="math display">\[m+1\]</span> unknowns(<span class="math display">\[\alpha\]</span>,<span class="math display">\[\beta\]</span>, <span class="math display">\[\gamma\]</span>) which is what we want to solve for:</p>
-<p><span class="math display">\[ y = \alpha + \beta x{_1} + \gamma x{_2} + ... + m_{-1}x_{m_{-1}} \]</span></p>
-<p><span class="math display">\[
+<p>Using the house price regression model, we will have as many rows(<span class="math display">n</span>) of these equations as we have house prices, each with its <span class="math display">m_{-1}</span> features(<span class="math display">x</span>) (m-1 due to alpha), and <span class="math display">m+1</span> unknowns(<span class="math display">\alpha</span>,<span class="math display">\beta</span>, <span class="math display">\gamma</span>) which is what we want to solve for:</p>
+<p><span class="math display"> y = \alpha + \beta x{_1} + \gamma x{_2} + ... + m_{-1}x_{m_{-1}} </span></p>
+<p><span class="math display">
 \begin{bmatrix}
 y{_1} |\alpha + \beta x{_{1,1}} + \gamma x{_{1,2}} + ... + m_{-1}x{_{1,m_{-1}}} \\
 y{_2} | \alpha + \beta x{_{2,1}} + \gamma x{_{2,2}} + ... + m_{-1}x{_{2,m_{-1}}} \\
 \dots \\
 y{_n} |  \alpha + \beta x{_{n,1}} + \gamma x{_{n,2}} + ... + m_{-1}x{_{n,m_{-1}}}
 \end{bmatrix}
-\]</span></p>
+</span></p>
 <p>This is a set (denoted by square brackets) of linear equations.</p>
 <section id="tensors" class="level2">
 <h2 class="anchored" data-anchor-id="tensors">Tensors</h2>
@@ -218,58 +233,58 @@ y{_n} |  \alpha + \beta x{_{n,1}} + \gamma x{_{n,2}} + ... + m_{-1}x{_{n,m_{-1}}
 <td>3d array (cube)</td>
 </tr>
 <tr class="odd">
-<td><span class="math display">\[n\]</span></td>
-<td><span class="math display">\[n\]</span>-Tensor</td>
+<td><span class="math display">n</span></td>
+<td><span class="math display">n</span>-Tensor</td>
 <td>multidimensional</td>
 </tr>
 </tbody>
 </table>
 <section id="scalar-tensors" class="level3">
 <h3 class="anchored" data-anchor-id="scalar-tensors">Scalar Tensors</h3>
-<p>Single value, no dimensions, denoted by lower case italic variable names e.g.&nbsp;<span class="math display">\[x\]</span></p>
+<p>Single value, no dimensions, denoted by lower case italic variable names e.g.&nbsp;<span class="math display">x</span></p>
 </section>
 <section id="vectors" class="level3">
 <h3 class="anchored" data-anchor-id="vectors">Vectors</h3>
-<p>1-Dimensional ordered array of values, lower case bold italic name e.g.&nbsp;<em><span class="math display">\[\large \boldsymbol{x}\]</span></em><br>
-Elements are scalars, denoted non-bold lower case x with their index e.g.&nbsp;<span class="math display">\[x{_1}\]</span></p>
+<p>1-Dimensional ordered array of values, lower case bold italic name e.g.&nbsp;<em><span class="math display">\large \boldsymbol{x}</span></em><br>
+Elements are scalars, denoted non-bold lower case x with their index e.g.&nbsp;<span class="math display">x{_1}</span></p>
 <section id="vector-transposition" class="level4">
 <h4 class="anchored" data-anchor-id="vector-transposition">Vector Transposition</h4>
-<p><span class="math display">\[\begin{bmatrix}  x{_1} &amp; x{_2} &amp; x{_3} \end{bmatrix}{^T}\]</span> =</p>
-<p><span class="math display">\[
+<p><span class="math display">\begin{bmatrix}  x{_1} &amp; x{_2} &amp; x{_3} \end{bmatrix}{^T}</span> =</p>
+<p><span class="math display">
 \begin{bmatrix}
 x{_1} \\
 x{_2} \\
 x{_3}
 \end{bmatrix}
-\]</span></p>
+</span></p>
 <p>Row vector of shape (1,3) transposed to a column vector shape (3,1).</p>
 </section>
 <section id="norms" class="level4">
 <h4 class="anchored" data-anchor-id="norms">Norms</h4>
 <p>Norms are functions that quantify vector magnitude (length).<br>
-<span class="math display">\[\begin{bmatrix}  x{_1} &amp; x{_2} \end{bmatrix} = \begin{bmatrix}  5 &amp; 7 \end{bmatrix}\]</span> also represents a magnitude and direction from the origin.</p>
-<p><span class="math display">\[\large L{^2}\]</span> Norm <span class="math display">\[||\boldsymbol{x}||{_2} = \sqrt{\sum_{\substack{i}}x{_i}{^2}}\]</span><br>
-Square each element in the vector, sum them, then take the square root. Measures euclidean distance from the origin. Also commonly denoted <span class="math display">\[\large||\boldsymbol{x}||\]</span></p>
-<p><span class="math display">\[\large L{^1}\]</span> Norm <span class="math display">\[||\boldsymbol{x}||{_1} = \sum_{\substack{i}}|x{_i}|\]</span><br>
+<span class="math display">\begin{bmatrix}  x{_1} &amp; x{_2} \end{bmatrix} = \begin{bmatrix}  5 &amp; 7 \end{bmatrix}</span> also represents a magnitude and direction from the origin.</p>
+<p><span class="math display">\large L{^2}</span> Norm <span class="math display">||\boldsymbol{x}||{_2} = \sqrt{\sum_{\substack{i}}x{_i}{^2}}</span><br>
+Square each element in the vector, sum them, then take the square root. Measures euclidean distance from the origin. Also commonly denoted <span class="math display">\large||\boldsymbol{x}||</span></p>
+<p><span class="math display">\large L{^1}</span> Norm <span class="math display">||\boldsymbol{x}||{_1} = \sum_{\substack{i}}|x{_i}|</span><br>
 Sum the absolute values in the vector. Varies linearly at all locations (not origin dependent). Used when differences between zero and non-zero are needed.</p>
-<p>Squared <span class="math display">\[\large  L{^2}\]</span> Norm <span class="math display">\[||\boldsymbol{x}||{_2^2} = \sum_{\substack{i}}x{_i}{^2}\]</span><br>
-Similar to <span class="math display">\[\large L{^2}\]</span> Norm, except we don’t take the root, just return the squared value. Computationally cheaper than <span class="math display">\[\large L{^2}\]</span> Norm as sqaured <span class="math display">\[\large L{^2}\]</span> Norm = <span class="math display">\[\boldsymbol{x}{^T}\boldsymbol{x}\]</span>. Derivative of element <span class="math display">\[x\]</span> only requires that element, vs <span class="math display">\[\large L{^2}\]</span> Norm which requires the vector. However, squared <span class="math display">\[\large  L{^2}\]</span> Norm grows slowly near the origin so can’t be used if zero/near-zero distinguishing is required.</p>
-<p><span class="math display">\[\large L{^\infin}\]</span> Norm (or Max Norm) <span class="math display">\[||\boldsymbol{x}||{_\infin} = max{_i}|x{_i}|\]</span><br>
+<p>Squared <span class="math display">\large  L{^2}</span> Norm <span class="math display">||\boldsymbol{x}||{_2^2} = \sum_{\substack{i}}x{_i}{^2}</span><br>
+Similar to <span class="math display">\large L{^2}</span> Norm, except we don’t take the root, just return the squared value. Computationally cheaper than <span class="math display">\large L{^2}</span> Norm as sqaured <span class="math display">\large L{^2}</span> Norm = <span class="math display">\boldsymbol{x}{^T}\boldsymbol{x}</span>. Derivative of element <span class="math display">x</span> only requires that element, vs <span class="math display">\large L{^2}</span> Norm which requires the vector. However, squared <span class="math display">\large  L{^2}</span> Norm grows slowly near the origin so can’t be used if zero/near-zero distinguishing is required.</p>
+<p><span class="math display">\large L{^\infin}</span> Norm (or Max Norm) <span class="math display">||\boldsymbol{x}||{_\infin} = max{_i}|x{_i}|</span><br>
 Return maximum absolute value of the vector.</p>
-<p>Generalised <span class="math display">\[\large L{^p}\]</span> Norm <span class="math display">\[||\boldsymbol{x}||{_p} = (\sum_{\substack{i}}|x{_i}|{^p}){^\frac{1}{p}}\]</span> for <span class="math display">\[p\]</span> being a real number <span class="math display">\[\geqslant 1\]</span></p>
-<p>Norms, particularly <span class="math display">\[\large L{^1}\]</span> and <span class="math display">\[\large L{^2}\]</span> norms, are used to regularise objective functions</p>
+<p>Generalised <span class="math display">\large L{^p}</span> Norm <span class="math display">||\boldsymbol{x}||{_p} = (\sum_{\substack{i}}|x{_i}|{^p}){^\frac{1}{p}}</span> for <span class="math display">p</span> being a real number <span class="math display">\geqslant 1</span></p>
+<p>Norms, particularly <span class="math display">\large L{^1}</span> and <span class="math display">\large L{^2}</span> norms, are used to regularise objective functions</p>
 </section>
 <section id="unit-vectors" class="level4">
 <h4 class="anchored" data-anchor-id="unit-vectors">Unit Vectors</h4>
-<p>Unit vector is a special case where the L2 norm (length) is equal to one i.e.&nbsp;<span class="math display">\[\boldsymbol{x}\]</span> is a unit vector with unit norm. <span class="math display">\[\large||\boldsymbol{x}|| = 1\]</span></p>
+<p>Unit vector is a special case where the L2 norm (length) is equal to one i.e.&nbsp;<span class="math display">\boldsymbol{x}</span> is a unit vector with unit norm. <span class="math display">\large||\boldsymbol{x}|| = 1</span></p>
 </section>
 <section id="basis-vectors" class="level4">
 <h4 class="anchored" data-anchor-id="basis-vectors">Basis Vectors</h4>
-<p>Basis vectors are vectors that can be scaled to represent any vector in a given vector space, typically unit vectors are used along the axes of the vector space. For example, the basis vectors <span class="math display">\[i = (1,0)\]</span> and <span class="math display">\[j=(0,1)\]</span>, then we can represent a vector <span class="math display">\[\boldsymbol v\]</span> as follows: <span class="math display">\[\boldsymbol v = 0.5 i + 3j\]</span></p>
+<p>Basis vectors are vectors that can be scaled to represent any vector in a given vector space, typically unit vectors are used along the axes of the vector space. For example, the basis vectors <span class="math display">i = (1,0)</span> and <span class="math display">j=(0,1)</span>, then we can represent a vector <span class="math display">\boldsymbol v</span> as follows: <span class="math display">\boldsymbol v = 0.5 i + 3j</span></p>
 </section>
 <section id="orthogonal-vectors" class="level4">
 <h4 class="anchored" data-anchor-id="orthogonal-vectors">Orthogonal Vectors</h4>
-<p>Sets of vectors where the dot product of the vectors are zero: <span class="math display">\[\boldsymbol{x}{^T}\boldsymbol{y} = 0\]</span> i.e.&nbsp;assuming they are of non-zero length, they are at 90<span class="math display">\[\degree\]</span> angles i.e.&nbsp;perpendicular. For an <span class="math display">\[n\]</span>-dimensional space, there are a maximum of <span class="math display">\[n\]</span> mutually orthogonal vectors.</p>
+<p>Sets of vectors where the dot product of the vectors are zero: <span class="math display">\boldsymbol{x}{^T}\boldsymbol{y} = 0</span> i.e.&nbsp;assuming they are of non-zero length, they are at 90<span class="math display">\degree</span> angles i.e.&nbsp;perpendicular. For an <span class="math display">n</span>-dimensional space, there are a maximum of <span class="math display">n</span> mutually orthogonal vectors.</p>
 <section id="orthonormal-vectors" class="level5">
 <h5 class="anchored" data-anchor-id="orthonormal-vectors">Orthonormal Vectors</h5>
 <p>Orthonormal vectors are orthogonal and have unit norm e.g.&nbsp;basis vectors.</p>
@@ -278,14 +293,14 @@ Return maximum absolute value of the vector.</p>
 </section>
 <section id="matrices-2d-tensors" class="level3">
 <h3 class="anchored" data-anchor-id="matrices-2d-tensors">Matrices (2D Tensors)</h3>
-<p>Denoted uppercase, italics and bold <span class="math display">\[\boldsymbol X = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\]</span><br>
-Notation is <span class="math display">\[(n_{row},n_{col})\]</span><br>
-Individual scalar elements denoted upper case italics only, e.g. <span class="math display">\[\boldsymbol X = \begin{bmatrix} X_{1,1} &amp; X_{1,2} \\ X_{2,1} &amp; X_{2,2} \end{bmatrix}\]</span></p>
+<p>Denoted uppercase, italics and bold <span class="math display">\boldsymbol X = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}</span><br>
+Notation is <span class="math display">(n_{row},n_{col})</span><br>
+Individual scalar elements denoted upper case italics only, e.g. <span class="math display">\boldsymbol X = \begin{bmatrix} X_{1,1} &amp; X_{1,2} \\ X_{2,1} &amp; X_{2,2} \end{bmatrix}</span></p>
 </section>
 <section id="generalisation-for-n-dimensional-tensors" class="level3">
-<h3 class="anchored" data-anchor-id="generalisation-for-n-dimensional-tensors">Generalisation for <span class="math display">\[n\]</span>-dimensional Tensors</h3>
-<p>Upper-case, bold, italic, sans-serif font e.g.&nbsp;<span class="math display">\[{\char"1D5EB}\]</span><br>
-For a 4-tensor <span class="math display">\[{\char"1D5EB}\]</span>, an element at position <span class="math display">\[(i,j,k,l)\]</span> would be denoted as <span class="math display">\[{\char"1D5EB} _{(i,j,k,l)}\]</span></p>
+<h3 class="anchored" data-anchor-id="generalisation-for-n-dimensional-tensors">Generalisation for <span class="math display">n</span>-dimensional Tensors</h3>
+<p>Upper-case, bold, italic, sans-serif font e.g.&nbsp;<span class="math display">{\char"1D5EB}</span><br>
+For a 4-tensor <span class="math display">{\char"1D5EB}</span>, an element at position <span class="math display">(i,j,k,l)</span> would be denoted as <span class="math display">{\char"1D5EB} _{(i,j,k,l)}</span></p>
 
 
 </section>

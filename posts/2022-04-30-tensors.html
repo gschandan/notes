@@ -63,7 +63,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -176,21 +191,21 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="tensor-transposition">Tensor Transposition</h2>
 <section id="scalars" class="level3">
 <h3 class="anchored" data-anchor-id="scalars">Scalars</h3>
-<p>Transpose of a scalar is the scalar itself i.e.&nbsp;<span class="math display">\[x{^T} = x\]</span></p>
+<p>Transpose of a scalar is the scalar itself i.e.&nbsp;<span class="math display">x{^T} = x</span></p>
 </section>
 <section id="vectors" class="level3">
 <h3 class="anchored" data-anchor-id="vectors">Vectors</h3>
 <p>Transposing a vector transofrms columns to rows, and rows to columns i.e.</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{bmatrix} x{_{1,1}} &amp; x{_{1,2}} \\ x{_{2,1}} &amp; x{_{2,2}} \\ x{_{3,1}} &amp; x{_{3,2}}
 \end{bmatrix}{^T} =
 \begin{bmatrix}
 x{_{1,1}} &amp; x{_{2,1}} &amp; x{_{3,1}} \\
 x{_{1,2}} &amp; x{_{2,2}} &amp; x{_{3,2}}
 \end{bmatrix}
-\]</span></p>
+</span></p>
 <p>Scalar and vector transpoition are special cases of matrix transposition, where the axes are “flipped” across the main diagonal.</p>
-<p><span class="math display">\[(\boldsymbol X^T)_{i,j} = (\boldsymbol X)_{j,i} \]</span></p>
+<p><span class="math display">(\boldsymbol X^T)_{i,j} = (\boldsymbol X)_{j,i} </span></p>
 </section>
 </section>
 <section id="tensor-reduction" class="level2">
@@ -198,15 +213,15 @@ x{_{1,2}} &amp; x{_{2,2}} &amp; x{_{3,2}}
 <section id="sum" class="level3">
 <h3 class="anchored" data-anchor-id="sum">Sum</h3>
 <p>Calculate the sum across all elements of the vector or matrix.</p>
-<p>Vector <span class="math display">\[\textstyle \sum_{i=1}^n x_i \]</span><br>
-Matrix <span class="math display">\[\textstyle \sum_{i=1}^m \sum_{j=1}^n \boldsymbol X_{j,i} \]</span></p>
+<p>Vector <span class="math display">\textstyle \sum_{i=1}^n x_i </span><br>
+Matrix <span class="math display">\textstyle \sum_{i=1}^m \sum_{j=1}^n \boldsymbol X_{j,i} </span></p>
 </section>
 </section>
 <section id="dot-product" class="level2">
 <h2 class="anchored" data-anchor-id="dot-product">Dot Product</h2>
 <p>Different to the Hadamard product as there is summation in the dot product (or scalar product) to produce a single scalar value.</p>
-<p>Can calculate the dot product if two vectors tensors <em><strong>x</strong></em> and <em><strong>y</strong></em> have the same length <span class="math inline">\(n\)</span> and can be denoted as: <span class="math inline">\(\boldsymbol X\cdot \boldsymbol Y\)</span> ,<span class="math inline">\(\boldsymbol X^T \boldsymbol Y\)</span> or <span class="math inline">\(\lang \boldsymbol X,\boldsymbol Y \rang\)</span>. The product is calculated in an elemnent-wise pattern, then summed across the products to produce a scalar value:</p>
-<p><span class="math inline">\(\boldsymbol X \cdot \boldsymbol Y = \sum_{i=1}^n x_iy_i\)</span></p>
+<p>Can calculate the dot product if two vectors tensors <em><strong>x</strong></em> and <em><strong>y</strong></em> have the same length <span class="math inline">n</span> and can be denoted as: <span class="math inline">\boldsymbol X\cdot \boldsymbol Y</span> ,<span class="math inline">\boldsymbol X^T \boldsymbol Y</span> or <span class="math inline">\lang \boldsymbol X,\boldsymbol Y \rang</span>. The product is calculated in an elemnent-wise pattern, then summed across the products to produce a scalar value:</p>
+<p><span class="math inline">\boldsymbol X \cdot \boldsymbol Y = \sum_{i=1}^n x_iy_i</span></p>
 
 
 </section>

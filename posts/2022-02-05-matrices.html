@@ -63,7 +63,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -177,30 +192,30 @@ ul.task-list li input[type="checkbox"] {
 <h1>Matrices</h1>
 <section id="norms---frobenius-norm" class="level2">
 <h2 class="anchored" data-anchor-id="norms---frobenius-norm">Norms - Frobenius Norm</h2>
-<p><span class="math inline">\(||\boldsymbol{X}||{_F} = \sqrt{\displaystyle\sum_{i,j} X_{i,j}{^2} }\)</span></p>
-<p>For i rows, and j columns, sum the square of each element, then take the square root. This is analogous to the <span class="math inline">\(L^2\)</span> norm of vectors, and measures the Euclidean size of the matrix. Can also be thought of as the sum of the magnitude of all the vectors in <span class="math inline">\(\boldsymbol{X}\)</span>.</p>
+<p><span class="math inline">||\boldsymbol{X}||{_F} = \sqrt{\displaystyle\sum_{i,j} X_{i,j}{^2} }</span></p>
+<p>For i rows, and j columns, sum the square of each element, then take the square root. This is analogous to the <span class="math inline">L^2</span> norm of vectors, and measures the Euclidean size of the matrix. Can also be thought of as the sum of the magnitude of all the vectors in <span class="math inline">\boldsymbol{X}</span>.</p>
 </section>
 <section id="multiplication" class="level2">
 <h2 class="anchored" data-anchor-id="multiplication">Multiplication</h2>
 <p>Number of columns in the first matrix must match the number of rows in the second, i.e.&nbsp;in the following example, m is the number of rows in the first matrix, n is the number of columns in the first matrix and the number of rows in the second, and p is the number of columns in the second matrix.</p>
-<p><span class="math display">\[ m\underset{n}{\begin{bmatrix} \, \\ A \\ \,\end{bmatrix}} \quad
+<p><span class="math display"> m\underset{n}{\begin{bmatrix} \, \\ A \\ \,\end{bmatrix}} \quad
 n\underset{p}{\begin{bmatrix}&amp; B &amp;\end{bmatrix}} = m\underset{p}{\begin{bmatrix} \, \\ C \\ \,\end{bmatrix}}
-\]</span></p>
-<p><span class="math display">\[ C_{i,k} = \displaystyle\sum_{j}A_{i,j}B_{j,k} \]</span></p>
+</span></p>
+<p><span class="math display"> C_{i,k} = \displaystyle\sum_{j}A_{i,j}B_{j,k} </span></p>
 <p>Multiplying a matrix with a vector:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{bmatrix} 3 &amp; 4 \\ 5 &amp; 6 \\ 7 &amp; 8 \end{bmatrix}
 \begin{bmatrix} 1 \\ 2 \end{bmatrix} = \begin{bmatrix} 3*1 + 4*2\\ 5*1+6*2 \\ 7*1+8*2 \end{bmatrix} = \begin{bmatrix} 11 \\ 17 \\ 23\end{bmatrix}
-\]</span></p>
+</span></p>
 <p>Multiplying a matrix with a matrix:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{bmatrix} 3 &amp; 4 \\ 5 &amp; 6 \\ 7 &amp; 8 \end{bmatrix}
 \begin{bmatrix} 1 &amp; 9\\ 2 &amp; 0 \end{bmatrix} = \begin{bmatrix} 3*1 + 4*2 &amp; 3*9+4*0\\ 5*1+6*2 &amp; 5*9+6*0\\ 7*1+8*2 &amp;7*9+8*0 \end{bmatrix} = \begin{bmatrix} 11 &amp; 27\\ 17 &amp; 45\\ 23&amp;63\end{bmatrix}
-\]</span></p>
-<p>Matrix multiplication is typically not commutative: <span class="math display">\[\boldsymbol{X}\boldsymbol{Y} \not= \boldsymbol{Y}\boldsymbol{X}\]</span></p>
+</span></p>
+<p>Matrix multiplication is typically not commutative: <span class="math display">\boldsymbol{X}\boldsymbol{Y} \not= \boldsymbol{Y}\boldsymbol{X}</span></p>
 <p>If both matrices are square, multiplying either way will work, but the results will usually be different.</p>
 <p>Can represent the following regression as a matrix multiplication:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{bmatrix}
 y{_1} |\alpha + \beta x{_{1,1}} + \gamma x{_{1,2}} + ... + m_{-1}x{_{1,m_{-1}}} \\
 y{_2} | \alpha + \beta x{_{2,1}} + \gamma x{_{2,2}} + ... + m_{-1}x{_{2,m_{-1}}} \\
@@ -208,8 +223,8 @@ y{_2} | \alpha + \beta x{_{2,1}} + \gamma x{_{2,2}} + ... + m_{-1}x{_{2,m_{-1}}}
 y{_n} |  \alpha + \beta x{_{n,1}} + \gamma x{_{n,2}} + ... + m_{-1}x{_{n,m_{-1}}}
 \end{bmatrix} \\ \begin{bmatrix} y{_1} \\ y{_2} \\ \vdots \\ y{_n}\end{bmatrix} =\begin{bmatrix} 1 &amp; X_{1,1} &amp; X_{1,2} &amp; \dots &amp; X_{1,m_{-1}}\\ 1 &amp; X_{2,1} &amp; X_{2,2} &amp; \dots &amp; X_{2,m_{-1}} \\ \vdots \\ 1 &amp; X_{n,1} &amp; X_{n,2} &amp; \dots &amp; X_{n,m_{-1}} \end{bmatrix}
 \begin{bmatrix} \alpha \\ \beta \\ \vdots \\ m_{-1}\end{bmatrix}
-\]</span></p>
-<p><span class="math inline">\(n\)</span> cases tall, <span class="math inline">\(m\)</span> features wide.</p>
+</span></p>
+<p><span class="math inline">n</span> cases tall, <span class="math inline">m</span> features wide.</p>
 </section>
 <section id="symmetric-identity-matrices" class="level2">
 <h2 class="anchored" data-anchor-id="symmetric-identity-matrices">Symmetric &amp; Identity Matrices</h2>
@@ -219,49 +234,49 @@ y{_n} |  \alpha + \beta x{_{n,1}} + \gamma x{_{n,2}} + ... + m_{-1}x{_{n,m_{-1}}
 </section>
 <section id="identity" class="level3">
 <h3 class="anchored" data-anchor-id="identity">Identity</h3>
-<p>An identity matrix is a symmetric matrix where every element along the main diagonal is 1, all others are 0. This satisfies the condition of being an identity as, if an identity matrix is multiplied by a <span class="math inline">\(n\)</span> length vector, it will remain unchanged i.e.&nbsp;we get the same vector returned.</p>
-<p>Notation <span class="math inline">\(\boldsymbol{I}_n\)</span> where n = height or width.</p>
-<p>1 is the identity element for multiplication - the number which when operated on with any other number results in the other number. 0 is the identity element for addition, and 1 is the identity element for multiplication. Whenever the identity element for an operation is the solution, the two items operated on are inverses of each other e.g.&nbsp;<span class="math inline">\(5x = 15\)</span>, both sides can be multiplied by the multiplicative inverse i.e.&nbsp;<span class="math inline">\(\frac{1}{5}\)</span> or <span class="math inline">\(5^{-1}\)</span> to get <span class="math inline">\(x=3\)</span>. A number multiplied by its reciprocal or inverse always returns 1 e.g.&nbsp;<span class="math inline">\(\frac{1}{5} * 5 = 1\)</span>. Similarly, a matrix multiplied by its inverse, will return the identity matrix.</p>
+<p>An identity matrix is a symmetric matrix where every element along the main diagonal is 1, all others are 0. This satisfies the condition of being an identity as, if an identity matrix is multiplied by a <span class="math inline">n</span> length vector, it will remain unchanged i.e.&nbsp;we get the same vector returned.</p>
+<p>Notation <span class="math inline">\boldsymbol{I}_n</span> where n = height or width.</p>
+<p>1 is the identity element for multiplication - the number which when operated on with any other number results in the other number. 0 is the identity element for addition, and 1 is the identity element for multiplication. Whenever the identity element for an operation is the solution, the two items operated on are inverses of each other e.g.&nbsp;<span class="math inline">5x = 15</span>, both sides can be multiplied by the multiplicative inverse i.e.&nbsp;<span class="math inline">\frac{1}{5}</span> or <span class="math inline">5^{-1}</span> to get <span class="math inline">x=3</span>. A number multiplied by its reciprocal or inverse always returns 1 e.g.&nbsp;<span class="math inline">\frac{1}{5} * 5 = 1</span>. Similarly, a matrix multiplied by its inverse, will return the identity matrix.</p>
 </section>
 </section>
 <section id="matrix-inversion" class="level2">
 <h2 class="anchored" data-anchor-id="matrix-inversion">Matrix Inversion</h2>
-<p>Used to computationally solve linear equations. Matrix inverse is denoted <span class="math inline">\(\boldsymbol{X}^{-1}\)</span>. It satisfies the following property:</p>
-<p><span class="math inline">\(\boldsymbol{X}^{-1} \boldsymbol{X} = \boldsymbol{X}\boldsymbol{X}^{-1} = \boldsymbol{I}_n\)</span></p>
-<p>2x2 Matrix inversion: <span class="math display">\[
+<p>Used to computationally solve linear equations. Matrix inverse is denoted <span class="math inline">\boldsymbol{X}^{-1}</span>. It satisfies the following property:</p>
+<p><span class="math inline">\boldsymbol{X}^{-1} \boldsymbol{X} = \boldsymbol{X}\boldsymbol{X}^{-1} = \boldsymbol{I}_n</span></p>
+<p>2x2 Matrix inversion: <span class="math display">
 \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}^{-1} = \frac{1}{ad-bc} \begin{bmatrix} d &amp; -b \\ -c &amp; a \end{bmatrix}
-\]</span></p>
-<p>where <span class="math inline">\({ad-bc}\)</span> is the determinant (which cannot be 0).</p>
-<p>Can’t divide by a matrix, but can multiply by an inverse to get the same result e.g. we know matrix <span class="math inline">\(\boldsymbol{A}\)</span> and <span class="math inline">\(\boldsymbol{B}\)</span>, and want to get the values for matrix <span class="math inline">\(\boldsymbol{X}\)</span>:<br>
-<span class="math inline">\(\boldsymbol{X} \boldsymbol{A} = \boldsymbol{B}\)</span><br>
-We can’t divide by <span class="math inline">\(\boldsymbol{A}\)</span>, but can multiply both sides by the inverse of <span class="math inline">\(\boldsymbol{A}\)</span>:<br>
-$ ^{-1} = ^{-1}$ and we know that <span class="math inline">\(\boldsymbol{A}\boldsymbol{A}^{-1} = \boldsymbol{I}\)</span><br>
+</span></p>
+<p>where <span class="math inline">{ad-bc}</span> is the determinant (which cannot be 0).</p>
+<p>Can’t divide by a matrix, but can multiply by an inverse to get the same result e.g. we know matrix <span class="math inline">\boldsymbol{A}</span> and <span class="math inline">\boldsymbol{B}</span>, and want to get the values for matrix <span class="math inline">\boldsymbol{X}</span>:<br>
+<span class="math inline">\boldsymbol{X} \boldsymbol{A} = \boldsymbol{B}</span><br>
+We can’t divide by <span class="math inline">\boldsymbol{A}</span>, but can multiply both sides by the inverse of <span class="math inline">\boldsymbol{A}</span>:<br>
+$ ^{-1} = ^{-1}$ and we know that <span class="math inline">\boldsymbol{A}\boldsymbol{A}^{-1} = \boldsymbol{I}</span><br>
 which gives us<br>
 $ = ^{-1}$<br>
-and <span class="math inline">\(\boldsymbol{I}\)</span> can be ignored, just like 1 would be during multiplication:<br>
+and <span class="math inline">\boldsymbol{I}</span> can be ignored, just like 1 would be during multiplication:<br>
 $ = ^{-1}$</p>
 <p>If a matrix has no inverse i.e.&nbsp;the determinant is zero, then it is called singular.</p>
 <p>Matrix inversion can also only be calculated if the matrix is square i.e.&nbsp;the vector span (number of rows) is equal to the matrix range (number of cols). This avoids overdetermination (rows &gt; cols) i.e.&nbsp;number of equations &gt; number of dimensions (multiple points of overlap), and underdetermination (rows &lt; cols) i.e.&nbsp;number of equations are less than dimensions (no overlap as single line) - may still be able to solve these, but can’t invert a matrix as a solution.</p>
 <section id="example-usage" class="level4">
 <h4 class="anchored" data-anchor-id="example-usage">Example Usage</h4>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{bmatrix} y{_1} \\ y{_2} \\ \vdots \\ y{_n}\end{bmatrix} =\begin{bmatrix} 1 &amp; X_{1,1} &amp; X_{1,2} &amp; \dots &amp; X_{1,m_{-1}}\\ 1 &amp; X_{2,1} &amp; X_{2,2} &amp; \dots &amp; X_{2,m_{-1}} \\ \vdots \\ 1 &amp; X_{n,1} &amp; X_{n,2} &amp; \dots &amp; X_{n,m_{-1}} \end{bmatrix}
 \begin{bmatrix} \alpha \\ \beta \\ \vdots \\ m_{-1}\end{bmatrix}
-\]</span> Would like to solve for the vector of variables on the right, in this regression model. This can be represented as: <span class="math inline">\(\boldsymbol{y} = \boldsymbol{X}\boldsymbol{w}\)</span> where <span class="math inline">\(\boldsymbol{w}\)</span> is the vector of weights, <span class="math inline">\(\alpha\)</span> to <span class="math inline">\(m_{-1}\)</span>, corresponding to the number of columns in our feature matrix.</p>
-<p>In this equation, <span class="math inline">\(\boldsymbol{y} = \boldsymbol{X}\boldsymbol{w}\)</span>, we know the outcomes <span class="math inline">\(\boldsymbol{y}\)</span>, and we know the features <span class="math inline">\(\boldsymbol{X}\)</span>, and we wish to work out the weights, <span class="math inline">\(\boldsymbol{w}\)</span>, which we can do using matrix inversion, assuming the inverse matrix exists i.e.&nbsp;it isn’t singular - all columns must be linearly independent e.g.&nbsp;one column should not be a multiple of another one like [1,2] - another can’t be [2,4] or [1,2] again as we would have paralell lines or overlapping lines respectively.</p>
-<p>We can multiply both sides by the inverse of <span class="math inline">\(\boldsymbol{X}\)</span>, <span class="math inline">\(\boldsymbol{X}^{-1}\)</span> to obtain:<br>
-$^{-1} = ^{-1} $ and given <span class="math inline">\(\boldsymbol{X}^{-1}\boldsymbol{X} = \boldsymbol{I}\)</span>, we can simplify this to:<br>
+</span> Would like to solve for the vector of variables on the right, in this regression model. This can be represented as: <span class="math inline">\boldsymbol{y} = \boldsymbol{X}\boldsymbol{w}</span> where <span class="math inline">\boldsymbol{w}</span> is the vector of weights, <span class="math inline">\alpha</span> to <span class="math inline">m_{-1}</span>, corresponding to the number of columns in our feature matrix.</p>
+<p>In this equation, <span class="math inline">\boldsymbol{y} = \boldsymbol{X}\boldsymbol{w}</span>, we know the outcomes <span class="math inline">\boldsymbol{y}</span>, and we know the features <span class="math inline">\boldsymbol{X}</span>, and we wish to work out the weights, <span class="math inline">\boldsymbol{w}</span>, which we can do using matrix inversion, assuming the inverse matrix exists i.e.&nbsp;it isn’t singular - all columns must be linearly independent e.g.&nbsp;one column should not be a multiple of another one like [1,2] - another can’t be [2,4] or [1,2] again as we would have paralell lines or overlapping lines respectively.</p>
+<p>We can multiply both sides by the inverse of <span class="math inline">\boldsymbol{X}</span>, <span class="math inline">\boldsymbol{X}^{-1}</span> to obtain:<br>
+$^{-1} = ^{-1} $ and given <span class="math inline">\boldsymbol{X}^{-1}\boldsymbol{X} = \boldsymbol{I}</span>, we can simplify this to:<br>
 $ = ^{-1} $ and given the property of the identity matrix, we can remove it to leave:<br>
 $ = ^{-1} $</p>
 <p>The order of operations is key to preserve, as matrix multiplication is not always commutative i.e.&nbsp;$ = $</p>
 </section>
 <section id="diagonal-matrices" class="level3">
 <h3 class="anchored" data-anchor-id="diagonal-matrices">Diagonal Matrices</h3>
-<p>Non-zero elements along the main diagonal, zero elsewhere e.g.&nbsp;identity matrix. If it is square, denoted as <span class="math inline">\(diag(\boldsymbol{x})\)</span> where <span class="math inline">\(\boldsymbol{x}\)</span> is a vector of main diagonal elements e.g.&nbsp;<span class="math inline">\([1,1,1]\)</span> to represent <span class="math inline">\(\boldsymbol{I}_3\)</span>. Much more computationally efficient: - Multiplication: <span class="math inline">\(diag(\boldsymbol{x})\boldsymbol{y} = \boldsymbol{x}\odot{}\boldsymbol{y}\)</span> - Inversion: $diag()^{-1} = diag(,,)^T $ - Can’t divide by zero, so if any elemenet along the diagonal contains zero, the diagonal can’t be inverted - Can be non-square and computation can still be efficient e.g.&nbsp;by adding zeros to the product if height &gt; width, or by removing elements from the product if the width &gt; height</p>
+<p>Non-zero elements along the main diagonal, zero elsewhere e.g.&nbsp;identity matrix. If it is square, denoted as <span class="math inline">diag(\boldsymbol{x})</span> where <span class="math inline">\boldsymbol{x}</span> is a vector of main diagonal elements e.g.&nbsp;<span class="math inline">[1,1,1]</span> to represent <span class="math inline">\boldsymbol{I}_3</span>. Much more computationally efficient: - Multiplication: <span class="math inline">diag(\boldsymbol{x})\boldsymbol{y} = \boldsymbol{x}\odot{}\boldsymbol{y}</span> - Inversion: $diag()^{-1} = diag(,,)^T $ - Can’t divide by zero, so if any elemenet along the diagonal contains zero, the diagonal can’t be inverted - Can be non-square and computation can still be efficient e.g.&nbsp;by adding zeros to the product if height &gt; width, or by removing elements from the product if the width &gt; height</p>
 </section>
 <section id="orthogonal-matrices" class="level3">
 <h3 class="anchored" data-anchor-id="orthogonal-matrices">Orthogonal Matrices</h3>
-<p>In orthogonal matrices, orthonormal vectors make up all rows and columns. This means that <span class="math inline">\(\boldsymbol{A}^{T} \boldsymbol{A} = \boldsymbol{A}\boldsymbol{A}^{T} = \boldsymbol{I}\)</span> and also that <span class="math inline">\(\boldsymbol{A}^{T} = \boldsymbol{A}^{-1}\boldsymbol{I} = \boldsymbol{A}^{-1}\)</span>. Calculating <span class="math inline">\(\boldsymbol{A}^{T}\)</span> is cheap, and therefore so is <span class="math inline">\(\boldsymbol{A}^{-1}\)</span> for orthogonal matrices.</p>
+<p>In orthogonal matrices, orthonormal vectors make up all rows and columns. This means that <span class="math inline">\boldsymbol{A}^{T} \boldsymbol{A} = \boldsymbol{A}\boldsymbol{A}^{T} = \boldsymbol{I}</span> and also that <span class="math inline">\boldsymbol{A}^{T} = \boldsymbol{A}^{-1}\boldsymbol{I} = \boldsymbol{A}^{-1}</span>. Calculating <span class="math inline">\boldsymbol{A}^{T}</span> is cheap, and therefore so is <span class="math inline">\boldsymbol{A}^{-1}</span> for orthogonal matrices.</p>
 
 
 </section>
