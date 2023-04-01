@@ -65,15 +65,14 @@ Elements are scalars, denoted non-bold lower case x with their index e.g. $x{_1}
 
 #### Vector Transposition
 
-$$\begin{bmatrix}  x{_1} & x{_2} & x{_3} \end{bmatrix}{^T}$$ =
-
-$$
+$\begin{bmatrix}  x{_1} & x{_2} & x{_3} \end{bmatrix}{^T}$ =
+$
 \begin{bmatrix}
 x{_1} \\
 x{_2} \\
 x{_3}
 \end{bmatrix}
-$$
+$
 
 Row vector of shape (1,3) transposed to a column vector shape (3,1).
 
