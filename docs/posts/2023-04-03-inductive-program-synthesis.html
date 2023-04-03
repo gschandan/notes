@@ -63,6 +63,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -152,6 +168,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#explicit" id="toc-explicit" class="nav-link" data-scroll-target="#explicit">Explicit</a>
   <ul class="collapse">
   <li><a href="#bottom-up-search" id="toc-bottom-up-search" class="nav-link" data-scroll-target="#bottom-up-search">Bottom-Up Search</a></li>
+  <li><a href="#synthesis-through-unification-stun" id="toc-synthesis-through-unification-stun" class="nav-link" data-scroll-target="#synthesis-through-unification-stun">Synthesis Through Unification (STUN)</a></li>
+  <li><a href="#hierarchical-search" id="toc-hierarchical-search" class="nav-link" data-scroll-target="#hierarchical-search">Hierarchical Search</a></li>
+  <li><a href="#top-down-search" id="toc-top-down-search" class="nav-link" data-scroll-target="#top-down-search">Top Down Search</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -170,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="explicit">Explicit</h2>
 <section id="bottom-up-search" class="level3">
 <h3 class="anchored" data-anchor-id="bottom-up-search">Bottom-Up Search</h3>
-<p>A simple implementation would be to construct all possible programs from the terminals of a grammar. This can be inefficient as the space of all expressions can grow quickly. Observationally equivalent (i.e.&nbsp;if the same output is generated based on the same input, the primitive can be discarded).</p>
+<p>A simple implementation would be to construct all possible programs from the terminals of a grammar. This can be inefficient as the space of all expressions can grow quickly. Observationally equivalent programs are discarded (i.e.&nbsp;if the same output is generated based on the same input, the primitive can be discarded), which reduces the solution space exponentially.</p>
 <pre><code>function synthesise (inputs, outputs):
   terms := set_of_all_terminals
   while(true):
@@ -179,6 +198,18 @@ ul.task-list li input[type="checkbox"] {
     foreach(t in terms):
       if(is_correct(t, inputs, outputs)):
         return t;</code></pre>
+<p>One characteristic is that bottom-up search explores small programs before larger ones, so it can potentially find the smallest program that satisfies the specification. Further heuristics can be applied in the grow or eliminate function level to direct the search, and it copes well with symmetry reduction. However, even with aggressive pruning, it is hard to scale beyond small lists of terms, and whilst it can connect discrete components, it is not effective at determining constants. It also may fail at pruning if the language has context dependant semantics e.g.&nbsp;if the same expression had dufferent values in different contexts e.g.&nbsp;via mutation.</p>
+</section>
+<section id="synthesis-through-unification-stun" class="level3">
+<h3 class="anchored" data-anchor-id="synthesis-through-unification-stun">Synthesis Through Unification (STUN)</h3>
+<p>By modularising the search, i.e.&nbsp;search for multiple programs that work for different inputs and find a way to combine them that will work for all inputs, the scalability can be improved. The first step is a best-effort synthesis (if it works on all then it is just returned), then it can try to either improve the current program by taking a selection of the currently failing inputs alongside the correctly mapped inputs, or STUN can be called recursively on the inputs where the synthesised program failed. Then the programs can be combined. #### Anti/Unification If there are no top-level branches to allow unification, <em>antiunification</em> can be used. Unification is finding a common structure for two different expressions by replacing variables with expressions. Antiunification is to process of finding the common structure by replacing expressions with variables. For example, if we find 2 expressions <span class="math inline">a \times c</span> and <span class="math inline">b \times c</span> cover all inputs, antiunification can produce a common expression <span class="math inline">v \times c</span> where v stands for a code fragment that can be solved, being a much smaller synthesis problem. When a recursive call to STUN is made, additional constraints can also be passed that the expression must satisfy to avoid situations where, for example, anntiunification cannot be used e.g.&nbsp;<span class="math inline">b \times c</span> would be chosen over <span class="math inline">-b</span> as <span class="math inline">b \times c</span> can be antiunified with <span class="math inline">a \times c</span>. <span class="math inline">\bigoplus</span> represents unification.</p>
+</section>
+<section id="hierarchical-search" class="level3">
+<h3 class="anchored" data-anchor-id="hierarchical-search">Hierarchical Search</h3>
+<p>Modularisation may also be performed if the program can be split into different levels of abstraction, and the search performed independently at each level. A potential optimisation here is if we can eliminate branches where the output is not a superset of the input set.</p>
+</section>
+<section id="top-down-search" class="level3">
+<h3 class="anchored" data-anchor-id="top-down-search">Top Down Search</h3>
 </section>
 </section>
 </section>
