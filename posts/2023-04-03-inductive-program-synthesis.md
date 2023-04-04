@@ -40,6 +40,26 @@ Modularisation may also be performed if the program can be split into different 
   
 ### Top Down Search
 
+Top down search can utilise types to assist in pruning invalid programs efficiently. A basic algorithm will start from the grammar rules and test with the inputs, pruning out programs that are fully expanded which don't return the correct output or which return incompatible types. Some languages will have infinite types, e.g. for supporting nested lists and functions.
+Typing rules have the following form:
+$$ \frac{premises}{context ⊢ expr : \tau } $$
+ ⊢ = proves or satisfies or is derived or assuming
+ expr will have type $\tau$ in a given context as long as all the premises are satisfied.
+Alternatively:
+$$ \frac{conditions}{Examples, ⊢ expression : \tau } $$
+
+An example typing rule might be:
+$$ \frac{\bold{\textit C},x : \tau_1 ⊢ expr : \tau_2}{\bold{\textit C} ⊢ \bold{\lambda}x.expr : \tau_1 \to \tau_2 } $$
+states the following: $\bold{\lambda}x.expr$ will have type $\tau_1 \to \tau_2$ if it can be shown that $expr$ has type $\tau_2$ in a context that is like the context $\bold{\textit C}$ but that also has $x$ as having type $\tau_1$.
+
+The search space can also be further restricted in further iterations/generations for functions like map; if the expected output is an array of integer arrays, the first expression must correspond to a function with a type of integer array, allowing filtering of programs that won't have the desired type before evaluating any concrete input values.
+
+#### Deductive Rules
+
+Type rules are a form of deductive rule; information about inputs/outputs are propogated to potential sub-expressions. Additional rules for different constructs in the language can prune the solution space. Given a candidate expression with an unknown subexpression $\textit{\bold f}$ and a set of input-outputs, the input-outputs can be propogated to the subexpression or establish that this line is not viable. Rules can inform the search if a candidate is not going to work e.g. map will always return a list of the same length so if the input length is different, map alone will not be viable. They can also provide information on how to propogate input-outputs to new expressions. It may not work when expressions involve functions e.g. if the same input value is mapped to multiple output values.
+
+### Stochastic Search
+
 
 
 # References

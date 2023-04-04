@@ -171,6 +171,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#synthesis-through-unification-stun" id="toc-synthesis-through-unification-stun" class="nav-link" data-scroll-target="#synthesis-through-unification-stun">Synthesis Through Unification (STUN)</a></li>
   <li><a href="#hierarchical-search" id="toc-hierarchical-search" class="nav-link" data-scroll-target="#hierarchical-search">Hierarchical Search</a></li>
   <li><a href="#top-down-search" id="toc-top-down-search" class="nav-link" data-scroll-target="#top-down-search">Top Down Search</a></li>
+  <li><a href="#stochastic-search" id="toc-stochastic-search" class="nav-link" data-scroll-target="#stochastic-search">Stochastic Search</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -210,6 +211,16 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="top-down-search" class="level3">
 <h3 class="anchored" data-anchor-id="top-down-search">Top Down Search</h3>
+<p>Top down search can utilise types to assist in pruning invalid programs efficiently. A basic algorithm will start from the grammar rules and test with the inputs, pruning out programs that are fully expanded which don’t return the correct output or which return incompatible types. Some languages will have infinite types, e.g.&nbsp;for supporting nested lists and functions. Typing rules have the following form: <span class="math display"> \frac{premises}{context ⊢ expr : \tau } </span> ⊢ = proves or satisfies or is derived or assuming expr will have type <span class="math inline">\tau</span> in a given context as long as all the premises are satisfied. Alternatively: <span class="math display"> \frac{conditions}{Examples, ⊢ expression : \tau } </span></p>
+<p>An example typing rule might be: <span class="math display"> \frac{\bold{\textit C},x : \tau_1 ⊢ expr : \tau_2}{\bold{\textit C} ⊢ \bold{\lambda}x.expr : \tau_1 \to \tau_2 } </span> states the following: <span class="math inline">\bold{\lambda}x.expr</span> will have type <span class="math inline">\tau_1 \to \tau_2</span> if it can be shown that <span class="math inline">expr</span> has type <span class="math inline">\tau_2</span> in a context that is like the context <span class="math inline">\bold{\textit C}</span> but that also has <span class="math inline">x</span> as having type <span class="math inline">\tau_1</span>.</p>
+<p>The search space can also be further restricted in further iterations/generations for functions like map; if the expected output is an array of integer arrays, the first expression must correspond to a function with a type of integer array, allowing filtering of programs that won’t have the desired type before evaluating any concrete input values.</p>
+<section id="deductive-rules" class="level4">
+<h4 class="anchored" data-anchor-id="deductive-rules">Deductive Rules</h4>
+<p>Type rules are a form of deductive rule; information about inputs/outputs are propogated to potential sub-expressions. Additional rules for different constructs in the language can prune the solution space. Given a candidate expression with an unknown subexpression <span class="math inline">\textit{\bold f}</span> and a set of input-outputs, the input-outputs can be propogated to the subexpression or establish that this line is not viable. Rules can inform the search if a candidate is not going to work e.g.&nbsp;map will always return a list of the same length so if the input length is different, map alone will not be viable. They can also provide information on how to propogate input-outputs to new expressions. It may not work when expressions involve functions e.g.&nbsp;if the same input value is mapped to multiple output values.</p>
+</section>
+</section>
+<section id="stochastic-search" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-search">Stochastic Search</h3>
 </section>
 </section>
 </section>
