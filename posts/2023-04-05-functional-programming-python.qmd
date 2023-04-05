@@ -1,0 +1,31 @@
+---
+title: "Introduction to Functional Programming In Python"
+categories:
+- programming
+- functional-programming
+- introduction
+- python
+date: '2023-04-05'
+description: Notes about functional programming in python
+layout: post
+toc: true
+format:
+  html:
+    html-math-method: katex
+    code-fold: true
+jupyter: python3
+---
+
+# Functional Programming in Python
+
+Python functions can take functions as arguments and can return functions to their calling site.
+
+```{python}
+def inside():
+    print("This is inside().")
+
+def outside(function):
+    function()
+outside(inside)
+```
+

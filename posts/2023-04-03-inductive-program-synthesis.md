@@ -69,7 +69,15 @@ and a set of input-outputs, the input-outputs can be propogated to the subexpres
   $ \bold{\textit K}(x,y): \chi \times \chi \to \reals $ where 
   $ \bold{\textit K}(x,y) \ge 0 $ and $ \sum_y \bold{\textit K}(x,y) = 1 $. Becuase the values of $\bold{\textit K}$ are probabilities, $\forall x,y. 0 \le \bold{\textit K}(x,y) < 1.0$
   and at every state there will be a transition (potentially to the same state) so  $\forall x.\sum_{y\in{\chi}} \bold{\textit K}(x,y) = 1.0$.  
-  A markov chain is a sequence of states $x_0, x_1, x_2,...$ in a markov process.
+  A markov chain is a sequence of states $\textit X_0, \textit X_1, \textit X_2,...$ in a markov process. The probability of the whole chain is the product of the probability of each transition:
+  $$ (\textit X_1 = y|\textit X_0 = x) = \bold{\textit K} $$
+  $$ \bold{\textit P}(\textit X_1 = y, \textit X_2 = z|\textit X_0 = x) = \bold{\textit K} $$
+  $$ \bold{\textit P}(\textit X_2 = z|\textit X_0 = x) = \sum_y \bold{\textit K(x,y)} \times \bold{\textit K(y,z)} $$
+  To obtain the probabilit that $X_2 = z$ given a starting point of $X_0 = x$, then we need to consider all the possible states of $X_1$ to get from $x$ to $z$. This is $ \sum_y \bold{\textit K(x,y)} \times \bold{\textit K(y,z)} $. $\bold{\textit K}$ is a matrix which gives the probability of transitioning from $x$ to $y$ in one step. $\bold{\textit K}^2$ is the probability of transitioning in 2 steps, and $\bold{\textit K}^n (x,y)$ is the probability of transitioning from $x$ to $y$ in exactly $n$ steps.
+
+#### Stationary Distributions
+
+
 
 # References
 

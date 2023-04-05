@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-04-03">
-<meta name="description" content="Notes about inductive program synthesis">
+<meta name="dcterms.date" content="2023-04-05">
+<meta name="description" content="Notes about functional programming in python">
 
-<title>notes - Inductive Program Synthesis</title>
+<title>notes - Introduction to Functional Programming In Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -63,22 +97,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -126,16 +144,17 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Inductive Program Synthesis</h1>
+      <h1 class="title">Introduction to Functional Programming In Python</h1>
                   <div>
         <div class="description">
-          Notes about inductive program synthesis
+          Notes about functional programming in python
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">programming</div>
-                <div class="quarto-category">inductive-synthesis</div>
-                <div class="quarto-category">algorithm</div>
+                <div class="quarto-category">functional-programming</div>
+                <div class="quarto-category">introduction</div>
+                <div class="quarto-category">python</div>
               </div>
                   </div>
   </div>
@@ -147,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 3, 2023</p>
+        <p class="date">April 5, 2023</p>
       </div>
     </div>
     
@@ -163,18 +182,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#inductive-synthesis" id="toc-inductive-synthesis" class="nav-link active" data-scroll-target="#inductive-synthesis">Inductive Synthesis</a>
-  <ul class="collapse">
-  <li><a href="#explicit" id="toc-explicit" class="nav-link" data-scroll-target="#explicit">Explicit</a>
-  <ul class="collapse">
-  <li><a href="#bottom-up-search" id="toc-bottom-up-search" class="nav-link" data-scroll-target="#bottom-up-search">Bottom-Up Search</a></li>
-  <li><a href="#synthesis-through-unification-stun" id="toc-synthesis-through-unification-stun" class="nav-link" data-scroll-target="#synthesis-through-unification-stun">Synthesis Through Unification (STUN)</a></li>
-  <li><a href="#hierarchical-search" id="toc-hierarchical-search" class="nav-link" data-scroll-target="#hierarchical-search">Hierarchical Search</a></li>
-  <li><a href="#top-down-search" id="toc-top-down-search" class="nav-link" data-scroll-target="#top-down-search">Top Down Search</a></li>
-  <li><a href="#stochastic-search" id="toc-stochastic-search" class="nav-link" data-scroll-target="#stochastic-search">Stochastic Search</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#functional-programming-in-python" id="toc-functional-programming-in-python" class="nav-link active" data-scroll-target="#functional-programming-in-python">Functional Programming in Python</a></li>
   </ul>
 </nav>
     </div>
@@ -184,57 +192,23 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="inductive-synthesis" class="level1">
-<h1>Inductive Synthesis</h1>
-<section id="explicit" class="level2">
-<h2 class="anchored" data-anchor-id="explicit">Explicit</h2>
-<section id="bottom-up-search" class="level3">
-<h3 class="anchored" data-anchor-id="bottom-up-search">Bottom-Up Search</h3>
-<p>A simple implementation would be to construct all possible programs from the terminals of a grammar. This can be inefficient as the space of all expressions can grow quickly. Observationally equivalent programs are discarded (i.e.&nbsp;if the same output is generated based on the same input, the primitive can be discarded), which reduces the solution space exponentially.</p>
-<pre><code>function synthesise (inputs, outputs):
-  terms := set_of_all_terminals
-  while(true):
-    terms := grow(terms)
-    terms := eliminate_observational_equivalents(terms, inputs);
-    foreach(t in terms):
-      if(is_correct(t, inputs, outputs)):
-        return t;</code></pre>
-<p>One characteristic is that bottom-up search explores small programs before larger ones, so it can potentially find the smallest program that satisfies the specification. Further heuristics can be applied in the grow or eliminate function level to direct the search, and it copes well with symmetry reduction. However, even with aggressive pruning, it is hard to scale beyond small lists of terms, and whilst it can connect discrete components, it is not effective at determining constants. It also may fail at pruning if the language has context dependant semantics e.g.&nbsp;if the same expression had dufferent values in different contexts e.g.&nbsp;via mutation.</p>
-</section>
-<section id="synthesis-through-unification-stun" class="level3">
-<h3 class="anchored" data-anchor-id="synthesis-through-unification-stun">Synthesis Through Unification (STUN)</h3>
-<p>By modularising the search, i.e.&nbsp;search for multiple programs that work for different inputs and find a way to combine them that will work for all inputs, the scalability can be improved. The first step is a best-effort synthesis (if it works on all then it is just returned), then it can try to either improve the current program by taking a selection of the currently failing inputs alongside the correctly mapped inputs, or STUN can be called recursively on the inputs where the synthesised program failed. Then the programs can be combined. #### Anti/Unification If there are no top-level branches to allow unification, <em>antiunification</em> can be used. Unification is finding a common structure for two different expressions by replacing variables with expressions. Antiunification is to process of finding the common structure by replacing expressions with variables. For example, if we find 2 expressions <span class="math inline">a \times c</span> and <span class="math inline">b \times c</span> cover all inputs, antiunification can produce a common expression <span class="math inline">v \times c</span> where v stands for a code fragment that can be solved, being a much smaller synthesis problem. When a recursive call to STUN is made, additional constraints can also be passed that the expression must satisfy to avoid situations where, for example, anntiunification cannot be used e.g.&nbsp;<span class="math inline">b \times c</span> would be chosen over <span class="math inline">-b</span> as <span class="math inline">b \times c</span> can be antiunified with <span class="math inline">a \times c</span>. <span class="math inline">\bigoplus</span> represents unification.</p>
-</section>
-<section id="hierarchical-search" class="level3">
-<h3 class="anchored" data-anchor-id="hierarchical-search">Hierarchical Search</h3>
-<p>Modularisation may also be performed if the program can be split into different levels of abstraction, and the search performed independently at each level. A potential optimisation here is if we can eliminate branches where the output is not a superset of the input set.</p>
-</section>
-<section id="top-down-search" class="level3">
-<h3 class="anchored" data-anchor-id="top-down-search">Top Down Search</h3>
-<p>Top down search can utilise types to assist in pruning invalid programs efficiently. A basic algorithm will start from the grammar rules and test with the inputs, pruning out programs that are fully expanded which don’t return the correct output or which return incompatible types. Some languages will have infinite types, e.g.&nbsp;for supporting nested lists and functions. Typing rules have the following form: <span class="math display"> \frac{premises}{context ⊢ expr : \tau } </span> ⊢ = proves or satisfies or is derived or assuming expr will have type <span class="math inline">\tau</span> in a given context as long as all the premises are satisfied. Alternatively: <span class="math display"> \frac{conditions}{Examples, ⊢ expression : \tau } </span></p>
-<p>An example typing rule might be: <span class="math display"> \frac{\bold{\textit C},x : \tau_1 ⊢ expr : \tau_2}{\bold{\textit C} ⊢ \bold{\lambda}x.expr : \tau_1 \to \tau_2 } </span> states the following: <span class="math inline">\bold{\lambda}x.expr</span> will have type <span class="math inline">\tau_1 \to \tau_2</span> if it can be shown that <span class="math inline">expr</span> has type <span class="math inline">\tau_2</span> in a context that is like the context <span class="math inline">\bold{\textit C}</span> but that also has <span class="math inline">x</span> as having type <span class="math inline">\tau_1</span>.</p>
-<p>The search space can also be further restricted in further iterations/generations for functions like map; if the expected output is an array of integer arrays, the first expression must correspond to a function with a type of integer array, allowing filtering of programs that won’t have the desired type before evaluating any concrete input values.</p>
-<section id="deductive-rules" class="level4">
-<h4 class="anchored" data-anchor-id="deductive-rules">Deductive Rules</h4>
-<p>Type rules are a form of deductive rule; information about inputs/outputs are propogated to potential sub-expressions. Additional rules for different constructs in the language can prune the solution space. Given a candidate expression with an unknown subexpression <span class="math inline">\bold{\textit f}</span> and a set of input-outputs, the input-outputs can be propogated to the subexpression or establish that this line is not viable. Rules can inform the search if a candidate is not going to work e.g.&nbsp;map will always return a list of the same length so if the input length is different, map alone will not be viable. They can also provide information on how to propogate input-outputs to new expressions. It may not work when expressions involve functions e.g.&nbsp;if the same input value is mapped to multiple output values.</p>
-</section>
-</section>
-<section id="stochastic-search" class="level3">
-<h3 class="anchored" data-anchor-id="stochastic-search">Stochastic Search</h3>
-<section id="markov-chain" class="level4">
-<h4 class="anchored" data-anchor-id="markov-chain">Markov Chain</h4>
-<p>A probabilistic process where there is a finite set of states $ $, and the probability of transitioning from a given state <span class="math inline">x</span> to a different state <span class="math inline">y</span> at each step of the process, is given by matrix $ (x,y): $ where $ (x,y) $ and $ _y (x,y) = 1 $. Becuase the values of <span class="math inline">\bold{\textit K}</span> are probabilities, <span class="math inline">\forall x,y. 0 \le \bold{\textit K}(x,y) &lt; 1.0</span> and at every state there will be a transition (potentially to the same state) so <span class="math inline">\forall x.\sum_{y\in{\chi}} \bold{\textit K}(x,y) = 1.0</span>.<br>
-A markov chain is a sequence of states <span class="math inline">\textit X_0, \textit X_1, \textit X_2,...</span> in a markov process. The probability of the whole chain is the product of the probability of each transition: <span class="math display"> (\textit X_1 = y|\textit X_0 = x) = \bold{\textit K} </span> <span class="math display"> \bold{\textit P}(\textit X_1 = y, \textit X_2 = z|\textit X_0 = x) = \bold{\textit K} </span> <span class="math display"> \bold{\textit P}(\textit X_2 = z|\textit X_0 = x) = \sum_y \bold{\textit K(x,y)} \times \bold{\textit K(y,z)} </span> To obtain the probabilit that <span class="math inline">X_2 = z</span> given a starting point of <span class="math inline">X_0 = x</span>, then we need to consider all the possible states of <span class="math inline">X_1</span> to get from <span class="math inline">x</span> to <span class="math inline">z</span>. This is $ _y $. <span class="math inline">\bold{\textit K}</span> is a matrix which gives the probability of transitioning from <span class="math inline">x</span> to <span class="math inline">y</span> in one step. <span class="math inline">\bold{\textit K}^2</span> is the probability of transitioning in 2 steps, and <span class="math inline">\bold{\textit K}^n (x,y)</span> is the probability of transitioning from <span class="math inline">x</span> to <span class="math inline">y</span> in exactly <span class="math inline">n</span> steps.</p>
-</section>
-<section id="stationary-distributions" class="level4">
-<h4 class="anchored" data-anchor-id="stationary-distributions">Stationary Distributions</h4>
-</section>
-</section>
-</section>
-</section>
-<section id="references" class="level1">
-<h1>References</h1>
-<p>[^1] A. Solar-Lezama, MIT 6.S981 <a href="https://people.csail.mit.edu/asolar/SynthesisCourse/index.htm">Introduction to Program Synthesis</a></p>
+<section id="functional-programming-in-python" class="level1">
+<h1>Functional Programming in Python</h1>
+<p>Python functions can take functions as arguments and can return functions to their calling site.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> inside():</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"This is inside()."</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> outside(function):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    function()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>outside(inside)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>This is inside().</code></pre>
+</div>
+</div>
 
 
 </section>

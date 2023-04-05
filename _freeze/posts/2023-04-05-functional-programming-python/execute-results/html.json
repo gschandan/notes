@@ -1,0 +1,11 @@
+{
+  "hash": "f98d4a636c9ab35b89fd468553c3f7b8",
+  "result": {
+    "markdown": "---\ntitle: Introduction to Functional Programming In Python\ncategories:\n  - programming\n  - functional-programming\n  - introduction\n  - python\ndate: '2023-04-05'\ndescription: Notes about functional programming in python\nlayout: post\ntoc: true\nformat:\n  html:\n    html-math-method: katex\n    code-fold: true\n---\n\n# Functional Programming in Python\n\nPython functions can take functions as arguments and can return functions to their calling site.\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\ndef inside():\n    print(\"This is inside().\")\n\ndef outside(function):\n    function()\noutside(inside)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nThis is inside().\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "2023-04-05-functional-programming-python_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

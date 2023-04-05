@@ -19,6 +19,8 @@ format:
 
 # Eigenvectors and Eigenvalues
 
+Coming soon!
+
 ### Linear Algebra
 
 Ch 1-7 Strang [^1]
