@@ -56,11 +56,20 @@ The search space can also be further restricted in further iterations/generation
 
 #### Deductive Rules
 
-Type rules are a form of deductive rule; information about inputs/outputs are propogated to potential sub-expressions. Additional rules for different constructs in the language can prune the solution space. Given a candidate expression with an unknown subexpression $\textit{\bold f}$ and a set of input-outputs, the input-outputs can be propogated to the subexpression or establish that this line is not viable. Rules can inform the search if a candidate is not going to work e.g. map will always return a list of the same length so if the input length is different, map alone will not be viable. They can also provide information on how to propogate input-outputs to new expressions. It may not work when expressions involve functions e.g. if the same input value is mapped to multiple output values.
+Type rules are a form of deductive rule; information about inputs/outputs are propogated to potential sub-expressions. Additional rules for different constructs in the language can prune the solution space. Given a candidate expression with an unknown subexpression 
+$\bold{\textit f}$ 
+and a set of input-outputs, the input-outputs can be propogated to the subexpression or establish that this line is not viable. Rules can inform the search if a candidate is not going to work e.g. map will always return a list of the same length so if the input length is different, map alone will not be viable. They can also provide information on how to propogate input-outputs to new expressions. It may not work when expressions involve functions e.g. if the same input value is mapped to multiple output values.
 
 ### Stochastic Search
 
+#### Markov Chain
 
+  A probabilistic process where there is a finite set of states 
+  $ \chi $, and the probability of transitioning from a given state $x$ to a different state $y$ at each step of the process, is given by matrix 
+  $ \bold{\textit K}(x,y): \chi \times \chi \to \reals $ where 
+  $ \bold{\textit K}(x,y) \ge 0 $ and $ \sum_y \bold{\textit K}(x,y) = 1 $. Becuase the values of $\bold{\textit K}$ are probabilities, $\forall x,y. 0 \le \bold{\textit K}(x,y) < 1.0$
+  and at every state there will be a transition (potentially to the same state) so  $\forall x.\sum_{y\in{\chi}} \bold{\textit K}(x,y) = 1.0$.  
+  A markov chain is a sequence of states $x_0, x_1, x_2,...$ in a markov process.
 
 # References
 

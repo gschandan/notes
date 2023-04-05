@@ -216,11 +216,16 @@ ul.task-list li input[type="checkbox"] {
 <p>The search space can also be further restricted in further iterations/generations for functions like map; if the expected output is an array of integer arrays, the first expression must correspond to a function with a type of integer array, allowing filtering of programs that won’t have the desired type before evaluating any concrete input values.</p>
 <section id="deductive-rules" class="level4">
 <h4 class="anchored" data-anchor-id="deductive-rules">Deductive Rules</h4>
-<p>Type rules are a form of deductive rule; information about inputs/outputs are propogated to potential sub-expressions. Additional rules for different constructs in the language can prune the solution space. Given a candidate expression with an unknown subexpression <span class="math inline">\textit{\bold f}</span> and a set of input-outputs, the input-outputs can be propogated to the subexpression or establish that this line is not viable. Rules can inform the search if a candidate is not going to work e.g.&nbsp;map will always return a list of the same length so if the input length is different, map alone will not be viable. They can also provide information on how to propogate input-outputs to new expressions. It may not work when expressions involve functions e.g.&nbsp;if the same input value is mapped to multiple output values.</p>
+<p>Type rules are a form of deductive rule; information about inputs/outputs are propogated to potential sub-expressions. Additional rules for different constructs in the language can prune the solution space. Given a candidate expression with an unknown subexpression <span class="math inline">\bold{\textit f}</span> and a set of input-outputs, the input-outputs can be propogated to the subexpression or establish that this line is not viable. Rules can inform the search if a candidate is not going to work e.g.&nbsp;map will always return a list of the same length so if the input length is different, map alone will not be viable. They can also provide information on how to propogate input-outputs to new expressions. It may not work when expressions involve functions e.g.&nbsp;if the same input value is mapped to multiple output values.</p>
 </section>
 </section>
 <section id="stochastic-search" class="level3">
 <h3 class="anchored" data-anchor-id="stochastic-search">Stochastic Search</h3>
+<section id="markov-chain" class="level4">
+<h4 class="anchored" data-anchor-id="markov-chain">Markov Chain</h4>
+<p>A probabilistic process where there is a finite set of states $ $, and the probability of transitioning from a given state <span class="math inline">x</span> to a different state <span class="math inline">y</span> at each step of the process, is given by matrix $ (x,y): $ where $ (x,y) $ and $ _y (x,y) = 1 $. Becuase the values of <span class="math inline">\bold{\textit K}</span> are probabilities, <span class="math inline">\forall x,y. 0 \le \bold{\textit K}(x,y) &lt; 1.0</span> and at every state there will be a transition (potentially to the same state) so <span class="math inline">\forall x.\sum_{y\in{\chi}} \bold{\textit K}(x,y) = 1.0</span>.<br>
+A markov chain is a sequence of states <span class="math inline">x_0, x_1, x_2,...</span> in a markov process.</p>
+</section>
 </section>
 </section>
 </section>
