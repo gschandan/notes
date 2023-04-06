@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2023-04-01">
-<meta name="description" content="Notes about basic terms and concepts">
+<meta name="dcterms.date" content="2023-04-06">
+<meta name="description" content="Notes about counter example guided inductive programsynthesis">
 
-<title>notes - Introduction to Program Synthesis</title>
+<title>notes - Introduction to CEGIS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,22 +63,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -126,16 +110,16 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Introduction to Program Synthesis</h1>
+      <h1 class="title">Introduction to CEGIS</h1>
                   <div>
         <div class="description">
-          Notes about basic terms and concepts
+          Notes about counter example guided inductive programsynthesis
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">programming</div>
-                <div class="quarto-category">introduction</div>
                 <div class="quarto-category">program-synthesis</div>
+                <div class="quarto-category">CEGIS</div>
+                <div class="quarto-category">introduction</div>
               </div>
                   </div>
   </div>
@@ -147,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 1, 2023</p>
+        <p class="date">April 6, 2023</p>
       </div>
     </div>
     
@@ -163,21 +147,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#program-synthesis" id="toc-program-synthesis" class="nav-link active" data-scroll-target="#program-synthesis">Program Synthesis</a>
-  <ul class="collapse">
-  <li><a href="#compilation-vs-synthesis" id="toc-compilation-vs-synthesis" class="nav-link" data-scroll-target="#compilation-vs-synthesis">Compilation vs Synthesis</a>
-  <ul class="collapse">
-  <li><a href="#intention" id="toc-intention" class="nav-link" data-scroll-target="#intention">Intention</a></li>
-  <li><a href="#invention" id="toc-invention" class="nav-link" data-scroll-target="#invention">Invention</a></li>
-  <li><a href="#adaptation" id="toc-adaptation" class="nav-link" data-scroll-target="#adaptation">Adaptation</a></li>
-  </ul></li>
-  <li><a href="#inductive-synthesis" id="toc-inductive-synthesis" class="nav-link" data-scroll-target="#inductive-synthesis">Inductive Synthesis</a></li>
-  <li><a href="#programming" id="toc-programming" class="nav-link" data-scroll-target="#programming">Programming</a></li>
-  <li><a href="#search-techniques" id="toc-search-techniques" class="nav-link" data-scroll-target="#search-techniques">Search Techniques</a>
-  <ul class="collapse">
-  <li><a href="#explicit-enumeration" id="toc-explicit-enumeration" class="nav-link" data-scroll-target="#explicit-enumeration">Explicit Enumeration</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#counter-example-guided-inductive-synthesis-cegis" id="toc-counter-example-guided-inductive-synthesis-cegis" class="nav-link active" data-scroll-target="#counter-example-guided-inductive-synthesis-cegis">Counter Example Guided Inductive Synthesis (CEGIS)</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -188,49 +158,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="program-synthesis" class="level1">
-<h1>Program Synthesis</h1>
-<section id="compilation-vs-synthesis" class="level2">
-<h2 class="anchored" data-anchor-id="compilation-vs-synthesis">Compilation vs Synthesis</h2>
-<p>Generally, compilers transform source code from the source language to the target language, usually to create an executable program, whereas program synthesisers <em>search</em> for a program that will satisfy some stated requirements. They both take high-level specifications to generate software, but synthesisers can search over a solution space to discover how to generate a program to satisfy the requirements (some compiler optimisations also do this e.g.&nbsp;autotuning). A program in this context, is a description of how to perform a computation. It is useful to constrain the solution to narrower notation than programming languages such as Domain Specific Languages (DSL) to avoid using specific constructs, rather build using a limited set of functions. Functional programming notation is useful for synthesis as we avoid side effects which can simplify the reasoning process, and can be expressed concisely.<br>
-## Synthesis Program synthesis will generate a program that will solve the stated problem, within a specified program solution space i.e.&nbsp;with control over the space of programs, not just the intended behaviour. An example is flash fill (Excel) which derives and applies a small program to the rest of the data. The order can also be rveersed e.g.&nbsp;start with a program and search for the specification i.e.&nbsp;reverse engineering e.g.&nbsp;Verified Lifting - discovering a high level representation that is provably equivalent to an implementation which can then be uo generate a more efficient version of the program. There are 3 major challenges; intention, invention and adaptation to consider.</p>
-<section id="intention" class="level3">
-<h3 class="anchored" data-anchor-id="intention">Intention</h3>
-<ul>
-<li>Semantic and syntactic constraints: form of user input will influence the synthesis system e.g.&nbsp;input-output examples like flash fill may not be suitable. May need a multimodal approach with some examples or abstract examples combined with logical specifications, to provide enough data about intended behaviour.</li>
-<li>Under specification: if there are multiple solutions that satisfy requirements, which one should be chosen?</li>
-</ul>
-</section>
-<section id="invention" class="level3">
-<h3 class="anchored" data-anchor-id="invention">Invention</h3>
-<ul>
-<li>Discovering the code to satisfy the requirements</li>
-</ul>
-</section>
-<section id="adaptation" class="level3">
-<h3 class="anchored" data-anchor-id="adaptation">Adaptation</h3>
-<ul>
-<li>The application of synthesis to broader software development e.g.&nbsp;bug fixing, optimisation and other maintenance or existing codebase tasks.</li>
-</ul>
-</section>
-</section>
-<section id="inductive-synthesis" class="level2">
-<h2 class="anchored" data-anchor-id="inductive-synthesis">Inductive Synthesis</h2>
-<p>Inductive synthesis generates a function that matches provided input-output examples. Deductive synthesis generally requires a complete list of axioms and formal specification for the language and program which may be difficult to obtain. Inductive synthesis allows for less complete specification with the downside of scaling issues due to iteration. ### Programming by example (PBE) and Programming by demonstration (PBD) In PBE, just the input-output is provided, which can leave a large potential solution space e.g.&nbsp;<span class="math inline">f(1) = 1</span> which could be addition, division, multiplication etc.<br>
-In PBD, a trace of the computation performed is also provided to provide additional specification which makes it easier to infer the intended program, e.g.&nbsp;<span class="math inline">f(1) = 1 \times 1 = 1</span><br>
-PBD and PBE can still be under-specificed with a large solution program space; need to address how to find the program that matches the observations, and how to know that the program that the user required is the one that was found. Arbritrary spaces can also be searched e.g.&nbsp;a large but highly constrained space, allowing exclusion of undesirable solutions, but would still likely require ranking of solutions.</p>
-</section>
-<section id="programming" class="level2">
-<h2 class="anchored" data-anchor-id="programming">Programming</h2>
-<p>Need to represent code as a data structure - Abstrac Syntax Trees (AST) are commonly used for this as they usually follow the same structure of the parse tree of the program, whilst ignoring additional characters e.g.&nbsp;parentheses, hence abstract. Context free grammar notation is often used to describe ASTs, to represent the structure of DSLs.</p>
-</section>
-<section id="search-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="search-techniques">Search Techniques</h2>
-<section id="explicit-enumeration" class="level3">
-<h3 class="anchored" data-anchor-id="explicit-enumeration">Explicit Enumeration</h3>
-<p>Explicitly construct programs until one satisfies the observations, ideally avoiding the generation of programs that are not viable e.g.&nbsp;cannot satisfy the observations or can be proven redundant from existing found solutions. - Bottom-Up: discover low level components then ho to assemble them into programs i.e.&nbsp;leaf nodes up. - Top-Down: discover the high level structure first, then enumerate to the low level components i.e.&nbsp;root down. The synthesiser will maintain a partial or completely constructed program that is being evaluated e.g.&nbsp;would evaluate potential solutions until success. ### Symbolic Search In symbolic searching, the synthesiser will maintain a symbolic representation of the space of all programs that are considered valid e.g.&nbsp;Version Space Algebras and Constraint Systems. A symbolic search may perform some algebraeic manipulation to deduce results which may perform better in some cases, but not all e.g.&nbsp;binary search being effective in finding solutions where algebraeic manipulation may be too costly. ## Program Solution Space ### Small DSL One way to simplify the solution space is to define or use a small DSL, then consider all possible valid programs within this language, using context free grammar to describe the ASTs. This makes it simple to enumerate all (or randomly sample) programs in a small DSL. If the DSL has a type system, this can help eliminate solutions which violate type rules. ### Constraint Based Constraint based approaches utilise parametric representations of the space - different choices of paramters correspond to different forms of the program. Paramtetric representations can be more general than grammars - grammars can be encoded in paramteric representation provided a boundary on the length of the program. Paramteric programs can also be referred to as generative models, particularly when the free parameter choice is associated with probabilities. ### Symmetry If there are many ways to represent the same program, the program space has lots of symmetry. Symmetry can be reduced with reduction of cummtativity e.g.&nbsp;forcing right or left associativity. Constraint and enumeration based strategies can benefit from symmetry reduction, though there are additional techniques that are mostly removed from this issue. For example $expr := var N | expr + expr $ has a greater soltuion space than $expr := var N | (var * N) + expr $ which forces right associativity.</p>
-</section>
-</section>
+<section id="counter-example-guided-inductive-synthesis-cegis" class="level1">
+<h1>Counter Example Guided Inductive Synthesis (CEGIS)</h1>
+<p>In CEGIS, with a supplied specification, a synthesiser produces a program that may satisfy the specification, and a verifier determines if this is true, otherwise it will provide a defined form of feedback to the synthesiser to further guide its search. The feedback is usually a counterexample - an input upon which the program did not satisfy the specification.</p>
 </section>
 <section id="references" class="level1">
 <h1>References</h1>
