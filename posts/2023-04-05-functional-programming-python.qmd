@@ -12,20 +12,177 @@ toc: true
 format:
   html:
     html-math-method: katex
-    code-fold: true
+    code-fold: false
 jupyter: python3
 ---
 
 # Functional Programming in Python
 
+## Basic Syntax
+
 Python functions can take functions as arguments and can return functions to their calling site.
 
 ```{python}
 def inside():
-    print("This is inside().")
+    print("This is inside")
 
 def outside(function):
     function()
 outside(inside)
 ```
+
+Inner functions can sometimes be referred to as callbacks as they are not invoked immediately. Forexample, passing a custom function to `sorted()`:
+
+```{python}
+fruits = ["apple", "tomato", "pear", "blueberry"]
+
+def reverse_length(x):
+    return -len(x)
+
+print(sorted(fruits, key=reverse_length))
+
+```
+
+Functions can also return functions, which can be called without intermediate assignement:
+```{python}
+def inside():
+    print("This is inside")
+
+def outside(function):
+    return function
+outside(inside)()
+```
+
+Lambda expressions can be useful and take the following form:
+```{code-fold="false"}
+lambda <parameter_list (optional)>: <expression>
+```
+Lambda expressions have their own namespace, and can access but not modify global variables.
+For example:
+```{python}
+
+reverse = lambda x: x[::-1]
+callable(reverse)
+print(reverse("Hello World!"))
+print(reverse([1,2,3,4]))
+
+print((lambda x1, x2: x1+x2)(2,2))
+
+meaning_of_life = lambda: 42
+print(meaning_of_life())
+```
+
+The return value of a lambda can only be a single expression, and not assignemnet or return statements, or other control constructs. It also does not allow implicit tuple unpacking.
+Tuples, lists and dictionaries can still be returned, but reqiore explicit parentheses:
+```{python}
+
+print((lambda x: (x, x**2, x**3))(2))
+print((lambda x: [x, x**2, x**3])(2))
+print((lambda x: {1:x, 2:x**2, 3:x**3})(2))
+
+```
+
+## Map
+
+Map can apply a function to each element of an iterable, and can return an iterator which can yield the results. Map takes the following form
+```{code-fold="false"}
+map(<function>, <iterable>)
+```
+```{python}
+
+square = lambda x: x**2
+numbers = [1,2,3,4,5,6,7]
+iterable = map(square, numbers)
+print(next(iterable))
+print(next(iterable))
+print(next(iterable))
+print(list(iterable))
+```
+Iterating over the iterable yeilds the items.
+
+Map can also take the form `map(<function>, <iterable₁>, ..., <iterableₙ>)` which can apply the function to the elements in each iterable in parallel. 
+The number of iterables must match the number of arguments the function expects:
+
+```{python}
+
+square_cube = lambda x1, x2: [x1**2, x2**3]
+iterable = map(square_cube, [3,5], [4,6])
+print(list(iterable))
+
+add = lambda x1, x2, x3: x1+x2+x3
+iterable = map(add, [1,2,3], [9,18,17], [100,200,300])
+print(list(iterable))
+```
+
+## Filter
+
+Filter is similar to map; it applies the function the each element of an iterable but only returns items which are truthy. It takes the following form:
+```{code-fold="false"}
+filter(<function>, <iterable>)
+```
+```{python}
+
+print(list(filter(lambda x: x % 2 == 0, [0,1,2,3,4,5,6])))
+
+```
+
+## Reduce
+
+Reduce applies a function to an iterable, accumulating or progressively combining the output and returning a single result. The function must take only 2 arguments. Reduce will apply the dunction to the first 2 arguments, then combine with the application of the combined and the third item and so on.
+```{code-fold="false"}
+reduce(<function>, <iterable>)
+```
+```{python}
+
+from functools import reduce
+
+print(reduce(lambda x,y:x+y, [1]))
+print(reduce(lambda x,y:x+y, [1,2,3,4,5]))
+print(reduce(lambda x,y:x*y, range(1,10)))
+print(reduce(lambda x,y:x if x > y else y, range(1,10)))
+
+```
+
+Another form is with an initial value:
+```{code-fold="false"}
+reduce(<function>, <iterable>, <initial_value>)
+```
+```{python}
+
+from functools import reduce
+
+print(reduce(lambda x,y:x+y, [1], 1))
+print(reduce(lambda x,y:x+y, [1,2,3,4,5], 5))
+print(reduce(lambda x,y:x*y, range(3,10), 1))
+print(reduce(lambda x,y:x if x > y else y, range(1,10), 100))
+
+```
+
+Map and filter can also be implemented with reduce:
+```{python}
+
+from functools import reduce
+
+def map_2(function, iterable):
+    return reduce(
+        lambda x,y : x + [function(y)],
+        iterable,
+        []
+    )
+print(map_2(lambda x: x**2, [1,2,3]))
+
+def filter_2(function, iterable):
+    return reduce(
+        lambda x,y : x + [y] if function(y) else x,
+        iterable,
+        []
+    )
+print(filter_2(lambda x: x%2==0, [1,2,3,4]))
+
+```
+
+
+# References
+
+[^1]  https://realpython.com/python-functional-programming/
 
