@@ -20,7 +20,7 @@ Generally, compilers transform source code from the source language to the targe
 A program in this context, is a description of how to perform a computation. It is useful to constrain the solution to narrower notation than programming languages such as Domain Specific Languages (DSL) to avoid using specific constructs, rather build using a limited set of functions. Functional programming notation is useful for synthesis as we avoid side effects which can simplify the reasoning process, and can be expressed concisely.  
 ## Synthesis
 Program synthesis will generate a program that will solve the stated problem, within a specified program solution space i.e. with control over the space of programs, not just the intended behaviour. An example is flash fill (Excel) which derives and applies a small program to the rest of the data.
-The order can also be rveersed e.g. start with a program and search for the specification i.e. reverse engineering e.g. Verified Lifting - discovering a high level representation that is provably equivalent to an implementation which can then be uo generate a more efficient version of the program.
+The order can also be reversed e.g. start with a program and search for the specification i.e. reverse engineering e.g. Verified Lifting - discovering a high level representation that is provably equivalent to an implementation which can then be uo generate a more efficient version of the program.
 There are 3 major challenges; intention, invention and adaptation to consider.  
 
 ### Intention

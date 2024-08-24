@@ -73,7 +73,7 @@ and a set of input-outputs, the input-outputs can be propogated to the subexpres
   $$ (\textit X_1 = y|\textit X_0 = x) = \bold{\textit K} $$
   $$ \bold{\textit P}(\textit X_1 = y, \textit X_2 = z|\textit X_0 = x) = \bold{\textit K} $$
   $$ \bold{\textit P}(\textit X_2 = z|\textit X_0 = x) = \sum_y \bold{\textit K(x,y)} \times \bold{\textit K(y,z)} $$
-  To obtain the probabilit that $X_2 = z$ given a starting point of $X_0 = x$, then we need to consider all the possible states of $X_1$ to get from $x$ to $z$. This is $ \sum_y \bold{\textit K(x,y)} \times \bold{\textit K(y,z)} $. $\bold{\textit K}$ is a matrix which gives the probability of transitioning from $x$ to $y$ in one step. $\bold{\textit K}^2$ is the probability of transitioning in 2 steps, and $\bold{\textit K}^n (x,y)$ is the probability of transitioning from $x$ to $y$ in exactly $n$ steps.
+  To obtain the probability that $X_2 = z$ given a starting point of $X_0 = x$, then we need to consider all the possible states of $X_1$ to get from $x$ to $z$. This is $ \sum_y \bold{\textit K(x,y)} \times \bold{\textit K(y,z)} $. $\bold{\textit K}$ is a matrix which gives the probability of transitioning from $x$ to $y$ in one step. $\bold{\textit K}^2$ is the probability of transitioning in 2 steps, and $\bold{\textit K}^n (x,y)$ is the probability of transitioning from $x$ to $y$ in exactly $n$ steps.
 
 #### Stationary Distributions
 
