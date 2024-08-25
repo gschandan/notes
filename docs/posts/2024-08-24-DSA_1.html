@@ -178,11 +178,6 @@ window.Quarto = {
 </i> 
 <span class="menu-text"></span></a>
   </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
 </ul>
           </div> <!-- /navcollapse -->
           <div class="quarto-navbar-tools">
@@ -261,22 +256,189 @@ window.Quarto = {
 <h1>DSA</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Data structures provide an organised format for data storage, management and access. Most of the following data structures are used in four basic ways:<br>
-1. Access - provided a location, return the item at that location, or alternatively, return all the items 2. Search - look for a specific item or value, and it’s location 3. Insert - add an item into the collection i.e.&nbsp;at the start, end or in between 4. Delete - remove an item from the collection</p>
+<p>Data structures provide an organised format for data storage, management and access. Most of the following data structures are used in four basic ways:</p>
+<ol type="1">
+<li>Access - provided a location, return the item at that location, or alternatively, return all the items</li>
+<li>Search - look for a specific item or value, and it’s location</li>
+<li>Insert - add an item into the collection i.e.&nbsp;at the start, end or in between</li>
+<li>Delete - remove an item from the collection</li>
+</ol>
 <p>Transformations like sorting and filtering can also be performed. The following are some common and basic data structures:</p>
 <section id="arrays" class="level3">
 <h3 class="anchored" data-anchor-id="arrays">Arrays</h3>
 <section id="general-arrays" class="level4">
 <h4 class="anchored" data-anchor-id="general-arrays">General Arrays</h4>
-<p>Arrays are collections of items, typically stored in contiguous memory: | Index | 0 | 1 | 2 | 3 | 4 | |——-|—|—|—|—|—| | Value | ‘h’ | ‘e’ | ‘l’ | ‘l’ | ‘o’ |</p>
+<p>Arrays are collections of items, typically stored in contiguous memory:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Value</td>
+<td>‘h’</td>
+<td>‘e’</td>
+<td>‘l’</td>
+<td>‘l’</td>
+<td>‘o’</td>
+</tr>
+</tbody>
+</table>
 <p>Efficiencies:</p>
-<p>Access: <span class="math inline">O(1)</span><br>
-Search: <span class="math inline">O(n)</span><br>
-Insertion: <span class="math inline">O(n)</span><br>
-Deletion: <span class="math inline">O(n)</span></p>
+<ul>
+<li>Access: <span class="math inline">O(1)</span></li>
+<li>Search: <span class="math inline">O(n)</span></li>
+<li>Insertion: <span class="math inline">O(n)</span></li>
+<li>Deletion: <span class="math inline">O(n)</span></li>
+</ul>
+<section id="unordered-array" class="level5">
+<h5 class="anchored" data-anchor-id="unordered-array">Unordered Array</h5>
+<p>Elements are stored in no particular order.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Value</td>
+<td>7</td>
+<td>2</td>
+<td>9</td>
+<td>4</td>
+<td>5</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Insertion: <span class="math inline">O(1)</span> (add to the end)<br>
+</li>
+<li>Deletion: <span class="math inline">O(n)</span> (need to shift elements)<br>
+</li>
+<li>Search: <span class="math inline">O(n)</span> (linear search)</li>
+</ul>
 </section>
-<section id="ordered-arrays" class="level4">
-<h4 class="anchored" data-anchor-id="ordered-arrays">Ordered Arrays</h4>
+<section id="ordered-sorted-array" class="level5">
+<h5 class="anchored" data-anchor-id="ordered-sorted-array">Ordered (Sorted) Array</h5>
+<p>Elements are stored in a specific order, typically ascending or descending.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Value</td>
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>5</td>
+<td>7</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Insertion: <span class="math inline">O(n)</span> (find position and shift elements)<br>
+</li>
+<li>Deletion: <span class="math inline">O(n)</span> (shift elements after deletion)<br>
+</li>
+<li>Search: <span class="math inline">O(\log n)</span> (binary search)</li>
+</ul>
+</section>
+<section id="circular-array" class="level5">
+<h5 class="anchored" data-anchor-id="circular-array">Circular Array</h5>
+<p>The last element is conceptually followed by the first element, forming a circle.</p>
+<pre><code>┌───┐</code></pre>
+<p>┌───┤ 5 ├───┐ │ 4 │ │ 1 │ ├───┤ ├───┤ │ 3 │ │ 2 │ └───┴───┴───┘</p>
+<ul>
+<li>Useful for queue implementations<br>
+</li>
+<li>Efficient use of fixed-size array<br>
+</li>
+<li>Operations wrap around the end of the array</li>
+</ul>
+</section>
+<section id="jagged-array-array-of-arrays" class="level5">
+<h5 class="anchored" data-anchor-id="jagged-array-array-of-arrays">Jagged Array (Array of Arrays)</h5>
+<p>An array where each element is an array, possibly of different lengths.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Index</th>
+<th>Array</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>[1, 2, 3]</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>[4, 5]</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>[6, 7, 8, 9]</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>[10]</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Flexible structure for 2D data with varying row lengths</li>
+<li>Efficient for sparse matrices</li>
+<li>Access: <span class="math inline">O(1)</span> for both dimensions</li>
+</ul>
+</section>
+<section id="parallel-arrays" class="level5">
+<h5 class="anchored" data-anchor-id="parallel-arrays">Parallel Arrays</h5>
+<p>Multiple arrays used to store related data side by side.</p>
+<p>Names: | “Alice” | “Bob” | “Charlie” | “David” | Ages: | 25 | 30 | 22 | 28 | Scores: | 95 | 88 | 91 | 79 |</p>
+<ul>
+<li>Simple alternative to array of structures<br>
+</li>
+<li>Good cache locality for operations on a single attribute<br>
+</li>
+<li>Requires careful management to keep arrays synchronized</li>
+</ul>
+</section>
+<section id="sparse-array" class="level5">
+<h5 class="anchored" data-anchor-id="sparse-array">Sparse Array</h5>
+<p>An array where most elements have the same value (usually zero).</p>
+<p>Logical view: | 0 | 0 | 0 | 3 | 0 | 0 | 1 | 0 | 0 | 2 | 0 |</p>
+<p>Actual storage (index-value pairs): | 3:3 | 6:1 | 9:2 |</p>
+<ul>
+<li>Space-efficient for sparse data<br>
+</li>
+<li>Slower access time compared to standard arrays</li>
+</ul>
+</section>
 </section>
 </section>
 <section id="sets" class="level3">
@@ -350,53 +512,53 @@ Search: <span class="math inline">\theta(1)</span> <span class="math inline">O(n
 <section id="linked-list" class="level3">
 <h3 class="anchored" data-anchor-id="linked-list">Linked List</h3>
 <p>A linked list consists of nodes where each node contains a data field and a reference to the next node in the sequence.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">3</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">7</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">1</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">9</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">4</span><span class="co">]</span> -&gt; null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">3</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">7</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">1</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">9</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">4</span><span class="co">]</span> -&gt; null</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Access: <span class="math inline">O(n)</span> Search: <span class="math inline">O(n)</span> Insertion: <span class="math inline">O(1)</span> Deletion: <span class="math inline">O(1)</span></p>
 </section>
 <section id="stack" class="level3">
 <h3 class="anchored" data-anchor-id="stack">Stack</h3>
 <p>A stack follows the Last In First Out (LIFO) principle.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>| 4 | &lt;- Top</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| 9 |</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>| 1 |</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>| 7 |</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>| 3 |</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>| 4 | &lt;- Top</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>| 9 |</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>| 1 |</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>| 7 |</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>| 3 |</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Push: <span class="math inline">O(1)</span> Pop: <span class="math inline">O(1)</span> Peek: <span class="math inline">O(1)</span></p>
 </section>
 <section id="queue" class="level3">
 <h3 class="anchored" data-anchor-id="queue">Queue</h3>
 <p>A queue follows the First In First Out (FIFO) principle.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Front -&gt; <span class="co">[</span><span class="ot">3</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">7</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">1</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">9</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">4</span><span class="co">]</span> &lt;- Rear</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Front -&gt; <span class="co">[</span><span class="ot">3</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">7</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">1</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">9</span><span class="co">]</span> -&gt; <span class="co">[</span><span class="ot">4</span><span class="co">]</span> &lt;- Rear</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Enqueue: <span class="math inline">O(1)</span> Dequeue: <span class="math inline">O(1)</span> Front: <span class="math inline">O(1)</span></p>
 </section>
 <section id="tree" class="level3">
 <h3 class="anchored" data-anchor-id="tree">Tree</h3>
 <p>A tree is a hierarchical structure with a root node and child nodes.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">    1</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   / \</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  2   3</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> / \   \</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>4   5   6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">    1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>   / \</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  2   3</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> / \   \</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>4   5   6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Access: <span class="math inline">O(\log n)</span> (for balanced trees) Search: <span class="math inline">O(\log n)</span> (for balanced trees) Insertion: <span class="math inline">O(\log n)</span> (for balanced trees) Deletion: <span class="math inline">O(\log n)</span> (for balanced trees)</p>
 </section>
 <section id="graph" class="level3">
 <h3 class="anchored" data-anchor-id="graph">Graph</h3>
 <p>A graph consists of vertices connected by edges.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">    A --- B</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="in">    |   / |</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="in">    |  /  |</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="in">    | /   |</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="in">    C --- D</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">    A --- B</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">    |   / |</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">    |  /  |</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">    | /   |</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="in">    C --- D</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Traversal: <span class="math inline">O(V + E)</span> where <span class="math inline">V</span> is the number of vertices and <span class="math inline">E</span> is the number of edges</p>
 </section>
 <section id="hash-table" class="level3">
 <h3 class="anchored" data-anchor-id="hash-table">Hash Table</h3>
 <p>A hash table stores key-value pairs and uses a hash function to compute an index into an array of buckets.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>| Key | Hash | Index | Value |</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>|-----|------|-------|-------|</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>| "apple" | hash("apple") | 2 | 5 |</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>| "banana" | hash("banana") | 4 | 8 |</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>| "cherry" | hash("cherry") | 1 | 3 |</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>| Key | Hash | Index | Value |</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>|-----|------|-------|-------|</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>| "apple" | hash("apple") | 2 | 5 |</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>| "banana" | hash("banana") | 4 | 8 |</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>| "cherry" | hash("cherry") | 1 | 3 |</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Access: <span class="math inline">O(1)</span> average case, <span class="math inline">O(n)</span> worst case Search: <span class="math inline">O(1)</span> average case, <span class="math inline">O(n)</span> worst case Insertion: <span class="math inline">O(1)</span> average case, <span class="math inline">O(n)</span> worst case Deletion: <span class="math inline">O(1)</span> average case, <span class="math inline">O(n)</span> worst case</p>
 </section>
 </section>
