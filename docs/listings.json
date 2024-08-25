@@ -2,13 +2,14 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-08-24-DSA_1.html",
       "/posts/2023-04-06-CEGIS.html",
       "/posts/2023-04-05-functional-programming-python.html",
       "/posts/2023-04-03-inductive-program-synthesis.html",
       "/posts/2023-04-01-introduction-program-synthesis.html",
+      "/posts/2022-04-30-linear-algebra-intro.html",
       "/posts/2022-04-30-eigenvectors.html",
       "/posts/2022-04-30-intro-to-linear-algebra.html",
-      "/posts/2022-04-30-linear-algebra-intro.html",
       "/posts/2022-04-30-tensors.html",
       "/posts/2022-04-27-testing-validation.html",
       "/posts/2022-04-19-data-types.html",
