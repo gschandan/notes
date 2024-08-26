@@ -244,6 +244,8 @@ window.Quarto = {
   <li><a href="#array-based-sets" id="toc-array-based-sets" class="nav-link" data-scroll-target="#array-based-sets">Array-based Sets</a></li>
   <li><a href="#hash-table-based-sets" id="toc-hash-table-based-sets" class="nav-link" data-scroll-target="#hash-table-based-sets">Hash Table-based Sets</a></li>
   <li><a href="#tree-based-sets" id="toc-tree-based-sets" class="nav-link" data-scroll-target="#tree-based-sets">Tree-based Sets</a></li>
+  <li><a href="#b-trees" id="toc-b-trees" class="nav-link" data-scroll-target="#b-trees">B-Trees</a></li>
+  <li><a href="#splay-trees" id="toc-splay-trees" class="nav-link" data-scroll-target="#splay-trees">Splay-Trees</a></li>
   </ul></li>
   <li><a href="#bit-vector-sets" id="toc-bit-vector-sets" class="nav-link" data-scroll-target="#bit-vector-sets">4. Bit Vector Sets</a>
   <ul class="collapse">
@@ -455,7 +457,9 @@ Search: <span class="math inline">\theta(1)</span> <span class="math inline">O(n
 </section>
 <section id="tree-based-sets" class="level3">
 <h3 class="anchored" data-anchor-id="tree-based-sets">Tree-based Sets</h3>
-<p>Tree-based sets store elements in a self-balancing binary search tree (BST). A self-balancing BST is a BST that automatically maintains its height after insertions or deletions, which keeps the height as small as possible, ensuring search/insertion/deletion can be performed in <span class="math inline">O(\log n)</span> time complexity, where <span class="math inline">n</span> is the number of nodes in the tree. The two most common implementations are Red-Black Trees and AVL Trees.</p>
+<p>Tree-based sets store elements in a self-balancing binary search tree (BST). A binary search tree is a data structure composed of nodes. Each node has a key, and each key in the left subtree of a node is less than the node’s key, while each key in the right subtree is greater. Standard operations (search, insert, delete) on a BST generally have action time complexity proportional to the height of the tree.</p>
+<p>The height of a tree is the length of the longest path from the root node to a leaf node. In a balanced tree, the height is <span class="math inline">O(\log ⁡n)</span>. If the tree becomes unbalanced (e.g., all nodes added to one side), the height can become <span class="math inline">O(n)</span>.</p>
+<p>A self-balancing BST is a BST that automatically maintains its height after insertions or deletions, which keeps the height as small as possible, ensuring search/insertion/deletion can be performed in <span class="math inline">O(\log n)</span> time complexity, where <span class="math inline">n</span> is the number of nodes in the tree. After every insertion or deletion, the tree checks if it has become unbalanced. If it has, the tree undergoes a series of rotations or restructuring operations to restore balance. The two most common implementations are Red-Black Trees and AVL Trees.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">    4</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>   / \</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  2   6</span>
@@ -465,7 +469,7 @@ Search: <span class="math inline">\theta(1)</span> <span class="math inline">O(n
 <section id="red-black-trees" class="level4">
 <h4 class="anchored" data-anchor-id="red-black-trees">Red-Black Trees</h4>
 <p>Red-Black trees are BSTs with one extra bit of storage per node: its color, which can be either red or black. By constraining the way nodes can be colored, Red-Black trees ensure that no path from the root to a leaf is more than twice as long as any other path.</p>
-<p>Properties: 1. Every node is either red or black. 2. The root is black. 3. Every leaf (NIL) is black. 4. If a node is red, then both its children are black. 5. For each node, all simple paths from the node to descendant leaves contain the same number of black nodes.</p>
+<p>Properties: 1. Every node is either red or black. 2. The root is black. 3. Every leaf (NIL) is black. 4. If a node is red, then both its children are black i.e.&nbsp;no two reds in a row 5. For each node, all simple paths from the node to descendant leaves contain the same number of black nodes.</p>
 <p>Visualization:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">    4B</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>   /  \</span>
@@ -477,7 +481,7 @@ Search: <span class="math inline">\theta(1)</span> <span class="math inline">O(n
 </section>
 <section id="avl-trees" class="level4">
 <h4 class="anchored" data-anchor-id="avl-trees">AVL Trees</h4>
-<p>AVL trees (named after Adelson-Velsky and Landis) are self-balancing binary search trees. In an AVL tree, the heights of the two child subtrees of any node differ by at most one.</p>
+<p>AVL trees (named after Adelson-Velsky and Landis) are self-balancing binary search trees. In an AVL tree, the heights of the two child subtrees of any node differ by at most one. If, after an insertion or deletion, the tree becomes unbalanced (i.e., the height difference becomes greater than one), rotations are performed to restore balance.</p>
 <p>Properties: 1. The heights of the left and right subtrees of every node differ by at most one. 2. Every subtree is an AVL tree.</p>
 <p>Balance Factor = Height(Left Subtree) - Height(Right Subtree)</p>
 <p>For any node in an AVL tree, the balance factor must be -1, 0, or 1.</p>
@@ -490,8 +494,16 @@ Search: <span class="math inline">\theta(1)</span> <span class="math inline">O(n
 <p>(Numbers in parentheses represent balance factors)</p>
 <p>AVL trees maintain a stricter balance than Red-Black trees, leading to faster lookups but slower insertion and deletion due to more frequent rotations.</p>
 </section>
-<section id="comparison" class="level4">
-<h4 class="anchored" data-anchor-id="comparison">Comparison</h4>
+</section>
+<section id="b-trees" class="level3">
+<h3 class="anchored" data-anchor-id="b-trees">B-Trees</h3>
+<p>B-Trees are generalisations of self-balancing trees that can have more than two children. B-Trees can be used in databases and file systems because they are work well with systems that read and write large blocks of data.</p>
+</section>
+<section id="splay-trees" class="level3">
+<h3 class="anchored" data-anchor-id="splay-trees">Splay-Trees</h3>
+<p>A splay tree is a self-balancing BST that performs splaying, a process that moves a given node to the root of the tree by performing a series of tree rotations. Splay trees keep recently accessed elements near the top, making them efficient for specific workload styles.</p>
+<section id="summary" class="level4">
+<h4 class="anchored" data-anchor-id="summary">Summary</h4>
 <ol type="1">
 <li>Balance:
 <ul>
@@ -509,7 +521,7 @@ Search: <span class="math inline">\theta(1)</span> <span class="math inline">O(n
 <li>Red-Black trees are preferred for insertion/deletion-intensive applications</li>
 </ul></li>
 </ol>
-<p>Both tree types guarantee <span class="math inline">O(\log n)</span> time complexity for basic operations, making them efficient choices for implementing sets and maps in many programming languages and libraries.</p>
+<p>Both tree types guarantee <span class="math inline">O(\log n)</span> time complexity for basic operations, making them efficient choices for set and map implementations.</p>
 </section>
 </section>
 </section>
