@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-08-26-hash-functions-introduction.html",
       "/posts/2024-08-24-DSA_1.html",
       "/posts/2023-04-06-CEGIS.html",
       "/posts/2023-04-05-functional-programming-python.html",
