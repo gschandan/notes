@@ -1,0 +1,243 @@
+---
+categories:
+  - DSA
+  - data-structures
+  - introduction
+  - linked-lists
+  - python
+date: '2024-08-27'
+description: Linked Lists Introduction
+layout: post
+title: Introduction to Linked Lists
+toc: true
+format:
+  html:
+    html-math-method: katex
+jupyter: python3
+---
+## Linked Lists
+
+A linked list is a linear data structure where elements are stored in nodes. Each node contains a data field and a reference (or link) to the next node in the sequence.
+
+### Basic Structure
+
+```markdown
+[Data|Next] -> [Data|Next] -> [Data|Next] -> null
+```
+
+### Types of Linked Lists
+
+1. Singly Linked List
+2. Doubly Linked List
+3. Circular Linked List
+
+### 1. Singly Linked List
+
+In a singly linked list, each node points to the next node in the sequence. In the following examples, the dot (•) is a pointer to the relevant node: 
+
+Example:
+```markdown
+[3|•] -> [7|•] -> [1|•] -> [9|•] -> [4|•] -> null
+```
+
+Operations:
+- Access: $O(n)$
+- Search: $O(n)$
+- Insertion at beginning: $O(1)$
+- Insertion at end: $O(n)$
+- Deletion at beginning: $O(1)$
+- Deletion at end: $O(n)$
+
+#### Example:
+
+```{python}
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = new_node
+    
+    def __str__(self):
+        if not self.head:
+            return "empty"
+        current = self.head
+        result = []
+        while current:
+            result.append(f"[{current.data}|•]")
+            current = current.next
+        result.append("null")
+        return " -> ".join(result)
+
+sll = SinglyLinkedList()
+sll.append(3)
+sll.append(7)
+sll.append(1)
+sll.append(9)
+sll.append(4)
+print("Singly Linked List:", sll)
+
+```
+
+### 2. Doubly Linked List
+
+In a doubly linked list, each node contains references to both the next and previous nodes.
+
+Example:
+```markdown
+null <-> [3|•|•] <-> [7|•|•] <-> [1|•|•] <-> [9|•|•] <-> [4|•|•] <-> null
+```
+
+Operations:
+- Access: $O(n)$
+- Search: $O(n)$
+- Insertion at beginning/end: $O(1)$
+- Deletion at beginning/end: $O(1)$
+
+#### Example:
+
+
+```{python}
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.prev = None
+        self.next = None
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = new_node
+        new_node.prev = last
+
+    def __str__(self):
+        if not self.head:
+            return "empty"
+        current = self.head
+        result = ["null"]
+        while current:
+            result.append(f"[{current.data}|•|•]")
+            current = current.next
+        result.append("null")
+        return " <-> ".join(result)
+
+
+dll = DoublyLinkedList()
+dll.append(3)
+dll.append(7)
+dll.append(1)
+dll.append(9)
+dll.append(4)
+print("Doubly Linked List:", dll)
+
+```
+
+### 3. Circular Linked List
+
+In a circular linked list, the last node points back to the first node, forming a circle.
+
+Example (Singly Circular):
+```markdown
+    ┌────────────────────────────────┐
+    │                                ▼
+[3|•] -> [7|•] -> [1|•] -> [9|•] -> [4|•]
+```
+
+Operations:
+- Similar to singly/doubly linked lists
+- No null end: facilitates continuous traversal
+
+#### Example:
+
+```{python}
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class CircularLinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            new_node.next = self.head
+            return
+        last = self.head
+        while last.next != self.head:
+            last = last.next
+        last.next = new_node
+        new_node.next = self.head
+
+    def __str__(self):
+        if not self.head:
+            return "empty"
+        current = self.head
+        result = []
+        while True:
+            result.append(f"[{current.data}|•]")
+            current = current.next
+            if current == self.head:
+                break
+        return " -> ".join(result) + " (circular)"
+
+cll = CircularLinkedList()
+cll.append(3)
+cll.append(7)
+cll.append(1)
+cll.append(9)
+cll.append(4)
+print("Circular Linked List:", cll)
+```
+
+### Advantages of Linked Lists
+
+1. Dynamic size
+2. Ease of insertion/deletion
+3. Efficient memory utilization
+
+### Disadvantages of Linked Lists
+
+1. Random access is not allowed - must be traversed
+2. Extra memory space for pointers at each node
+3. Not cache friendly - less cache locality for CPU than a contiguous array - more likely to be randomly scattered around and therefore get cache misses
+
+### Applications
+
+- Implementation of stacks and queues  
+- Implementing mutable arrays or collections  
+
+
+# References
+
+[^1] [HackerRank - Linked Lists Data Structure](https://www.hackerrank.com/domains/data-structures?filters%5Bsubdomains%5D%5B%5D=linked-lists)
+
+[^2] [Stanford CS Education Library - Linked List Basics](http://cslibrary.stanford.edu/103/LinkedListBasics.pdf)
+
+[^3] [VisuAlgo - Linked List Visualization](https://visualgo.net/en/list)
+
+[^4] [leetcode](https://leetcode.com/tag/linked-list/)
+
