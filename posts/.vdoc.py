@@ -53,156 +53,110 @@
 #
 #
 #
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
+def binary_search_iterative(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
 
-class SinglyLinkedList:
-    def __init__(self):
-        self.head = None
+sorted_array = [1, 3, 4, 6, 8, 9, 11]
+target = 6
+result = binary_search(sorted_array, target)
+print(f"Target {target} found at index: {result}")
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+import numpy as np
+import matplotlib.pyplot as plt
+import time
+import random
 
-    def append(self, data):
-        new_node = Node(data)
-        if not self.head:
-            self.head = new_node
-            return
-        last = self.head
-        while last.next:
-            last = last.next
-        last.next = new_node
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+def measure_search_time(search_func, arr, target):
+    start_time = time.time()
+    search_func(arr, target)
+    end_time = time.time()
+    return end_time - start_time
+
+# Generate data points
+sizes = np.logspace(1, 6, num=20, dtype=int)  # 10 to 1,000,000
+linear_times = []
+binary_times = []
+
+for size in sizes:
+    arr = sorted(random.sample(range(size * 10), size))
+    target = random.choice(arr)
     
-    def __str__(self):
-        if not self.head:
-            return "empty"
-        current = self.head
-        result = []
-        while current:
-            result.append(f"[{current.data}|•]")
-            current = current.next
-        result.append("null")
-        return " -> ".join(result)
+    linear_time = measure_search_time(linear_search, arr, target)
+    binary_time = measure_search_time(binary_search, arr, target)
+    
+    linear_times.append(linear_time)
+    binary_times.append(binary_time)
 
-sll = SinglyLinkedList()
-sll.append(3)
-sll.append(7)
-sll.append(1)
-sll.append(9)
-sll.append(4)
-print("Singly Linked List:", sll)
+# Create the plot
+plt.figure(figsize=(12, 6))
+plt.plot(sizes, linear_times, label='Linear Search', color='red', marker='o')
+plt.plot(sizes, binary_times, label='Binary Search', color='green', marker='o')
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.prev = None
-        self.next = None
+plt.title('Binary Search vs Linear Search: Actual Performance')
+plt.xlabel('Input Size (n)')
+plt.ylabel('Execution Time (seconds)')
+plt.legend()
 
-class DoublyLinkedList:
-    def __init__(self):
-        self.head = None
+# Use log scale for both axes
+plt.xscale('log')
+plt.yscale('log')
 
-    def append(self, data):
-        new_node = Node(data)
-        if not self.head:
-            self.head = new_node
-            return
-        last = self.head
-        while last.next:
-            last = last.next
-        last.next = new_node
-        new_node.prev = last
+# Add grid for better readability
+plt.grid(True, linestyle='--', alpha=0.7)
 
-    def __str__(self):
-        if not self.head:
-            return "empty"
-        current = self.head
-        result = ["null"]
-        while current:
-            result.append(f"[{current.data}|•|•]")
-            current = current.next
-        result.append("null")
-        return " <-> ".join(result)
+plt.tight_layout()
+plt.show()
 
-
-dll = DoublyLinkedList()
-dll.append(3)
-dll.append(7)
-dll.append(1)
-dll.append(9)
-dll.append(4)
-print("Doubly Linked List:", dll)
-
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-
-class CircularLinkedList:
-    def __init__(self):
-        self.head = None
-
-    def append(self, data):
-        new_node = Node(data)
-        if not self.head:
-            self.head = new_node
-            new_node.next = self.head
-            return
-        last = self.head
-        while last.next != self.head:
-            last = last.next
-        last.next = new_node
-        new_node.next = self.head
-
-# Usage
-cll = CircularLinkedList()
-cll.append(3)
-cll.append(7)
-cll.append(1)
-#
-#
-#
-#
+# Print some statistics
+print(f"Largest input size: {sizes[-1]}")
+print(f"Linear search time for largest input: {linear_times[-1]:.6f} seconds")
+print(f"Binary search time for largest input: {binary_times[-1]:.6f} seconds")
+print(f"Speedup factor for largest input: {linear_times[-1] / binary_times[-1]:.2f}x")
+```
 #
 #
 #

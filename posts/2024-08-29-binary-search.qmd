@@ -1,0 +1,180 @@
+---
+categories:
+  - DSA
+  - data-structures
+  - introduction
+  - algorithms
+  - python
+date: '2024-08-27'
+description: Binary Search Introduction
+layout: post
+title: Introduction to Binary Search
+toc: true
+format:
+  html:
+    html-math-method: katex
+jupyter: python3
+---
+
+## Binary Search
+
+Binary search is an efficienct way to find items in a **sorted** or ordered collection, by repeatedly dividing the range to search in half, as we know, due to the ordering, if the value is to the left or right of the current item.
+
+### Algorithm
+  
+1. Pick an item in the middle of the array  
+2. If the item is equal to the item being searched for, the search ends  
+3. If the target is less than the middle elements, repeat the steps in the lower half/left hand side   
+4. If the target is greater, repeat the steps in the upper half/right hand side  
+
+```
+// Sorted array
+[1, 3, 4, 6, 8, 9, 11] 
+ ^           ^      ^
+low         mid    high
+
+Target: 6
+Step 1: mid = 8, target < mid, search lower half
+[1, 3, 4, 6]
+ ^     ^  ^
+low   mid high
+
+Step 2: mid = 3, target > mid, search upper half
+      [4, 6]
+       ^  ^
+      low high
+      mid
+
+Step 3: mid = 6, target == mid, found!
+```
+
+### Implementation
+
+```{python}
+def binary_search_iterative(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+def binary_search_recursive(arr, target):
+    # TODO
+    pass
+
+sorted_array = [1, 3, 4, 6, 8, 9, 11]
+target = 6
+result = binary_search(sorted_array, target)
+print(f"Target {target} found at index: {result}")
+```
+
+### Time Complexity
+  
+- $O(\log n)$  
+- $\Omega(1)$ (when the middle element is the target)  
+
+### Space Complexity
+  
+- Iterative implementation: $O(1)$  
+- Recursive implementation: $O(\log n)$ due to the call stack  
+
+### Advantages
+  
+1. Very efficient for searching in large sorted datasets  
+2. Logarithmic time complexity makes it much faster than linear search for large arrays  
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+import time
+import random
+
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+def measure_search_time(search_func, arr, target):
+    start_time = time.time()
+    search_func(arr, target)
+    end_time = time.time()
+    return end_time - start_time
+
+
+sizes = np.logspace(1, 6, num=20, dtype=int)
+linear_times = []
+binary_times = []
+
+for size in sizes:
+    arr = sorted(random.sample(range(size * 10), size))
+    target = random.choice(arr)
+    
+    linear_time = measure_search_time(linear_search, arr, target)
+    binary_time = measure_search_time(binary_search, arr, target)
+    
+    linear_times.append(linear_time)
+    binary_times.append(binary_time)
+
+
+plt.figure(figsize=(12, 6))
+plt.plot(sizes, linear_times, label='Linear Search', color='red', marker='o')
+plt.plot(sizes, binary_times, label='Binary Search', color='green', marker='o')
+
+plt.title('Binary Search vs Linear Search Performance')
+plt.xlabel('Input Size (n)')
+plt.ylabel('Execution Time (seconds)')
+plt.legend()
+
+plt.xscale('log')
+plt.yscale('log')
+
+plt.grid(True, linestyle='--', alpha=0.7)
+
+plt.tight_layout()
+plt.show()
+
+print(f"Largest input size: {sizes[-1]}")
+print(f"Linear search time for largest input: {linear_times[-1]:.6f} seconds")
+print(f"Binary search time for largest input: {binary_times[-1]:.6f} seconds")
+print(f"Difference for the largest input: {linear_times[-1] / binary_times[-1]:.2f}x")
+```
+  
+### Disadvantages
+  
+1. Requires a sorted array  
+2. Not efficient for small datasets compared to linear search due to overhead  
+
+### Applications
+  
+- Used in algorithms for database searches and spell checkers  
+- Finding the closest element to a target value in a sorted array  
+  
+### Variants  
+  
+1. Uniform Binary Search  
+2. Exponential Search  
+3. Interpolation Search  
+
+## References
+
+[^1] [Khan Academy - Binary Search](https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search)
+
+[^2] [LeetCode - Binary Search Problems](https://leetcode.com/tag/binary-search/)
