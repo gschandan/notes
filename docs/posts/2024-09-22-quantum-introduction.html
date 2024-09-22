@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-09-22">
+<meta name="description" content="Quantum Programming Concepts Introduction">
+
+<title>notes - Introduction to Quantum Programming</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">notes</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Introduction to Quantum Programming</h1>
+                  <div>
+        <div class="description">
+          Quantum Programming Concepts Introduction
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">programming</div>
+                <div class="quarto-category">quantum</div>
+                <div class="quarto-category">introduction</div>
+                <div class="quarto-category">maths</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">September 22, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#quantum-states" id="toc-quantum-states" class="nav-link" data-scroll-target="#quantum-states">Quantum States</a>
+  <ul class="collapse">
+  <li><a href="#quantum-bits-qubits" id="toc-quantum-bits-qubits" class="nav-link" data-scroll-target="#quantum-bits-qubits">Quantum Bits (Qubits)</a></li>
+  <li><a href="#mathematical-representation" id="toc-mathematical-representation" class="nav-link" data-scroll-target="#mathematical-representation">Mathematical Representation</a></li>
+  <li><a href="#multi-qubit-systems" id="toc-multi-qubit-systems" class="nav-link" data-scroll-target="#multi-qubit-systems">Multi-Qubit Systems</a></li>
+  <li><a href="#bloch-sphere-representation" id="toc-bloch-sphere-representation" class="nav-link" data-scroll-target="#bloch-sphere-representation">Bloch Sphere Representation</a></li>
+  <li><a href="#visualizing-state-evolution" id="toc-visualizing-state-evolution" class="nav-link" data-scroll-target="#visualizing-state-evolution">Visualizing State Evolution</a></li>
+  <li><a href="#are-states-typically-between-0-and-1" id="toc-are-states-typically-between-0-and-1" class="nav-link" data-scroll-target="#are-states-typically-between-0-and-1">Are States Typically Between 0 and 1?</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  </ul></li>
+  <li><a href="#probability-vectors" id="toc-probability-vectors" class="nav-link" data-scroll-target="#probability-vectors">Probability Vectors</a>
+  <ul class="collapse">
+  <li><a href="#properties" id="toc-properties" class="nav-link" data-scroll-target="#properties">Properties:</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example:</a></li>
+  </ul></li>
+  <li><a href="#linear-combinations-and-convex-combinations" id="toc-linear-combinations-and-convex-combinations" class="nav-link" data-scroll-target="#linear-combinations-and-convex-combinations">Linear Combinations and Convex Combinations</a>
+  <ul class="collapse">
+  <li><a href="#convex-combination" id="toc-convex-combination" class="nav-link" data-scroll-target="#convex-combination">Convex Combination:</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example:</a></li>
+  </ul></li>
+  <li><a href="#classical-transformations" id="toc-classical-transformations" class="nav-link" data-scroll-target="#classical-transformations">Classical Transformations</a>
+  <ul class="collapse">
+  <li><a href="#properties-of-valid-classical-transformation-matrices" id="toc-properties-of-valid-classical-transformation-matrices" class="nav-link" data-scroll-target="#properties-of-valid-classical-transformation-matrices">Properties of Valid Classical Transformation Matrices:</a></li>
+  <li><a href="#example-not-operation" id="toc-example-not-operation" class="nav-link" data-scroll-target="#example-not-operation">Example: NOT Operation</a></li>
+  </ul></li>
+  <li><a href="#tensor-product" id="toc-tensor-product" class="nav-link" data-scroll-target="#tensor-product">Tensor Product</a>
+  <ul class="collapse">
+  <li><a href="#properties-1" id="toc-properties-1" class="nav-link" data-scroll-target="#properties-1">Properties:</a></li>
+  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">Example:</a></li>
+  </ul></li>
+  <li><a href="#quantum-circuits" id="toc-quantum-circuits" class="nav-link" data-scroll-target="#quantum-circuits">Quantum Circuits</a>
+  <ul class="collapse">
+  <li><a href="#example-simple-quantum-circuit" id="toc-example-simple-quantum-circuit" class="nav-link" data-scroll-target="#example-simple-quantum-circuit">Example: Simple Quantum Circuit</a></li>
+  <li><a href="#vector-notation" id="toc-vector-notation" class="nav-link" data-scroll-target="#vector-notation">Vector Notation</a></li>
+  <li><a href="#dirac-bra-ket-notation" id="toc-dirac-bra-ket-notation" class="nav-link" data-scroll-target="#dirac-bra-ket-notation">Dirac (Bra-Ket) Notation</a></li>
+  <li><a href="#complex-numbers-and-polar-form" id="toc-complex-numbers-and-polar-form" class="nav-link" data-scroll-target="#complex-numbers-and-polar-form">Complex Numbers and Polar Form</a></li>
+  <li><a href="#density-matrix" id="toc-density-matrix" class="nav-link" data-scroll-target="#density-matrix">Density Matrix</a></li>
+  <li><a href="#examples-with-mathematical-representation" id="toc-examples-with-mathematical-representation" class="nav-link" data-scroll-target="#examples-with-mathematical-representation">Examples with Mathematical Representation</a></li>
+  <li><a href="#bloch-sphere-coordinates" id="toc-bloch-sphere-coordinates" class="nav-link" data-scroll-target="#bloch-sphere-coordinates">Bloch Sphere Coordinates</a></li>
+  <li><a href="#multi-qubit-systems-1" id="toc-multi-qubit-systems-1" class="nav-link" data-scroll-target="#multi-qubit-systems-1">Multi-Qubit Systems</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>In classical computing, we typically deal with systems that can exist in two states, i.e., bits are either 1 or 0. In quantum computing, we deal with systems that can exist in multiple states simultaneously (using the <a href="https://en.wikipedia.org/wiki/Copenhagen_interpretation">Copenhagen interpretation</a>).</p>
+<section id="quantum-states" class="level2">
+<h2 class="anchored" data-anchor-id="quantum-states">Quantum States</h2>
+<section id="quantum-bits-qubits" class="level3">
+<h3 class="anchored" data-anchor-id="quantum-bits-qubits">Quantum Bits (Qubits)</h3>
+<p>While a classical bit is always in a definite state of either 0 or 1, a qubit can exist in a superposition of states:</p>
+<ol type="1">
+<li><p><strong>Superposition</strong>: A qubit can be in a superposition of the basis states <span class="math inline">|0\rangle</span> and <span class="math inline">|1\rangle</span>. This means it’s not just 0 or 1, but a complex <ins>linear</ins> combination of both.</p></li>
+<li><p><strong>Probability Distribution vs.&nbsp;Specific State</strong>: A qubit has a probability distribution over possible measurement outcomes, rather than a probability of being in a specific state. Before measurement, the qubit exists in superposition.</p></li>
+<li><p><strong>State Vector</strong>: The state of a qubit is represented by a two-dimensional complex vector called a state vector. This vector contains the amplitudes for each basis state.</p></li>
+<li><p><strong>Measurement</strong>: When we measure a qubit, we force it to collapse into one of the basis states (typically <span class="math inline">|0\rangle</span> or <span class="math inline">|1\rangle</span>). The probability of each outcome is determined by the squared magnitude of the corresponding amplitude in the state vector.</p></li>
+</ol>
+</section>
+<section id="mathematical-representation" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-representation">Mathematical Representation</h3>
+<p>A qubit’s state is typically represented as:</p>
+<p><span class="math display">
+|\psi\rangle = \alpha|0\rangle + \beta|1\rangle
+</span></p>
+<p>Where:<br>
+- <span class="math inline">|\psi\rangle</span> represents the qubit’s state<br>
+- <span class="math inline">\alpha</span> and <span class="math inline">\beta</span> are complex numbers called probability amplitudes<br>
+- <span class="math inline">|\alpha|^2 + |\beta|^2 = 1</span> (normalization condition)</p>
+<p>A state vector is a mathematical representation of a qubit’s state in quantum mechanics. For a single qubit, it’s a two-dimensional complex vector that captures all the information about the qubit’s state.</p>
+<section id="amplitudes" class="level4">
+<h4 class="anchored" data-anchor-id="amplitudes">Amplitudes</h4>
+<p>Amplitudes (<span class="math inline">\alpha</span> and <span class="math inline">\beta</span>) are complex numbers that determine the quantum state’s properties.</p>
+<ol type="1">
+<li><p><strong>Probability</strong>: The squared magnitude of an amplitude (<span class="math inline">|\alpha|^2</span> or <span class="math inline">|\beta|^2</span>) gives the probability of measuring the qubit in the corresponding basis state.</p></li>
+<li><p><strong>Phase</strong>: The complex phase of the amplitude carries information about the qubit’s behavior in interference situations.</p></li>
+<li><p><strong>Superposition</strong>: Non-zero amplitudes for both <span class="math inline">|0\rangle</span> and <span class="math inline">|1\rangle</span> indicate the qubit is in a superposition of these basis states.</p></li>
+</ol>
+</section>
+<section id="example-1-classical-like-states" class="level4">
+<h4 class="anchored" data-anchor-id="example-1-classical-like-states">Example 1: Classical-like States</h4>
+<ol type="1">
+<li><span class="math inline">|\psi\rangle = 1|0\rangle + 0|1\rangle</span>
+<ul>
+<li>This represents a qubit in the definite state <span class="math inline">|0\rangle</span>.</li>
+<li>Measuring this qubit will always yield <span class="math inline">|0\rangle</span>.</li>
+</ul></li>
+<li><span class="math inline">|\psi\rangle = 0|0\rangle + 1|1\rangle</span>
+<ul>
+<li>This represents a qubit in the definite state <span class="math inline">|1\rangle</span>.</li>
+<li>Measuring this qubit will always yield <span class="math inline">|1\rangle</span>.</li>
+</ul></li>
+</ol>
+</section>
+<section id="example-2-equal-superposition" class="level4">
+<h4 class="anchored" data-anchor-id="example-2-equal-superposition">Example 2: Equal Superposition</h4>
+<p><span class="math display">|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle</span></p>
+<ul>
+<li>This is often written as <span class="math inline">|+\rangle</span> and represents an equal superposition.</li>
+<li>Probability of measuring <span class="math inline">|0\rangle</span>: <span class="math inline">|\frac{1}{\sqrt{2}}|^2 = \frac{1}{2}</span></li>
+<li>Probability of measuring <span class="math inline">|1\rangle</span>: <span class="math inline">|\frac{1}{\sqrt{2}}|^2 = \frac{1}{2}</span></li>
+<li>The qubit has an equal chance of being measured in either state.</li>
+</ul>
+</section>
+<section id="example-3-unequal-superposition" class="level4">
+<h4 class="anchored" data-anchor-id="example-3-unequal-superposition">Example 3: Unequal Superposition</h4>
+<p><span class="math display">|\psi\rangle = \frac{\sqrt{3}}{2}|0\rangle + \frac{1}{2}|1\rangle</span></p>
+<ul>
+<li>Probability of measuring <span class="math inline">|0\rangle</span>: <span class="math inline">|\frac{\sqrt{3}}{2}|^2 = \frac{3}{4}</span></li>
+<li>Probability of measuring <span class="math inline">|1\rangle</span>: <span class="math inline">|\frac{1}{2}|^2 = \frac{1}{4}</span></li>
+<li>The qubit is more likely to be measured in state <span class="math inline">|0\rangle</span>.</li>
+</ul>
+</section>
+<section id="example-4-complex-amplitudes" class="level4">
+<h4 class="anchored" data-anchor-id="example-4-complex-amplitudes">Example 4: Complex Amplitudes</h4>
+<p><span class="math display">|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{i}{\sqrt{2}}|1\rangle</span></p>
+<ul>
+<li>Probability of measuring <span class="math inline">|0\rangle</span>: <span class="math inline">|\frac{1}{\sqrt{2}}|^2 = \frac{1}{2}</span></li>
+<li>Probability of measuring <span class="math inline">|1\rangle</span>: <span class="math inline">|\frac{i}{\sqrt{2}}|^2 = \frac{1}{2}</span></li>
+<li>Equal probabilities, but the <span class="math inline">i</span> in the second amplitude introduces a phase difference.</li>
+<li>This phase difference is important in quantum interference but doesn’t affect single-qubit measurements.</li>
+</ul>
+</section>
+</section>
+<section id="multi-qubit-systems" class="level3">
+<h3 class="anchored" data-anchor-id="multi-qubit-systems">Multi-Qubit Systems</h3>
+<p>For systems with multiple qubits, the state vector grows exponentially:</p>
+<ul>
+<li>1 qubit: 2-dimensional vector</li>
+<li>2 qubits: 4-dimensional vector</li>
+<li>3 qubits: 8-dimensional vector</li>
+<li>n qubits: <span class="math inline">2^n</span> dimensional vector</li>
+</ul>
+<p>This exponential growth in the state space is what gives quantum computers their potential power relative to classical computers.</p>
+</section>
+<section id="bloch-sphere-representation" class="level3">
+<h3 class="anchored" data-anchor-id="bloch-sphere-representation">Bloch Sphere Representation</h3>
+<p>Qubits are often visualized using the Bloch sphere, a unit sphere in three-dimensional space. Any single qubit state can be represented as a point on the surface of this sphere.</p>
+<div id="1952d5a8" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip <span class="im">import</span> Bloch, basis, sigmax, sigmay, sigmaz</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_bloch_sphere(states, labels):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> Bloch(axes<span class="op">=</span>ax)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    b.point_color <span class="op">=</span> [<span class="st">'r'</span>, <span class="st">'g'</span>, <span class="st">'b'</span>, <span class="st">'y'</span>]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> state, label <span class="kw">in</span> <span class="bu">zip</span>(states, labels):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        b.add_states(state)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        b.add_annotation(state, label)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    b.render()</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># some example states</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>psi1 <span class="op">=</span> basis(<span class="dv">2</span>, <span class="dv">0</span>)  <span class="co"># |0⟩ i.e. classical 0</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>psi2 <span class="op">=</span> basis(<span class="dv">2</span>, <span class="dv">1</span>)  <span class="co"># |1⟩ i.e. classical 1</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>psi3 <span class="op">=</span> (basis(<span class="dv">2</span>, <span class="dv">0</span>) <span class="op">+</span> basis(<span class="dv">2</span>, <span class="dv">1</span>)).unit()  <span class="co"># (|0⟩ + |1⟩)/√2 i.e. equal superposition</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>psi4 <span class="op">=</span> (basis(<span class="dv">2</span>, <span class="dv">0</span>) <span class="op">+</span> <span class="ot">1j</span><span class="op">*</span>basis(<span class="dv">2</span>, <span class="dv">1</span>)).unit()  <span class="co"># (|0⟩ + i|1⟩)/√2 i.e. superposition with a phase difference</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>states <span class="op">=</span> [psi1, psi2, psi3, psi4]</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">"|0⟩"</span>, <span class="st">"|1⟩"</span>, <span class="st">"|+⟩"</span>, <span class="st">"|+i⟩"</span>]</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_bloch_sphere(states, labels)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'bloch_sphere_example.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>plt.close(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bloch_sphere_example.png" class="img-fluid figure-img"></p>
+<figcaption>Example Bloch Sphere representing quantum states</figcaption>
+</figure>
+</div>
+<ul>
+<li>The <span class="math inline">|0\rangle</span> state is represented by a point at the north pole of the sphere.<br>
+</li>
+<li>The <span class="math inline">|1\rangle</span> state is represented by a point at the south pole of the sphere.<br>
+</li>
+<li>The <span class="math inline">|+\rangle</span> state (equal superposition) is represented by a point on the equator along the x-axis.<br>
+</li>
+<li>The <span class="math inline">|+i\rangle</span> state is represented by a point on the equator along the y-axis.</li>
+</ul>
+</section>
+<section id="visualizing-state-evolution" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-state-evolution">Visualizing State Evolution</h3>
+<p>We can also use this to visualize how quantum states evolve under certain operations. Here’s an example that shows the state evolution under the action of a Hadamard-like gate:</p>
+<div id="a6a75f76" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip <span class="im">import</span> Bloch, basis, qeye, sigmax, sigmay, sigmaz</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.animation <span class="im">import</span> FuncAnimation</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> imageio</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_bloch_sphere(states, filename<span class="op">=</span><span class="st">'bloch_sphere_evolution.gif'</span>, duration<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> Bloch(axes<span class="op">=</span>ax)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> update(frame):</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        ax.cla()</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> Bloch(axes<span class="op">=</span>ax)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        b.add_states(states[frame])</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        b.add_states([states[<span class="dv">0</span>], states[<span class="op">-</span><span class="dv">1</span>]], <span class="st">'point'</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        b.render()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f'Frame </span><span class="sc">{</span>frame <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="bu">len</span>(states)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    anim <span class="op">=</span> FuncAnimation(fig, update, frames<span class="op">=</span><span class="bu">len</span>(states), repeat<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    frames <span class="op">=</span> []</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(states)):</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        update(i)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        fig.canvas.draw()</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        image <span class="op">=</span> np.frombuffer(fig.canvas.tostring_rgb(), dtype<span class="op">=</span><span class="st">'uint8'</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        image <span class="op">=</span> image.reshape(fig.canvas.get_width_height()[::<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> (<span class="dv">3</span>,))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        frames.append(image)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    imageio.mimsave(filename, frames, duration<span class="op">=</span>duration)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    plt.close(fig)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> state_evolution(initial_state, operation, steps<span class="op">=</span><span class="dv">50</span>):</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    states <span class="op">=</span> [initial_state]</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, steps<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        states.append(operation(initial_state, i<span class="op">/</span>steps))</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> states</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hadamard_like_transform(state, t):</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    H <span class="op">=</span> np.sqrt(<span class="dv">1</span> <span class="op">-</span> t) <span class="op">*</span> sigmaz() <span class="op">+</span> np.sqrt(t) <span class="op">*</span> sigmax()</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">1</span> <span class="op">-</span> t) <span class="op">*</span> state <span class="op">+</span> t <span class="op">*</span> H <span class="op">*</span> state</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>psi0 <span class="op">=</span> basis(<span class="dv">2</span>, <span class="dv">0</span>) <span class="co"># initial state |0⟩</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>states <span class="op">=</span> state_evolution(psi0, hadamard_like_transform, steps<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>plot_bloch_sphere(states, <span class="st">'bloch_sphere_evolution.gif'</span>, duration<span class="op">=</span><span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_572339/1348161396.py:26: MatplotlibDeprecationWarning: The tostring_rgb function was deprecated in Matplotlib 3.8 and will be removed in 3.10. Use buffer_rgba instead.
+  image = np.frombuffer(fig.canvas.tostring_rgb(), dtype='uint8')</code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="bloch_sphere_evolution.gif" class="img-fluid figure-img"></p>
+<figcaption>Example Bloch Sphere representing quantum state evolution</figcaption>
+</figure>
+</div>
+<p>This will show how the <span class="math inline">|0\rangle</span> state evolves into the <span class="math inline">|+\rangle</span> state under the action of the Hadamard-like gate.</p>
+</section>
+<section id="are-states-typically-between-0-and-1" class="level3">
+<h3 class="anchored" data-anchor-id="are-states-typically-between-0-and-1">Are States Typically Between 0 and 1?</h3>
+<ol type="1">
+<li>The basis states are typically labeled <span class="math inline">|0\rangle</span> and <span class="math inline">|1\rangle</span>, which might suggest values between 0 and 1.<br>
+</li>
+<li>However, the actual state of a qubit is described by complex amplitudes <span class="math inline">\alpha</span> and <span class="math inline">\beta</span>. These amplitudes can take any complex values as long as <span class="math inline">|\alpha|^2 + |\beta|^2 = 1</span>.<br>
+</li>
+<li>The probabilities of measuring <span class="math inline">|0\rangle</span> or <span class="math inline">|1\rangle</span> (given by <span class="math inline">|\alpha|^2</span> and <span class="math inline">|\beta|^2</span> respectively) are between 0 and 1 (as they must be for any probability).</li>
+</ol>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>With a qubit in the state:</p>
+<p><span class="math display">
+|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle
+</span></p>
+<p>This state has an equal probability of being measured as <span class="math inline">|0\rangle</span> or <span class="math inline">|1\rangle</span>. The probabilities are:</p>
+<ul>
+<li><span class="math inline">P(|0\rangle) = |\frac{1}{\sqrt{2}}|^2 = \frac{1}{2}</span></li>
+<li><span class="math inline">P(|1\rangle) = |\frac{1}{\sqrt{2}}|^2 = \frac{1}{2}</span></li>
+</ul>
+</section>
+</section>
+<section id="probability-vectors" class="level2">
+<h2 class="anchored" data-anchor-id="probability-vectors">Probability Vectors</h2>
+<p>Probability vectors are fundamental in describing quantum states. They represent the probability distribution of possible outcomes when measuring a quantum system.</p>
+<section id="properties" class="level3">
+<h3 class="anchored" data-anchor-id="properties">Properties:</h3>
+<ol type="1">
+<li>All entries are non-negative real numbers.</li>
+<li>The sum of all entries equals 1.</li>
+</ol>
+</section>
+<section id="example-1" class="level3">
+<h3 class="anchored" data-anchor-id="example-1">Example:</h3>
+<p>For a coin flip:</p>
+<pre><code>p = [0.5, 0.5]  # Represents a fair coin (50% chance of heads, 50% chance of tails)</code></pre>
+</section>
+</section>
+<section id="linear-combinations-and-convex-combinations" class="level2">
+<h2 class="anchored" data-anchor-id="linear-combinations-and-convex-combinations">Linear Combinations and Convex Combinations</h2>
+<p>In quantum mechanics, states can be combined linearly, but probability vectors specifically use convex combinations.</p>
+<section id="convex-combination" class="level3">
+<h3 class="anchored" data-anchor-id="convex-combination">Convex Combination:</h3>
+<p>A linear combination where: 1. All coefficients are non-negative. 2. The sum of coefficients equals 1.</p>
+<p>This ensures that the result is still a valid probability vector.</p>
+</section>
+<section id="example-2" class="level3">
+<h3 class="anchored" data-anchor-id="example-2">Example:</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> [<span class="fl">0.3</span>, <span class="fl">0.7</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> [<span class="fl">0.6</span>, <span class="fl">0.4</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>α <span class="op">=</span> <span class="fl">0.4</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>convex_combination <span class="op">=</span> α <span class="op">*</span> np.array(p1) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> α) <span class="op">*</span> np.array(p2)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Result: [0.48, 0.52]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="classical-transformations" class="level2">
+<h2 class="anchored" data-anchor-id="classical-transformations">Classical Transformations</h2>
+<p>Classical transformations in quantum computing are represented by matrices that transform one probability vector into another.</p>
+<section id="properties-of-valid-classical-transformation-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="properties-of-valid-classical-transformation-matrices">Properties of Valid Classical Transformation Matrices:</h3>
+<ol type="1">
+<li>All entries are non-negative.</li>
+<li>The sum of each column is 1 (stochastic property).</li>
+</ol>
+</section>
+<section id="example-not-operation" class="level3">
+<h3 class="anchored" data-anchor-id="example-not-operation">Example: NOT Operation</h3>
+<p>The NOT operation flips a bit. In matrix form for a single qubit:</p>
+<p><span class="math display">
+\text{NOT} = \begin{bmatrix}
+0 &amp; 1 \\
+1 &amp; 0
+\end{bmatrix}
+</span></p>
+</section>
+</section>
+<section id="tensor-product" class="level2">
+<h2 class="anchored" data-anchor-id="tensor-product">Tensor Product</h2>
+<p>The tensor product is used to combine quantum systems, creating a joint state space.</p>
+<section id="properties-1" class="level3">
+<h3 class="anchored" data-anchor-id="properties-1">Properties:</h3>
+<ul>
+<li>Combines probability vectors of individual systems.</li>
+<li>Results in a higher-dimensional probability vector.</li>
+</ul>
+</section>
+<section id="example-3" class="level3">
+<h3 class="anchored" data-anchor-id="example-3">Example:</h3>
+<p>For two coins:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>coin1 <span class="op">=</span> [<span class="fl">0.5</span>, <span class="fl">0.5</span>]  <span class="co"># Fair coin</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>coin2 <span class="op">=</span> [<span class="fl">0.7</span>, <span class="fl">0.3</span>]  <span class="co"># Biased coin</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>joint_state <span class="op">=</span> np.kron(coin1, coin2)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Result: [0.35, 0.15, 0.35, 0.15]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note: Not all higher-dimensional probability vectors can be decomposed into tensor products of lower-dimensional vectors.</p>
+</section>
+</section>
+<section id="quantum-circuits" class="level2">
+<h2 class="anchored" data-anchor-id="quantum-circuits">Quantum Circuits</h2>
+<p>Quantum circuits are sequences of operations (gates) applied to qubits. They are the quantum analogue of classical logic circuits.</p>
+<section id="example-simple-quantum-circuit" class="level3">
+<h3 class="anchored" data-anchor-id="example-simple-quantum-circuit">Example: Simple Quantum Circuit</h3>
+<pre><code>      ┌───┐
+q_0: ─┤ H ├─────●─────
+      └───┘     │
+q_1: ───────────┼─────
+                │
+q_2: ───────────X─────</code></pre>
+<p>This circuit applies a Hadamard gate (H) to the first qubit and then a controlled-NOT (CNOT) with the first qubit as control and the third as target. 3. <strong><span class="math inline">\alpha</span> and <span class="math inline">\beta</span></strong>: - These are complex numbers called probability amplitudes. - <span class="math inline">|\alpha|^2</span> gives the probability of measuring the qubit in state <span class="math inline">|0\rangle</span>. - <span class="math inline">|\beta|^2</span> gives the probability of measuring the qubit in state <span class="math inline">|1\rangle</span>. - The normalization condition requires that <span class="math inline">|\alpha|^2 + |\beta|^2 = 1</span>.</p>
+</section>
+<section id="vector-notation" class="level3">
+<h3 class="anchored" data-anchor-id="vector-notation">Vector Notation</h3>
+<p>In vector notation, the same state can be written as:</p>
+<p><span class="math display">|\psi\rangle = \begin{bmatrix} \alpha \\ \beta \end{bmatrix}</span></p>
+</section>
+<section id="dirac-bra-ket-notation" class="level3">
+<h3 class="anchored" data-anchor-id="dirac-bra-ket-notation">Dirac (Bra-Ket) Notation</h3>
+<ol type="1">
+<li><strong>Ket <span class="math inline">|\psi\rangle</span></strong>: Represents a column vector.<br>
+</li>
+<li><strong>Bra <span class="math inline">\langle\psi|</span></strong>: Represents the conjugate transpose of <span class="math inline">|\psi\rangle</span>, i.e., a row vector.
+<ul>
+<li>Conjugate Transpose (or Hermitian Conjugate): formed from an m-by-n matrix by taking the transpose of the matrix (forming an n-by-m matrix), then taking the complex conjugate of each entry (negating their imaginary components).</li>
+</ul></li>
+</ol>
+</section>
+<section id="complex-numbers-and-polar-form" class="level3">
+<h3 class="anchored" data-anchor-id="complex-numbers-and-polar-form">Complex Numbers and Polar Form</h3>
+<p>Since <span class="math inline">\alpha</span> and <span class="math inline">\beta</span> are complex numbers, they can be written in polar form:</p>
+<p><span class="math display">\begin{align*}
+\alpha &amp;= r_1e^{i\theta_1} \\
+\beta &amp;= r_2e^{i\theta_2}
+\end{align*}</span></p>
+<p>Where: - <span class="math inline">r_1</span> and <span class="math inline">r_2</span> are the magnitudes (<span class="math inline">r_1^2 + r_2^2 = 1</span>) - <span class="math inline">\theta_1</span> and <span class="math inline">\theta_2</span> are the phases - <span class="math inline">i</span> is the imaginary unit (<span class="math inline">i^2 = -1</span>)</p>
+</section>
+<section id="density-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="density-matrix">Density Matrix</h3>
+<p>For mixed states or when dealing with subsystems, we often use the density matrix representation:</p>
+<p><span class="math display">\rho = |\psi\rangle\langle\psi| = \begin{bmatrix}
+|\alpha|^2 &amp; \alpha\beta^* \\
+\alpha^*\beta &amp; |\beta|^2
+\end{bmatrix}</span></p>
+<p>Where <span class="math inline">*</span> denotes complex conjugation.</p>
+</section>
+<section id="examples-with-mathematical-representation" class="level3">
+<h3 class="anchored" data-anchor-id="examples-with-mathematical-representation">Examples with Mathematical Representation</h3>
+<ol type="1">
+<li><p><strong><span class="math inline">|0\rangle</span> state</strong>: <span class="math inline">|\psi\rangle = 1|0\rangle + 0|1\rangle = \begin{bmatrix} 1 \\ 0 \end{bmatrix}</span></p></li>
+<li><p><strong><span class="math inline">|1\rangle</span> state</strong>: <span class="math inline">|\psi\rangle = 0|0\rangle + 1|1\rangle = \begin{bmatrix} 0 \\ 1 \end{bmatrix}</span></p></li>
+<li><p><strong><span class="math inline">|+\rangle</span> state</strong> (equal superposition): <span class="math inline">|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{1}{\sqrt{2}}|1\rangle = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ 1 \end{bmatrix}</span></p></li>
+<li><p><strong><span class="math inline">|-\rangle</span> state</strong>: <span class="math inline">|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle - \frac{1}{\sqrt{2}}|1\rangle = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ -1 \end{bmatrix}</span></p></li>
+<li><p><strong><span class="math inline">|+i\rangle</span> state</strong>: <span class="math inline">|\psi\rangle = \frac{1}{\sqrt{2}}|0\rangle + \frac{i}{\sqrt{2}}|1\rangle = \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ i \end{bmatrix}</span></p></li>
+</ol>
+</section>
+<section id="bloch-sphere-coordinates" class="level3">
+<h3 class="anchored" data-anchor-id="bloch-sphere-coordinates">Bloch Sphere Coordinates</h3>
+<p>The Bloch sphere provides a geometrical representation of a qubit’s state. Any pure state of a qubit can be represented as:</p>
+<p><span class="math display">|\psi\rangle = \cos\left(\frac{\theta}{2}\right)|0\rangle + e^{i\phi}\sin\left(\frac{\theta}{2}\right)|1\rangle</span></p>
+<p>Where: - <span class="math inline">\theta</span> (theta) is the polar angle (<span class="math inline">0 \leq \theta \leq \pi</span>) - <span class="math inline">\phi</span> (phi) is the azimuthal angle (<span class="math inline">0 \leq \phi &lt; 2\pi</span>)</p>
+<p>This representation directly maps to the surface of the Bloch sphere.</p>
+</section>
+<section id="multi-qubit-systems-1" class="level3">
+<h3 class="anchored" data-anchor-id="multi-qubit-systems-1">Multi-Qubit Systems</h3>
+<p>For a system of n qubits, the state is represented by a <span class="math inline">2^n</span> dimensional complex vector. For example, a two-qubit system has the general form:</p>
+<p><span class="math display">|\psi\rangle = \alpha|00\rangle + \beta|01\rangle + \gamma|10\rangle + \delta|11\rangle</span></p>
+<p>Where <span class="math inline">\alpha</span>, <span class="math inline">\beta</span>, <span class="math inline">\gamma</span>, and <span class="math inline">\delta</span> are complex amplitudes satisfying <span class="math inline">|\alpha|^2 + |\beta|^2 + |\gamma|^2 + |\delta|^2 = 1</span>.</p>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ol type="1">
+<li><a href="https://qworld.net/qbook101/">QWorld</a><br>
+</li>
+<li><a href="https://glenmartin.wordpress.com/dirac-bra-ket-notation/#:~:text=If%20%CE%A8%20corresponds%20to%20a,bra%E2%80%9D%20vector%20%3C%CE%A8%7C.">Dirac Bra-Ket Notation</a></li>
+<li>Mermin, N. D. (2007). Quantum Computer Science: An Introduction. Cambridge University Press.</li>
+<li>Sutor, R. S. (2019). Dancing with Qubits: How quantum computing works and how it can change the world. Packt Publishing.</li>
+<li>Griffiths, D. J., &amp; Schroeter, D. F. (2018). Introduction to Quantum Mechanics (3rd ed.). Cambridge University Press.<br>
+</li>
+<li>Preskill, J. (2018). Quantum Computing in the NISQ era and beyond. Quantum, 2, 79.</li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

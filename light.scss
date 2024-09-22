@@ -1,0 +1,29 @@
+/*-- scss:defaults --*/
+$link-color: #248cfc;
+
+/*-- scss:rules --*/
+.light-mode {
+  display: block;
+}
+.dark-mode {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .figure p img,
+  div.cell-output-display p img,
+  p.card-img-top img {
+    filter: sepia(50%) hue-rotate(30deg) saturate(500%) invert(0.9);
+  }
+
+  img.noinvert,
+  img.photo,
+  .menu ul li.left a img,
+  img[src*="-noinvert"],
+  .figure p img:hover,
+  div.cell-output-display p img:hover,
+  p.card-img-top img[src$=".jpg"],
+  p.card-img-top img[src*="-noinvert"] {
+    filter: sepia(0%) hue-rotate(0deg) saturate(100%) invert(0) !important;
+  }
+}

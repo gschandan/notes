@@ -149,7 +149,6 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -286,7 +285,7 @@ Step 3: mid = 6, target == mid, found!</code></pre>
 </section>
 <section id="implementation" class="level3">
 <h3 class="anchored" data-anchor-id="implementation">Implementation</h3>
-<div id="7a95badc" class="cell" data-execution_count="1">
+<div id="4c49e0a5" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> binary_search_iterative(arr, target):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    left, right <span class="op">=</span> <span class="dv">0</span>, <span class="bu">len</span>(arr) <span class="op">-</span> <span class="dv">1</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> left <span class="op">&lt;=</span> right:</span>
@@ -335,7 +334,7 @@ Step 3: mid = 6, target == mid, found!</code></pre>
 </li>
 <li>Logarithmic time complexity makes it much faster than linear search for large arrays</li>
 </ol>
-<div id="050a34c5" class="cell" data-execution_count="2">
+<div id="f98748a2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
@@ -365,57 +364,48 @@ Step 3: mid = 6, target == mid, found!</code></pre>
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    end_time <span class="op">=</span> time.time()</span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> end_time <span class="op">-</span> start_time</span>
 <span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>sizes <span class="op">=</span> np.logspace(<span class="dv">1</span>, <span class="dv">6</span>, num<span class="op">=</span><span class="dv">20</span>, dtype<span class="op">=</span><span class="bu">int</span>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>linear_times <span class="op">=</span> []</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>binary_times <span class="op">=</span> []</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> size <span class="kw">in</span> sizes:</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> <span class="bu">sorted</span>(random.sample(<span class="bu">range</span>(size <span class="op">*</span> <span class="dv">10</span>), size))</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    target <span class="op">=</span> random.choice(arr)</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    linear_time <span class="op">=</span> measure_search_time(linear_search, arr, target)</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    binary_time <span class="op">=</span> measure_search_time(binary_search, arr, target)</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    linear_times.append(linear_time)</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    binary_times.append(binary_time)</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>plt.plot(sizes, linear_times, label<span class="op">=</span><span class="st">'Linear Search'</span>, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>plt.plot(sizes, binary_times, label<span class="op">=</span><span class="st">'Binary Search'</span>, color<span class="op">=</span><span class="st">'green'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Binary Search vs Linear Search Performance'</span>)</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Input Size (n)'</span>)</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Execution Time (seconds)'</span>)</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>plt.yscale(<span class="st">'log'</span>)</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_plot(sizes, linear_times, binary_times):</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    plt.plot(sizes, linear_times, label<span class="op">=</span><span class="st">'Linear Search'</span>, color<span class="op">=</span><span class="st">'red'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    plt.plot(sizes, binary_times, label<span class="op">=</span><span class="st">'Binary Search'</span>, color<span class="op">=</span><span class="st">'green'</span>, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'Binary Search vs Linear Search Performance'</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Input Size (n)'</span>)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Execution Time (seconds)'</span>)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    plt.xscale(<span class="st">'log'</span>)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    plt.yscale(<span class="st">'log'</span>)</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> plt</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>sizes <span class="op">=</span> np.logspace(<span class="dv">1</span>, <span class="dv">6</span>, num<span class="op">=</span><span class="dv">20</span>, dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>linear_times <span class="op">=</span> []</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>binary_times <span class="op">=</span> []</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> size <span class="kw">in</span> sizes:</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> <span class="bu">sorted</span>(random.sample(<span class="bu">range</span>(size <span class="op">*</span> <span class="dv">10</span>), size))</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    target <span class="op">=</span> random.choice(arr)</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    linear_time <span class="op">=</span> measure_search_time(linear_search, arr, target)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    binary_time <span class="op">=</span> measure_search_time(binary_search, arr, target)</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    linear_times.append(linear_time)</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    binary_times.append(binary_time)</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> create_plot(sizes, linear_times, binary_times)</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>plot.savefig(<span class="st">'search_performance.png'</span>)</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>plt.close()</span>
 <span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Largest input size: </span><span class="sc">{</span>sizes[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Linear search time for largest input: </span><span class="sc">{</span>linear_times[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.6f}</span><span class="ss"> seconds"</span>)</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Binary search time for largest input: </span><span class="sc">{</span>binary_times[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.6f}</span><span class="ss"> seconds"</span>)</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Difference for the largest input: </span><span class="sc">{</span>linear_times[<span class="op">-</span><span class="dv">1</span>] <span class="op">/</span> binary_times[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.2f}</span><span class="ss">x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2024-08-29-binary-search_files/figure-html/cell-3-output-1.png" width="1141" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Largest input size: </span><span class="sc">{</span>sizes[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Linear search time for largest input: </span><span class="sc">{</span>linear_times[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.6f}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Binary search time for largest input: </span><span class="sc">{</span>binary_times[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.6f}</span><span class="ss"> seconds"</span>)</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Difference for the largest input: </span><span class="sc">{</span>linear_times[<span class="op">-</span><span class="dv">1</span>] <span class="op">/</span> binary_times[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.2f}</span><span class="ss">x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Largest input size: 1000000
-Linear search time for largest input: 0.001444 seconds
+Linear search time for largest input: 0.029848 seconds
 Binary search time for largest input: 0.000006 seconds
-Difference for the largest input: 232.88x</code></pre>
+Difference for the largest input: 5007.60x</code></pre>
 </div>
 </div>
+<p><img src="search_performance.png" class="img-fluid" alt="Binary Search vs Linear Search Performance"> As you can see, the binary search (green line) remains much faster than the linear search (red line) as the input size grows, demonstrating its logarithmic time complexity compared to the linear time complexity of the linear search.</p>
 </section>
 <section id="disadvantages" class="level3">
 <h3 class="anchored" data-anchor-id="disadvantages">Disadvantages</h3>

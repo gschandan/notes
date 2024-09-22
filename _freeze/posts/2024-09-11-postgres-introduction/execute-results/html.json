@@ -1,0 +1,12 @@
+{
+  "hash": "31ad7d5a9d9691596c4a96de86e0ebe2",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ncategories:\n  - programming\n  - sql\n  - introduction\n  - postgres\ndate: '2024-09-11'\ndescription: PostgreSQL Introduction\nlayout: post\ntitle: Introduction to PostgreSQL\ntoc: true\nformat:\n  html:\n    html-math-method: katex\n---\n\n# Introduction\n\n## Database Models\n\nVarious models developed to solve data storage and retrieval problems:\n\n1. Hierarchical e.g. IMS (IBM) - each record composed of other records - efficient storage for particular questions  \n2. Network Database Model - records can contain references to other records via pointers - end up with a linked list - difficult to maintain pointers, and queries need to follow the linked lists  \n3. Relational models (used in RDMSs) - emphasis on data integrity  \n   - records are called tuples - an ordered group of components or attributes which each have a defined type  \n   - typles are ordered, there cannot be duplicates, and attributes must be atomic i.e. a single piece of data  \n   - the attribute(s) used to differentiate a record from another are usually the primary key  \n  \n## Language\n  \nSQL (Structured Query Language):   \n- current standard is SQL:2023  \n- three types of commands:  \n  - DML (Data Manipulation Language) e.g. inserting/updating/deleting\n  - DDL (Data Definition Language) e.g. creating tables/altering the structure or relationships of tables\n  - DCL (Data Control Language) e.g.granting permissions or access\n\n## Responsibilities of an (R)DBMS\n- Management and storage of the database(s)  \n- Query facilities  \n- Concurrent use \n- Auditing/Logging - for auditing, investigation and restoration  \n- Security and access management  \n- Maintain referential integrity  \n\n## PostgreSQL\n\nA relational DBMS that supports SQL \n\n\n## References\n\n[^1] Beginning Databases with PostgreSQL\n\n",
+    "supporting": [
+      "2024-09-11-postgres-introduction_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2022-04-30">
-<meta name="description" content="Tensors">
+<meta name="dcterms.date" content="2024-09-11">
+<meta name="description" content="PostgreSQL Introduction">
 
-<title>notes - Tensors and Tensor Operations</title>
+<title>notes - Introduction to PostgreSQL</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,49 +71,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -155,16 +112,17 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Tensors and Tensor Operations</h1>
+      <h1 class="title">Introduction to PostgreSQL</h1>
                   <div>
         <div class="description">
-          Tensors
+          PostgreSQL Introduction
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">math</div>
-                <div class="quarto-category">linear-algebra</div>
-                <div class="quarto-category">tensors</div>
+                <div class="quarto-category">programming</div>
+                <div class="quarto-category">sql</div>
+                <div class="quarto-category">introduction</div>
+                <div class="quarto-category">postgres</div>
               </div>
                   </div>
   </div>
@@ -176,7 +134,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 30, 2022</p>
+        <p class="date">September 11, 2024</p>
       </div>
     </div>
     
@@ -192,18 +150,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tensors" id="toc-tensors" class="nav-link active" data-scroll-target="#tensors">Tensors</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
-  <li><a href="#tensor-transposition" id="toc-tensor-transposition" class="nav-link" data-scroll-target="#tensor-transposition">Tensor Transposition</a>
-  <ul class="collapse">
-  <li><a href="#scalars" id="toc-scalars" class="nav-link" data-scroll-target="#scalars">Scalars</a></li>
-  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors">Vectors</a></li>
-  </ul></li>
-  <li><a href="#tensor-reduction" id="toc-tensor-reduction" class="nav-link" data-scroll-target="#tensor-reduction">Tensor Reduction</a>
-  <ul class="collapse">
-  <li><a href="#sum" id="toc-sum" class="nav-link" data-scroll-target="#sum">Sum</a></li>
-  </ul></li>
-  <li><a href="#dot-product" id="toc-dot-product" class="nav-link" data-scroll-target="#dot-product">Dot Product</a></li>
+  <li><a href="#database-models" id="toc-database-models" class="nav-link" data-scroll-target="#database-models">Database Models</a></li>
+  <li><a href="#language" id="toc-language" class="nav-link" data-scroll-target="#language">Language</a></li>
+  <li><a href="#responsibilities-of-an-rdbms" id="toc-responsibilities-of-an-rdbms" class="nav-link" data-scroll-target="#responsibilities-of-an-rdbms">Responsibilities of an (R)DBMS</a></li>
+  <li><a href="#postgresql" id="toc-postgresql" class="nav-link" data-scroll-target="#postgresql">PostgreSQL</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -215,43 +168,55 @@ window.Quarto = {
 
 
 
-<section id="tensors" class="level1">
-<h1>Tensors</h1>
-<section id="tensor-transposition" class="level2">
-<h2 class="anchored" data-anchor-id="tensor-transposition">Tensor Transposition</h2>
-<section id="scalars" class="level3">
-<h3 class="anchored" data-anchor-id="scalars">Scalars</h3>
-<p>Transpose of a scalar is the scalar itself i.e.&nbsp;<span class="math inline">x{^T} = x</span></p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="database-models" class="level2">
+<h2 class="anchored" data-anchor-id="database-models">Database Models</h2>
+<p>Various models developed to solve data storage and retrieval problems:</p>
+<ol type="1">
+<li>Hierarchical e.g.&nbsp;IMS (IBM) - each record composed of other records - efficient storage for particular questions<br>
+</li>
+<li>Network Database Model - records can contain references to other records via pointers - end up with a linked list - difficult to maintain pointers, and queries need to follow the linked lists<br>
+</li>
+<li>Relational models (used in RDMSs) - emphasis on data integrity
+<ul>
+<li>records are called tuples - an ordered group of components or attributes which each have a defined type<br>
+</li>
+<li>typles are ordered, there cannot be duplicates, and attributes must be atomic i.e.&nbsp;a single piece of data<br>
+</li>
+<li>the attribute(s) used to differentiate a record from another are usually the primary key</li>
+</ul></li>
+</ol>
 </section>
-<section id="vectors" class="level3">
-<h3 class="anchored" data-anchor-id="vectors">Vectors</h3>
-<p>Transposing a vector transofrms columns to rows, and rows to columns i.e.</p>
-<p><span class="math display">
-\begin{bmatrix} x{_{1,1}} &amp; x{_{1,2}} \\ x{_{2,1}} &amp; x{_{2,2}} \\ x{_{3,1}} &amp; x{_{3,2}}
-\end{bmatrix}{^T} =
-\begin{bmatrix}
-x{_{1,1}} &amp; x{_{2,1}} &amp; x{_{3,1}} \\
-x{_{1,2}} &amp; x{_{2,2}} &amp; x{_{3,2}}
-\end{bmatrix}
-</span></p>
-<p>Scalar and vector transpoition are special cases of matrix transposition, where the axes are “flipped” across the main diagonal.</p>
-<p><span class="math display">(\boldsymbol X^T)_{i,j} = (\boldsymbol X)_{j,i} </span></p>
+<section id="language" class="level2">
+<h2 class="anchored" data-anchor-id="language">Language</h2>
+<p>SQL (Structured Query Language):<br>
+- current standard is SQL:2023<br>
+- three types of commands:<br>
+- DML (Data Manipulation Language) e.g.&nbsp;inserting/updating/deleting - DDL (Data Definition Language) e.g.&nbsp;creating tables/altering the structure or relationships of tables - DCL (Data Control Language) e.g.granting permissions or access</p>
 </section>
+<section id="responsibilities-of-an-rdbms" class="level2">
+<h2 class="anchored" data-anchor-id="responsibilities-of-an-rdbms">Responsibilities of an (R)DBMS</h2>
+<ul>
+<li>Management and storage of the database(s)<br>
+</li>
+<li>Query facilities<br>
+</li>
+<li>Concurrent use</li>
+<li>Auditing/Logging - for auditing, investigation and restoration<br>
+</li>
+<li>Security and access management<br>
+</li>
+<li>Maintain referential integrity</li>
+</ul>
 </section>
-<section id="tensor-reduction" class="level2">
-<h2 class="anchored" data-anchor-id="tensor-reduction">Tensor Reduction</h2>
-<section id="sum" class="level3">
-<h3 class="anchored" data-anchor-id="sum">Sum</h3>
-<p>Calculate the sum across all elements of the vector or matrix.</p>
-<p>Vector $<em>{i=1}^n x_i $<br>
-Matrix $</em>{i=1}^m <em>{j=1}^n X</em>{j,i} $</p>
+<section id="postgresql" class="level2">
+<h2 class="anchored" data-anchor-id="postgresql">PostgreSQL</h2>
+<p>A relational DBMS that supports SQL</p>
 </section>
-</section>
-<section id="dot-product" class="level2">
-<h2 class="anchored" data-anchor-id="dot-product">Dot Product</h2>
-<p>Different to the Hadamard product as there is summation in the dot product (or scalar product) to produce a single scalar value.</p>
-<p>Can calculate the dot product if two vectors tensors <em><strong>x</strong></em> and <em><strong>y</strong></em> have the same length <span class="math inline">n</span> and can be denoted as: <span class="math inline">\boldsymbol X\cdot \boldsymbol Y</span> ,<span class="math inline">\boldsymbol X^T \boldsymbol Y</span> or <span class="math inline">\lang \boldsymbol X,\boldsymbol Y \rang</span>. The product is calculated in an elemnent-wise pattern, then summed across the products to produce a scalar value:</p>
-<p><span class="math inline">\boldsymbol X \cdot \boldsymbol Y = \sum_{i=1}^n x_iy_i</span></p>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>[^1] Beginning Databases with PostgreSQL</p>
 
 
 </section>

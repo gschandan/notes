@@ -1,0 +1,55 @@
+---
+categories:
+  - programming
+  - sql
+  - introduction
+  - postgres
+date: '2024-09-11'
+description: PostgreSQL Introduction
+layout: post
+title: Introduction to PostgreSQL
+toc: true
+format:
+  html:
+    html-math-method: katex
+jupyter: python3
+---
+
+# Introduction
+
+## Database Models
+
+Various models developed to solve data storage and retrieval problems:
+
+1. Hierarchical e.g. IMS (IBM) - each record composed of other records - efficient storage for particular questions  
+2. Network Database Model - records can contain references to other records via pointers - end up with a linked list - difficult to maintain pointers, and queries need to follow the linked lists  
+3. Relational models (used in RDMSs) - emphasis on data integrity  
+   - records are called tuples - an ordered group of components or attributes which each have a defined type  
+   - typles are ordered, there cannot be duplicates, and attributes must be atomic i.e. a single piece of data  
+   - the attribute(s) used to differentiate a record from another are usually the primary key  
+  
+## Language
+  
+SQL (Structured Query Language):   
+- current standard is SQL:2023  
+- three types of commands:  
+  - DML (Data Manipulation Language) e.g. inserting/updating/deleting
+  - DDL (Data Definition Language) e.g. creating tables/altering the structure or relationships of tables
+  - DCL (Data Control Language) e.g.granting permissions or access
+
+## Responsibilities of an (R)DBMS
+- Management and storage of the database(s)  
+- Query facilities  
+- Concurrent use 
+- Auditing/Logging - for auditing, investigation and restoration  
+- Security and access management  
+- Maintain referential integrity  
+
+## PostgreSQL
+
+A relational DBMS that supports SQL 
+
+
+## References
+
+[^1] Beginning Databases with PostgreSQL

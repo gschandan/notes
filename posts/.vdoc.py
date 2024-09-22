@@ -53,26 +53,50 @@
 #
 #
 #
-def binary_search_iterative(arr, target):
-    left, right = 0, len(arr) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if arr[mid] == target:
-            return mid
-        elif arr[mid] < target:
-            left = mid + 1
-        else:
-            right = mid - 1
-    return -1
-
-def binary_search_recursive(arr, target):
-    # TODO
-    pass
-
-sorted_array = [1, 3, 4, 6, 8, 9, 11]
-target = 6
-result = binary_search_iterative(sorted_array, target)
-print(f"Target {target} found at index: {result}")
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #
 #
 #
@@ -93,71 +117,212 @@ print(f"Target {target} found at index: {result}")
 #
 import numpy as np
 import matplotlib.pyplot as plt
-import time
-import random
+from qutip import Bloch, basis, sigmax, sigmay, sigmaz
 
-def linear_search(arr, target):
-    for i in range(len(arr)):
-        if arr[i] == target:
-            return i
-    return -1
-
-def binary_search(arr, target):
-    left, right = 0, len(arr) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if arr[mid] == target:
-            return mid
-        elif arr[mid] < target:
-            left = mid + 1
-        else:
-            right = mid - 1
-    return -1
-
-def measure_search_time(search_func, arr, target):
-    start_time = time.time()
-    search_func(arr, target)
-    end_time = time.time()
-    return end_time - start_time
-
-
-sizes = np.logspace(1, 6, num=20, dtype=int)
-linear_times = []
-binary_times = []
-
-for size in sizes:
-    arr = sorted(random.sample(range(size * 10), size))
-    target = random.choice(arr)
+def plot_bloch_sphere(states, labels):
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    b = Bloch(axes=ax)
+    b.point_color = ['r', 'g', 'b', 'y']
     
-    linear_time = measure_search_time(linear_search, arr, target)
-    binary_time = measure_search_time(binary_search, arr, target)
+    for state, label in zip(states, labels):
+        b.add_states(state)
+        b.add_annotation(state, label)
     
-    linear_times.append(linear_time)
-    binary_times.append(binary_time)
+    b.render()
+    return fig
 
+# some example states
+psi1 = basis(2, 0)  # |0⟩ i.e. classical 0
+psi2 = basis(2, 1)  # |1⟩ i.e. classical 1
+psi3 = (basis(2, 0) + basis(2, 1)).unit()  # (|0⟩ + |1⟩)/√2 i.e. equal superposition
+psi4 = (basis(2, 0) + 1j*basis(2, 1)).unit()  # (|0⟩ + i|1⟩)/√2 i.e. superposition with a pahse difference
 
-plt.figure(figsize=(12, 6))
-plt.plot(sizes, linear_times, label='Linear Search', color='red', marker='o')
-plt.plot(sizes, binary_times, label='Binary Search', color='green', marker='o')
+states = [psi1, psi2, psi3, psi4]
+labels = ["|0⟩", "|1⟩", "|+⟩", "|+i⟩"]
 
-plt.title('Binary Search vs Linear Search Performance')
-plt.xlabel('Input Size (n)')
-plt.ylabel('Execution Time (seconds)')
-plt.legend()
-
-plt.xscale('log')
-plt.yscale('log')
-
-plt.grid(True, linestyle='--', alpha=0.7)
+fig = plot_bloch_sphere(states, labels)
 
 plt.tight_layout()
-plt.show()
+plt.savefig('bloch_sphere_example.png', dpi=150, bbox_inches='tight')
+plt.close(fig)
 
-print(f"Largest input size: {sizes[-1]}")
-print(f"Linear search time for largest input: {linear_times[-1]:.6f} seconds")
-print(f"Binary search time for largest input: {binary_times[-1]:.6f} seconds")
-print(f"Difference for the largest input: {linear_times[-1] / binary_times[-1]:.2f}x")
 ```
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+import numpy as np
+import matplotlib.pyplot as plt
+from qutip import Bloch, basis, qeye, sigmax, sigmay, sigmaz
+from matplotlib.animation import FuncAnimation
+import imageio
+
+def plot_bloch_sphere(states, filename='bloch_sphere_evolution.gif', duration=0.1):
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(111, projection='3d')
+    b = Bloch(axes=ax)
+
+    def update(frame):
+        ax.cla()
+        b = Bloch(axes=ax)
+        b.add_states(states[frame])
+        b.add_states([states[0], states[-1]], 'point')
+        b.render()
+        ax.set_title(f'Frame {frame + 1}/{len(states)}')
+
+    anim = FuncAnimation(fig, update, frames=len(states), repeat=True)
+
+    frames = []
+    for i in range(len(states)):
+        update(i)
+        fig.canvas.draw()
+        image = np.frombuffer(fig.canvas.tostring_rgb(), dtype='uint8')
+        image = image.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+        frames.append(image)
+
+    imageio.mimsave(filename, frames, duration=duration)
+    plt.close(fig)
+
+def state_evolution(initial_state, operation, steps=50):
+    states = [initial_state]
+    for i in range(1, steps+1):
+        states.append(operation(initial_state, i/steps))
+    return states
+
+def hadamard_like_transform(state, t):
+    H = np.sqrt(1 - t) * sigmaz() + np.sqrt(t) * sigmax()
+    return (1 - t) * state + t * H * state
+
+psi0 = basis(2, 0) # initial state |0⟩
+
+states = state_evolution(psi0, hadamard_like_transform, steps=50)
+
+plot_bloch_sphere(states, 'hadamard_evolution.gif', duration=0.1)
+```
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #
 #
 #
