@@ -258,10 +258,6 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#properties-1" id="toc-properties-1" class="nav-link" data-scroll-target="#properties-1">Properties:</a></li>
   <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">Example:</a></li>
-  </ul></li>
-  <li><a href="#quantum-circuits" id="toc-quantum-circuits" class="nav-link" data-scroll-target="#quantum-circuits">Quantum Circuits</a>
-  <ul class="collapse">
-  <li><a href="#example-simple-quantum-circuit" id="toc-example-simple-quantum-circuit" class="nav-link" data-scroll-target="#example-simple-quantum-circuit">Example: Simple Quantum Circuit</a></li>
   <li><a href="#vector-notation" id="toc-vector-notation" class="nav-link" data-scroll-target="#vector-notation">Vector Notation</a></li>
   <li><a href="#dirac-bra-ket-notation" id="toc-dirac-bra-ket-notation" class="nav-link" data-scroll-target="#dirac-bra-ket-notation">Dirac (Bra-Ket) Notation</a></li>
   <li><a href="#complex-numbers-and-polar-form" id="toc-complex-numbers-and-polar-form" class="nav-link" data-scroll-target="#complex-numbers-and-polar-form">Complex Numbers and Polar Form</a></li>
@@ -269,6 +265,12 @@ window.Quarto = {
   <li><a href="#examples-with-mathematical-representation" id="toc-examples-with-mathematical-representation" class="nav-link" data-scroll-target="#examples-with-mathematical-representation">Examples with Mathematical Representation</a></li>
   <li><a href="#bloch-sphere-coordinates" id="toc-bloch-sphere-coordinates" class="nav-link" data-scroll-target="#bloch-sphere-coordinates">Bloch Sphere Coordinates</a></li>
   <li><a href="#multi-qubit-systems-1" id="toc-multi-qubit-systems-1" class="nav-link" data-scroll-target="#multi-qubit-systems-1">Multi-Qubit Systems</a></li>
+  </ul></li>
+  <li><a href="#quantum-circuits" id="toc-quantum-circuits" class="nav-link" data-scroll-target="#quantum-circuits">Quantum Circuits</a>
+  <ul class="collapse">
+  <li><a href="#example-simple-quantum-circuit" id="toc-example-simple-quantum-circuit" class="nav-link" data-scroll-target="#example-simple-quantum-circuit">Example: Simple Quantum Circuit</a></li>
+  <li><a href="#cnot-gate" id="toc-cnot-gate" class="nav-link" data-scroll-target="#cnot-gate">CNOT Gate</a></li>
+  <li><a href="#hadamard-gate" id="toc-hadamard-gate" class="nav-link" data-scroll-target="#hadamard-gate">Hadamard Gate</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul></li>
@@ -306,6 +308,8 @@ window.Quarto = {
 <p>Where:<br>
 - <span class="math inline">|\psi\rangle</span> represents the qubit’s state<br>
 - <span class="math inline">\alpha</span> and <span class="math inline">\beta</span> are complex numbers called probability amplitudes<br>
+- <span class="math inline">|\alpha|^2</span> gives the probability of measuring the qubit in state <span class="math inline">|0\rangle</span><br>
+- <span class="math inline">|\beta|^2</span> gives the probability of measuring the qubit in state <span class="math inline">|1\rangle</span><br>
 - <span class="math inline">|\alpha|^2 + |\beta|^2 = 1</span> (normalization condition)</p>
 <p>A state vector is a mathematical representation of a qubit’s state in quantum mechanics. For a single qubit, it’s a two-dimensional complex vector that captures all the information about the qubit’s state.</p>
 <section id="amplitudes" class="level4">
@@ -376,7 +380,7 @@ window.Quarto = {
 <section id="bloch-sphere-representation" class="level3">
 <h3 class="anchored" data-anchor-id="bloch-sphere-representation">Bloch Sphere Representation</h3>
 <p>Qubits are often visualized using the Bloch sphere, a unit sphere in three-dimensional space. Any single qubit state can be represented as a point on the surface of this sphere.</p>
-<div id="1952d5a8" class="cell" data-execution_count="1">
+<div id="777ab575" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip <span class="im">import</span> Bloch, basis, sigmax, sigmay, sigmaz</span>
@@ -428,7 +432,7 @@ window.Quarto = {
 <section id="visualizing-state-evolution" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-state-evolution">Visualizing State Evolution</h3>
 <p>We can also use this to visualize how quantum states evolve under certain operations. Here’s an example that shows the state evolution under the action of a Hadamard-like gate:</p>
-<div id="a6a75f76" class="cell" data-execution_count="2">
+<div id="20cda2ed" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip <span class="im">import</span> Bloch, basis, qeye, sigmax, sigmay, sigmaz</span>
@@ -477,7 +481,7 @@ window.Quarto = {
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>plot_bloch_sphere(states, <span class="st">'bloch_sphere_evolution.gif'</span>, duration<span class="op">=</span><span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/tmp/ipykernel_572339/1348161396.py:26: MatplotlibDeprecationWarning: The tostring_rgb function was deprecated in Matplotlib 3.8 and will be removed in 3.10. Use buffer_rgba instead.
+<pre><code>/tmp/ipykernel_3956532/1348161396.py:26: MatplotlibDeprecationWarning: The tostring_rgb function was deprecated in Matplotlib 3.8 and will be removed in 3.10. Use buffer_rgba instead.
   image = np.frombuffer(fig.canvas.tostring_rgb(), dtype='uint8')</code></pre>
 </div>
 </div>
@@ -585,21 +589,7 @@ window.Quarto = {
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>joint_state <span class="op">=</span> np.kron(coin1, coin2)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Result: [0.35, 0.15, 0.35, 0.15]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Note: Not all higher-dimensional probability vectors can be decomposed into tensor products of lower-dimensional vectors.</p>
-</section>
-</section>
-<section id="quantum-circuits" class="level2">
-<h2 class="anchored" data-anchor-id="quantum-circuits">Quantum Circuits</h2>
-<p>Quantum circuits are sequences of operations (gates) applied to qubits. They are the quantum analogue of classical logic circuits.</p>
-<section id="example-simple-quantum-circuit" class="level3">
-<h3 class="anchored" data-anchor-id="example-simple-quantum-circuit">Example: Simple Quantum Circuit</h3>
-<pre><code>      ┌───┐
-q_0: ─┤ H ├─────●─────
-      └───┘     │
-q_1: ───────────┼─────
-                │
-q_2: ───────────X─────</code></pre>
-<p>This circuit applies a Hadamard gate (H) to the first qubit and then a controlled-NOT (CNOT) with the first qubit as control and the third as target. 3. <strong><span class="math inline">\alpha</span> and <span class="math inline">\beta</span></strong>: - These are complex numbers called probability amplitudes. - <span class="math inline">|\alpha|^2</span> gives the probability of measuring the qubit in state <span class="math inline">|0\rangle</span>. - <span class="math inline">|\beta|^2</span> gives the probability of measuring the qubit in state <span class="math inline">|1\rangle</span>. - The normalization condition requires that <span class="math inline">|\alpha|^2 + |\beta|^2 = 1</span>.</p>
+<p>Not all higher-dimensional probability vectors can be decomposed into tensor products of lower-dimensional vectors.</p>
 </section>
 <section id="vector-notation" class="level3">
 <h3 class="anchored" data-anchor-id="vector-notation">Vector Notation</h3>
@@ -657,6 +647,205 @@ q_2: ───────────X─────</code></pre>
 <p>For a system of n qubits, the state is represented by a <span class="math inline">2^n</span> dimensional complex vector. For example, a two-qubit system has the general form:</p>
 <p><span class="math display">|\psi\rangle = \alpha|00\rangle + \beta|01\rangle + \gamma|10\rangle + \delta|11\rangle</span></p>
 <p>Where <span class="math inline">\alpha</span>, <span class="math inline">\beta</span>, <span class="math inline">\gamma</span>, and <span class="math inline">\delta</span> are complex amplitudes satisfying <span class="math inline">|\alpha|^2 + |\beta|^2 + |\gamma|^2 + |\delta|^2 = 1</span>.</p>
+</section>
+</section>
+<section id="quantum-circuits" class="level2">
+<h2 class="anchored" data-anchor-id="quantum-circuits">Quantum Circuits</h2>
+<p>Quantum circuits are sequences of operations (gates) applied to qubits. They are the quantum analogue of classical logic circuits.</p>
+<section id="example-simple-quantum-circuit" class="level3">
+<h3 class="anchored" data-anchor-id="example-simple-quantum-circuit">Example: Simple Quantum Circuit</h3>
+<pre><code>      ┌───┐
+q_0: ─┤ H ├─────●─────
+      └───┘     │
+q_1: ───────────┼─────
+                │
+q_2: ───────────X─────</code></pre>
+<p>This circuit applies a Hadamard gate (H) to the first qubit and then a controlled-NOT (CNOT) with the first qubit as control and the third as target.</p>
+</section>
+<section id="cnot-gate" class="level3">
+<h3 class="anchored" data-anchor-id="cnot-gate">CNOT Gate</h3>
+<p>The CNOT (Controlled-NOT) gate is a two-qubit gate that flips the second qubit (target) if and only if the first qubit (control) is in the state <span class="math inline">|1\rangle</span>.</p>
+<section id="derivation" class="level4">
+<h4 class="anchored" data-anchor-id="derivation">Derivation:</h4>
+<section id="basis-states" class="level5">
+<h5 class="anchored" data-anchor-id="basis-states">Basis States</h5>
+<p>The four possible basis states for a two-qubit system:</p>
+<ol type="1">
+<li><span class="math inline">|00\rangle</span></li>
+<li><span class="math inline">|01\rangle</span></li>
+<li><span class="math inline">|10\rangle</span></li>
+<li><span class="math inline">|11\rangle</span></li>
+</ol>
+</section>
+<section id="x-gate-not-gate" class="level5">
+<h5 class="anchored" data-anchor-id="x-gate-not-gate">X Gate (NOT Gate)</h5>
+<p>The X gate (NOT gate) for a single qubit is represented by the matrix:</p>
+<p><span class="math display">X = \begin{bmatrix}
+0 &amp; 1 \\
+1 &amp; 0
+\end{bmatrix}</span></p>
+<p>and the 2x2 identity matrix is also used:</p>
+<p><span class="math display">I = \begin{bmatrix}
+1 &amp; 0 \\
+0 &amp; 1
+\end{bmatrix}</span></p>
+</section>
+<section id="cnot-operation" class="level5">
+<h5 class="anchored" data-anchor-id="cnot-operation">CNOT Operation</h5>
+<p>The CNOT gate performs the following operations:</p>
+<ul>
+<li>If the control qubit is <span class="math inline">|0\rangle</span>, do nothing to the target qubit.</li>
+<li>If the control qubit is <span class="math inline">|1\rangle</span>, apply the X gate to the target qubit.</li>
+</ul>
+<p>This can be expressed as:</p>
+<p><span class="math display">CNOT = |0\rangle\langle0| \otimes I + |1\rangle\langle1| \otimes X</span></p>
+<p>Where <span class="math inline">\otimes</span> denotes the tensor product.</p>
+<ol type="1">
+<li><p><span class="math inline">|0\rangle\langle0| \otimes I</span>:</p>
+<p><span class="math display">\begin{bmatrix}
+1 &amp; 0 \\
+0 &amp; 0
+\end{bmatrix} \otimes
+\begin{bmatrix}
+1 &amp; 0 \\
+0 &amp; 1
+\end{bmatrix} =
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{bmatrix}</span></p></li>
+<li><p><span class="math inline">|1\rangle\langle1| \otimes X</span>:</p>
+<p><span class="math display">\begin{bmatrix}
+0 &amp; 0 \\
+0 &amp; 1
+\end{bmatrix} \otimes
+\begin{bmatrix}
+0 &amp; 1 \\
+1 &amp; 0
+\end{bmatrix} =
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix}</span></p></li>
+</ol>
+</section>
+<section id="cnot-matrix" class="level5">
+<h5 class="anchored" data-anchor-id="cnot-matrix">CNOT Matrix</h5>
+<p>Adding these two matrices gives us the final CNOT matrix:</p>
+<p><span class="math display">CNOT = \begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix}</span></p>
+</section>
+</section>
+<section id="verification" class="level4">
+<h4 class="anchored" data-anchor-id="verification">Verification</h4>
+<p>We can verify this matrix by applying it to each basis state:</p>
+<ol type="1">
+<li><span class="math inline">CNOT|00\rangle = |00\rangle</span> (No change)<br>
+</li>
+<li><span class="math inline">CNOT|01\rangle = |01\rangle</span> (No change)<br>
+</li>
+<li><span class="math inline">CNOT|10\rangle = |11\rangle</span> (Flips second qubit)<br>
+</li>
+<li><span class="math inline">CNOT|11\rangle = |10\rangle</span> (Flips second qubit)</li>
+</ol>
+<p>The CNOT operation only flips the second qubit when the first qubit is in state <span class="math inline">|1\rangle</span>.</p>
+</section>
+</section>
+<section id="hadamard-gate" class="level3">
+<h3 class="anchored" data-anchor-id="hadamard-gate">Hadamard Gate</h3>
+<p>The Hadamard gate is a single-qubit gate that creates superpositions. It’s often used to initialize qubits in quantum algorithms.</p>
+<section id="definition" class="level4">
+<h4 class="anchored" data-anchor-id="definition">Definition</h4>
+<p>The Hadamard gate is defined by the following matrix:</p>
+<p><span class="math display">H = \frac{1}{\sqrt{2}} \begin{bmatrix}
+1 &amp; 1 \\
+1 &amp; -1
+\end{bmatrix}</span></p>
+</section>
+<section id="derivation-1" class="level4">
+<h4 class="anchored" data-anchor-id="derivation-1">Derivation</h4>
+<p>We can derive the Hadamard gate by considering its action on the computational basis states:</p>
+<ol type="1">
+<li><p>For <span class="math inline">|0\rangle</span>:</p>
+<p><span class="math display">H|0\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)</span></p></li>
+<li><p>For <span class="math inline">|1\rangle</span>:</p>
+<p><span class="math display">H|1\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)</span></p></li>
+</ol>
+<p>These actions can be represented in matrix form:</p>
+<p><span class="math display">H\begin{bmatrix}
+1 \\
+0
+\end{bmatrix} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}</span></p>
+<p><span class="math display">H\begin{bmatrix}
+0 \\
+1
+\end{bmatrix} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}</span></p>
+<p>From these, we can construct the Hadamard matrix:</p>
+<p><span class="math display">H = \frac{1}{\sqrt{2}} \begin{bmatrix}
+1 &amp; 1 \\
+1 &amp; -1
+\end{bmatrix}</span></p>
+</section>
+<section id="properties-2" class="level4">
+<h4 class="anchored" data-anchor-id="properties-2">Properties</h4>
+<ol type="1">
+<li>The Hadamard gate is its own inverse: <span class="math inline">H^2 = I</span><br>
+</li>
+<li>It creates equal superpositions of computational basis states<br>
+</li>
+<li>It can be expressed as a combination of Pauli gates: <span class="math inline">H = \frac{1}{\sqrt{2}}(X + Z)</span></li>
+</ol>
+</section>
+<section id="visualization" class="level4">
+<h4 class="anchored" data-anchor-id="visualization">Visualization</h4>
+<p>On the Bloch sphere, the Hadamard gate performs a 180° rotation around the axis that is 45° between the X and Z axes.</p>
+<div id="448864df" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> qutip <span class="im">import</span> Bloch, basis, sigmax, sigmaz</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hadamard_transform(state, t):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    H <span class="op">=</span> np.sqrt(<span class="dv">1</span> <span class="op">-</span> t) <span class="op">*</span> sigmaz() <span class="op">+</span> np.sqrt(t) <span class="op">*</span> sigmax()</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (<span class="dv">1</span> <span class="op">-</span> t) <span class="op">*</span> state <span class="op">+</span> t <span class="op">*</span> H <span class="op">*</span> state</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> Bloch(axes<span class="op">=</span>ax)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>psi0 <span class="op">=</span> basis(<span class="dv">2</span>, <span class="dv">0</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>states <span class="op">=</span> [hadamard_transform(psi0, t) <span class="cf">for</span> t <span class="kw">in</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">50</span>)]</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>b.add_states(states)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>b.add_states([states[<span class="dv">0</span>], states[<span class="op">-</span><span class="dv">1</span>]], <span class="st">'point'</span>)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>b.render()</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Hadamard Transform on Bloch Sphere"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'hadamard_transform.png'</span>, dpi<span class="op">=</span><span class="dv">150</span>, bbox_inches<span class="op">=</span><span class="st">'tight'</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>plt.close(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="hadamard_transform.png" class="img-fluid figure-img"></p>
+<figcaption>Hadamard Transform on Bloch Sphere</figcaption>
+</figure>
+</div>
+<p>The Hadamard gate is fundamental in quantum algorithms, including quantum Fourier transform and quantum phase estimation.</p>
+</section>
 </section>
 </section>
 <section id="references" class="level2">

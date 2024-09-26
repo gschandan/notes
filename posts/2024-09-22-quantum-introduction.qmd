@@ -44,8 +44,10 @@ $$
 Where:  
 - $|\psi\rangle$ represents the qubit's state  
 - $\alpha$ and $\beta$ are complex numbers called probability amplitudes  
-- $|\alpha|^2 + |\beta|^2 = 1$ (normalization condition) 
-   
+- $|\alpha|^2$ gives the probability of measuring the qubit in state $|0\rangle$  
+- $|\beta|^2$ gives the probability of measuring the qubit in state $|1\rangle$  
+- $|\alpha|^2 + |\beta|^2 = 1$ (normalization condition)  
+
 
 A state vector is a mathematical representation of a qubit's state in quantum mechanics. 
 For a single qubit, it's a two-dimensional complex vector that captures all the information about the qubit's state.
@@ -58,7 +60,8 @@ Amplitudes ($\alpha$ and $\beta$) are complex numbers that determine the quantum
 
 2. **Phase**: The complex phase of the amplitude carries information about the qubit's behavior in interference situations.
 
-3. **Superposition**: Non-zero amplitudes for both $|0\rangle$ and $|1\rangle$ indicate the qubit is in a superposition of these basis states.
+3. **Superposition**: Non-zero amplitudes for both $|0\rangle$ and $|1\rangle$ indicate the qubit is in a superposition of these basis states.  
+
 
 #### Example 1: Classical-like States
 
@@ -306,29 +309,7 @@ joint_state = np.kron(coin1, coin2)
 # Result: [0.35, 0.15, 0.35, 0.15]
 ```
 
-Note: Not all higher-dimensional probability vectors can be decomposed into tensor products of lower-dimensional vectors.
-
-## Quantum Circuits
-
-Quantum circuits are sequences of operations (gates) applied to qubits. They are the quantum analogue of classical logic circuits.
-
-### Example: Simple Quantum Circuit
-
-```
-      ┌───┐
-q_0: ─┤ H ├─────●─────
-      └───┘     │
-q_1: ───────────┼─────
-                │
-q_2: ───────────X─────
-```
-
-This circuit applies a Hadamard gate (H) to the first qubit and then a controlled-NOT (CNOT) with the first qubit as control and the third as target.
-3. **$\alpha$ and $\beta$**:
-   - These are complex numbers called probability amplitudes.
-   - $|\alpha|^2$ gives the probability of measuring the qubit in state $|0\rangle$.
-   - $|\beta|^2$ gives the probability of measuring the qubit in state $|1\rangle$.
-   - The normalization condition requires that $|\alpha|^2 + |\beta|^2 = 1$.
+Not all higher-dimensional probability vectors can be decomposed into tensor products of lower-dimensional vectors.
 
 ### Vector Notation
 
@@ -403,6 +384,213 @@ For a system of n qubits, the state is represented by a $2^n$ dimensional comple
 $$|\psi\rangle = \alpha|00\rangle + \beta|01\rangle + \gamma|10\rangle + \delta|11\rangle$$
 
 Where $\alpha$, $\beta$, $\gamma$, and $\delta$ are complex amplitudes satisfying $|\alpha|^2 + |\beta|^2 + |\gamma|^2 + |\delta|^2 = 1$.
+
+## Quantum Circuits
+
+Quantum circuits are sequences of operations (gates) applied to qubits. They are the quantum analogue of classical logic circuits.
+
+### Example: Simple Quantum Circuit
+
+```
+      ┌───┐
+q_0: ─┤ H ├─────●─────
+      └───┘     │
+q_1: ───────────┼─────
+                │
+q_2: ───────────X─────
+```
+
+This circuit applies a Hadamard gate (H) to the first qubit and then a controlled-NOT (CNOT) with the first qubit as control and the third as target.
+
+### CNOT Gate
+
+The CNOT (Controlled-NOT) gate is a two-qubit gate that flips the second qubit (target) if and only if the first qubit (control) is in the state $|1\rangle$.
+
+#### Derivation:
+
+##### Basis States
+
+The four possible basis states for a two-qubit system:
+
+1. $|00\rangle$
+2. $|01\rangle$
+3. $|10\rangle$
+4. $|11\rangle$
+
+##### X Gate (NOT Gate)
+
+The X gate (NOT gate) for a single qubit is represented by the matrix:
+
+$$X = \begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}$$
+
+and the 2x2 identity matrix is also used:
+
+$$I = \begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}$$
+
+##### CNOT Operation
+
+The CNOT gate performs the following operations:
+
+- If the control qubit is $|0\rangle$, do nothing to the target qubit.
+- If the control qubit is $|1\rangle$, apply the X gate to the target qubit.  
+
+This can be expressed as:
+
+$$CNOT = |0\rangle\langle0| \otimes I + |1\rangle\langle1| \otimes X$$  
+
+Where $\otimes$ denotes the tensor product.  
+
+1. $|0\rangle\langle0| \otimes I$:
+
+   $$\begin{bmatrix}
+   1 & 0 \\
+   0 & 0
+   \end{bmatrix} \otimes
+   \begin{bmatrix}
+   1 & 0 \\
+   0 & 1
+   \end{bmatrix} =
+   \begin{bmatrix}
+   1 & 0 & 0 & 0 \\
+   0 & 1 & 0 & 0 \\
+   0 & 0 & 0 & 0 \\
+   0 & 0 & 0 & 0
+   \end{bmatrix}$$  
+
+2. $|1\rangle\langle1| \otimes X$:
+
+   $$\begin{bmatrix}
+   0 & 0 \\
+   0 & 1
+   \end{bmatrix} \otimes
+   \begin{bmatrix}
+   0 & 1 \\
+   1 & 0
+   \end{bmatrix} =
+   \begin{bmatrix}
+   0 & 0 & 0 & 0 \\
+   0 & 0 & 0 & 0 \\
+   0 & 0 & 0 & 1 \\
+   0 & 0 & 1 & 0
+   \end{bmatrix}$$  
+
+##### CNOT Matrix
+
+Adding these two matrices gives us the final CNOT matrix:
+
+$$CNOT = \begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0
+\end{bmatrix}$$  
+
+#### Verification
+
+We can verify this matrix by applying it to each basis state:
+
+1. $CNOT|00\rangle = |00\rangle$ (No change)  
+2. $CNOT|01\rangle = |01\rangle$ (No change)  
+3. $CNOT|10\rangle = |11\rangle$ (Flips second qubit)  
+4. $CNOT|11\rangle = |10\rangle$ (Flips second qubit)  
+
+The CNOT operation only flips the second qubit when the first qubit is in state $|1\rangle$.  
+
+### Hadamard Gate
+
+The Hadamard gate is a single-qubit gate that creates superpositions. It's often used to initialize qubits in quantum algorithms.  
+
+#### Definition
+
+The Hadamard gate is defined by the following matrix:  
+
+$$H = \frac{1}{\sqrt{2}} \begin{bmatrix} 
+1 & 1 \\
+1 & -1
+\end{bmatrix}$$  
+
+#### Derivation
+
+We can derive the Hadamard gate by considering its action on the computational basis states:  
+
+1. For $|0\rangle$:
+   
+   $$H|0\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$$  
+
+2. For $|1\rangle$:
+   
+   $$H|1\rangle = \frac{1}{\sqrt{2}}(|0\rangle - |1\rangle)$$  
+
+These actions can be represented in matrix form:  
+
+$$H\begin{bmatrix}
+1 \\
+0
+\end{bmatrix} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+1 \\
+1
+\end{bmatrix}$$  
+
+$$H\begin{bmatrix}
+0 \\
+1
+\end{bmatrix} = \frac{1}{\sqrt{2}}\begin{bmatrix}
+1 \\
+-1
+\end{bmatrix}$$  
+
+From these, we can construct the Hadamard matrix:  
+
+$$H = \frac{1}{\sqrt{2}} \begin{bmatrix} 
+1 & 1 \\
+1 & -1
+\end{bmatrix}$$  
+
+#### Properties
+
+1. The Hadamard gate is its own inverse: $H^2 = I$  
+2. It creates equal superpositions of computational basis states  
+3. It can be expressed as a combination of Pauli gates: $H = \frac{1}{\sqrt{2}}(X + Z)$  
+
+#### Visualization
+
+On the Bloch sphere, the Hadamard gate performs a 180° rotation around the axis that is 45° between the X and Z axes.
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from qutip import Bloch, basis, sigmax, sigmaz
+
+def hadamard_transform(state, t):
+    H = np.sqrt(1 - t) * sigmaz() + np.sqrt(t) * sigmax()
+    return (1 - t) * state + t * H * state
+
+fig = plt.figure(figsize=(8, 8))
+ax = fig.add_subplot(111, projection='3d')
+b = Bloch(axes=ax)
+
+psi0 = basis(2, 0)
+states = [hadamard_transform(psi0, t) for t in np.linspace(0, 1, 50)]
+
+b.add_states(states)
+b.add_states([states[0], states[-1]], 'point')
+b.render()
+
+plt.title("Hadamard Transform on Bloch Sphere")
+plt.tight_layout()
+plt.savefig('hadamard_transform.png', dpi=150, bbox_inches='tight')
+plt.close(fig)
+```
+![Hadamard Transform on Bloch Sphere](hadamard_transform.png)
+
+The Hadamard gate is fundamental in quantum algorithms such as quantum Fourier transform and quantum phase estimation. 
+
 
 ## References
    
