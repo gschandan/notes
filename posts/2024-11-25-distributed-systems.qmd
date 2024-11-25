@@ -1,0 +1,137 @@
+---
+title: "Introduction to Distributed Systems"
+subtitle: "Architectural Principles and Challenges"
+date: "2024-11-25"
+categories: 
+  - architecture
+  - computing
+  - networking
+  - infrastructure
+description: "Overview of distributed systems architecture, challenges, and implementation strategies"
+toc: true
+layout: post
+format:
+  html:
+    html-math-method: katex
+jupyter: python3
+---
+
+# Distributed Systems: Foundations and Principles
+
+## Core Concepts
+
+### Motivations
+
+1. **Parallelism**: Divide computationally intensive tasks across multiple machines  
+2. **Fault Tolerance**: Ensure system resilience through redundancy  
+3. **Performance Scaling**: Horizontal scaling of computational resources  
+4. **Geographic Distribution**: Leverage physical separation for security and latency optimization  
+
+### Fundamental Challenges
+
+- **Concurrency Management**: Coordinating simultaneous operations  
+- **Partial Failure Handling**: Responding to individual component failures  
+- **Performance Optimization**: Maintaining efficiency across distributed infrastructure  
+- **Consistency Maintenance**: Synchronizing state across multiple nodes  
+
+## System Architecture
+
+### Communication Paradigms
+
+- **Remote Procedure Calls (RPC)**: Synchronous method invocation across network  
+- **Message Passing**: Asynchronous communication between distributed components  
+- **Publish-Subscribe Models**: Event-driven communication patterns  
+
+### Concurrency Control Mechanisms
+
+1. **Locks and Semaphores**
+   - Mutual exclusion  
+   - Resource synchronisation  
+   
+2. **Atomic Transactions**
+   - ACID properties (Atomicity, Consistency, Isolation, Durability)  
+   - Ensuring data integrity  
+
+### Consistency Models
+
+#### Strong Consistency
+- Guarantees immediate, synchronized view across all nodes  
+- High overhead, lower performance  
+- Suitable for financial, transactional systems  
+
+#### Weak Consistency
+- Allows temporary divergence between node states  
+- Lower overhead, higher performance  
+- Appropriate for eventually consistent systems like caches  
+
+## Replication Strategies
+
+### Fault Tolerance Approaches
+- **Primary-Backup Model**
+- **Peer-to-Peer Replication**
+- **Quorum-Based Replication**
+
+### Synchronization Challenges
+- Network latency  
+- Conflict resolution  
+- Maintaining replica coherence  
+
+## Performance Considerations
+
+### Scalability Principles
+- Linear speedup goals  
+- Horizontal scaling  
+- Resource partitioning  
+
+### Latency and Throughput
+- Minimizing inter-node communication  
+- Optimizing data locality  
+- Caching strategies  
+
+
+## MapReduce
+
+Map reduce is an example of divide-and-conquer parallel processing:
+1. Map -
+2. Reduce -
+
+
+
+## Raft for Fault Tolerance
+
+## Replicated K/V store
+
+### Sample Implementation: Distributed Key-Value Store
+
+```{python}
+class DistributedKeyValueStore:
+    def __init__(self, nodes):
+        self.nodes = nodes
+        self.replication_factor = 3
+    
+    def put(self, key, value):
+        """Distribute key-value across nodes with replication"""
+        target_nodes = self._select_nodes(key)
+        for node in target_nodes:
+            node.store(key, value)
+    
+    def get(self, key):
+        """Retrieve value with consistency mechanism"""
+        nodes_with_key = self._find_nodes_with_key(key)
+        return self._resolve_conflicts(nodes_with_key)
+    
+    def _select_nodes(self, key):
+        """Deterministic node selection strategy"""
+        hash_value = hash(key)
+        return [self.nodes[i % len(self.nodes)] 
+                for i in range(self.replication_factor)]
+```
+
+
+
+## Sharded K/V service
+
+# References
+
+[^1] [MIT 6.5840 Distributed Systems](https://pdos.csail.mit.edu/6.824/)
+[^2] [UC Berkeley CS267 Applications of Parallel Computers](https://sites.google.com/lbl.gov/cs267-spr2024)
