@@ -2,6 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2024-12-17-duplicate-items.html",
+      "/posts/2024-11-25-distributed-systems.html",
       "/posts/2024-09-22-quantum-introduction.html",
       "/posts/2024-09-11-postgres-introduction.html",
       "/posts/2024-09-01-binary-tree-inversion.html",

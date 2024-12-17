@@ -1,0 +1,201 @@
+---
+title: "Duplicate Items"
+date: "2024-12-17"
+categories: 
+  - dsa
+  - algorithms
+  - data-structures
+  - basics
+description: "Analysis of different ways to solve finding duplicate items in an unsorted list"
+toc: true
+layout: post
+format:
+  html:
+    html-math-method: katex
+jupyter: python3
+---
+
+# Contains Duplicate
+
+## Problem
+
+Given an unsorted array of integers, determine if any value appears more than once. The function should return true if any value appears at least twice in the array, and false if every element is distinct.
+
+Example 1:
+```
+Input: nums = [1, 2, 3, 3]
+
+Output: true
+```
+
+Example 2:
+```
+Input: nums = [1, 2, 3, 4]
+
+Output: false
+```
+
+Ideally the solution would have $O(n)$ space and time complexity.
+
+
+## Initial Solution - Set Based Approach  
+  
+```{python}
+
+def hasDuplicate(nums: list[int]) -> bool:
+    items = set(nums)
+    return len(items) != len(nums)
+
+print('[1,2,3,3]',hasDuplicate([1,2,3,3]))
+print('[1,2,3,4]',hasDuplicate([1,2,3,4]))
+```
+
+### Complexity Analysis  
+  
+1. Creating a set from a list (items = set(nums)):  
+   - Python's set creation involves hashing each element i.e. for each element, Python must:  
+     - Compute the hash value ($O(1)$ for integers)  
+     - Handle potential hash collisions  
+     - Potentially resize the hash table  
+   - amortised time complexity is $O(n)$, but individual operations might take longer due to rehashing  
+  
+2. Length operations (len(items) and len(nums)):  
+   - Both len() operations are $O(1)$ in Python  
+   - Python maintains a length counter for both lists and sets
+   - No iteration is required to get the length
+
+The overall complexity is $O(n)$; constant factors involved in set creation can be significant due to the hashing overhead.
+Space complexity is $O(n)$ as we store each unique element in the set.
+
+## Modified Initial Solution - Exit Early Set Based Approach  
+
+The initial solution could be modified to exit early:
+
+```{python}
+
+def hasDuplicate(nums: list[int]) -> bool:
+    seen = set()
+    for num in nums:
+        if num in seen:
+            return True
+        seen.add(num)
+    return False
+
+print('[1,2,3,3]',hasDuplicate([1,2,3,3]))
+print('[1,2,3,4]',hasDuplicate([1,2,3,4]))
+```
+
+This approach can be more efficient:  
+- It stops immediately upon finding a duplicate and the set grows only until a duplicate is found  
+- Each set operation (in/add) is amortised $O(1)$  
+
+## Alternative Solution - Counter Approach  
+
+```{python}
+
+from collections import Counter
+
+def hasDuplicate(nums: list[int]) -> bool:
+    counter = Counter(nums)
+    return any(count > 1 for count in counter.values())
+
+print('[1,2,3,3]',hasDuplicate([1,2,3,3]))
+print('[1,2,3,4]',hasDuplicate([1,2,3,4]))
+```
+
+## Alternative Solution - Optimising for Space
+
+If the input array is mutable, we can sort the array with $O(n \log n)$ time, with the trade off for reduced space of $O(1)$:
+
+```{python}
+
+def hasDuplicate(nums: list[int]) -> bool:
+    if not nums:
+        return False
+    nums.sort()
+    return any(nums[i] == nums[i+1] for i in range(len(nums)-1))
+
+print('[1,2,3,3]',hasDuplicate([1,2,3,3]))
+print('[1,2,3,4]',hasDuplicate([1,2,3,4]))
+```
+
+## Alternative Solution - Array as Hash Table Approach
+
+If the input array is mutable, all numbers are positive, and the numbers are within the array's length i.e. $(0 to n-1)$ inclusive, then we can use the array indices as a hash function (each index corresponds to a unique value or element within the range) with the sign of each element in the array as a marker (i.e. as a visited marker array, if negated, marks that we have previously visited this value). This eliminates the need for additional space i.e. this is an in-place solution.
+
+```{python}
+
+def hasDuplicate(nums: list[int]) -> bool:
+    n = len(nums)
+    for i in range(n):
+        index = abs(nums[i])  # get the index of the item - abs() as duplicates may already be negated
+        if index >= n:        # skip if the index is out of range
+            continue
+        if nums[index] < 0:   # duplicate found if already negative
+            return True
+        nums[index] = -nums[index]  # mark as seen i.e. make negative
+    return False
+
+
+print('[1,2,3,3]',hasDuplicate([1,2,3,3]))
+print('[1,2,3,4]',hasDuplicate([1,2,3,4]))
+```
+
+## Visualising the Array-as-Hash-Table Approach
+
+Given input ``nums = [2, 3, 1, 2]``
+
+### Initial State
+```
+Index:     0   1   2   3
+nums:      2   3   1   2
+```
+
+1. i = 0, nums[0] = 2:
+   ```
+   - abs(nums[0]) = 2 as our index
+   - check nums[2] = 1 (positive)
+   - negate nums[2] to mark we've seen 2
+   
+   Index:     0   1   2   3
+   nums:      2   3  -1   2
+   ```
+
+2. i = 1, nums[1] = 3:
+   ```
+   - abs(nums[1]) = 3 as our index
+   - check nums[3] = 2 (positive)
+   - negate nums[3] to mark we've seen 3
+   
+   Index:     0   1   2   3
+   nums:      2   3  -1  -2
+   ```
+
+3. i = 2, nums[2] = -1:
+   ```
+   - abs(nums[2]) = 1 as our index
+   - check nums[1] = 3 (positive)
+   - negate nums[1] to mark we've seen 1
+   
+   Index:     0   1   2   3
+   nums:      2  -3  -1  -2
+   ```
+
+4. i = 3, nums[3] = -2:
+   ```
+   - abs(nums[3]) = 2 as our index
+   - check nums[2] = -1 (negative)
+   - since nums[2] is negative, return True as we have a duplicate
+   
+   Index:     0   1   2   3
+   nums:      2  -3  -1  -2
+   ```
+
+- When we encounter a number ``n``, we use its absolute value as an index and negate the value at that index.  
+- If we later find that value at ``index = abs(n)`` is already negative, it means we've seen this number before.  
+- This approach cleverly uses the array itself as its own hash table, with the sign bit serving as our presence marker.  
+
+
+# References
+
+[1] [Neetcode Contains Duplicate](https://neetcode.io/problems/duplicate-integer)
