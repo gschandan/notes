@@ -1,0 +1,58 @@
+---
+title: "Amortised Time Complexity"
+date: "2024-12-31"
+categories: 
+  - dsa
+  - algorithms
+  - data-structures
+  - basics
+  - time-complexity
+description: "Notes on amortised time complexity"
+toc: true
+layout: post
+format:
+  html:
+    html-math-method: katex
+jupyter: python3
+---
+
+## Amortised Time Complexity
+
+Amortised analysis considers the averaged cost of operations over time, rather than just the worst case for each individual operation.
+
+### Dynamic Array
+
+Consider Python's list (dynamic array) append operation:
+```{python}
+nums = []
+for i in range(10):
+    nums.append(i)  # Seems O(1), but occasionally triggers resize
+```
+
+- Most appends: $O(1)$ - simply add an element
+- Occasional resize: $O(n)$ - create new array, copy all elements
+- Amortised cost: $O(1)$ - the expensive resizes happen so rarely that the average cost per operation is constant
+
+### Hash Table
+
+```{python}
+from collections import Counter 
+counter = Counter()
+for char in "hello":
+    counter[char] += 1  # Usually O(1), but may trigger rehash
+```
+
+- Normal insertion: $O(1)$ - compute hash, store value
+- Rehashing: $O(n)$ - rebuild hash table with larger capacity
+- Amortised cost: $O(1)$ - expensive rehashing is rare enough that average cost remains constant
+
+This is why it can be said that Counter or set operations are "Amortised $O(1)$" - while individual operations might occasionally take longer, the average cost over many operations approaches $O(1)$.
+
+### Memory Allocation Pattern
+```
+Initial size: 4
+Resize at: 5th element (8), 9th element (16)...
+
+Timeline:
+[1,2,3,4] → resize → [1,2,3,4,5,6,7,8] → resize → [1,2,3,4,5,6,7,8,9,...]
+```

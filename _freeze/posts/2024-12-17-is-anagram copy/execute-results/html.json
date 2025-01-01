@@ -1,0 +1,12 @@
+{
+  "hash": "499cce8753e44c6a34e5cf9e3ae95f1d",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Amortised Time Complexity\"\ndate: \"2024-12-31\"\ncategories: \n  - dsa\n  - algorithms\n  - data-structures\n  - basics\n  - time-complexity\ndescription: \"Notes on amortised time complexity\"\ntoc: true\nlayout: post\nformat:\n  html:\n    html-math-method: katex\njupyter: python3\n---\n\n\n## Amortised Time Complexity\n\nAmortised analysis considers the averaged cost of operations over time, rather than just the worst case for each individual operation.\n\n### Dynamic Array\n\nConsider Python's list (dynamic array) append operation:\n\n::: {#935cc07e .cell execution_count=1}\n``` {.python .cell-code}\nnums = []\nfor i in range(10):\n    nums.append(i)  # Seems O(1), but occasionally triggers resize\n```\n:::\n\n\n- Most appends: $O(1)$ - simply add an element\n- Occasional resize: $O(n)$ - create new array, copy all elements\n- Amortised cost: $O(1)$ - the expensive resizes happen so rarely that the average cost per operation is constant\n\n### Hash Table\n\n::: {#a9e2c3e5 .cell execution_count=2}\n``` {.python .cell-code}\nfrom collections import Counter \ncounter = Counter()\nfor char in \"hello\":\n    counter[char] += 1  # Usually O(1), but may trigger rehash\n```\n:::\n\n\n- Normal insertion: $O(1)$ - compute hash, store value\n- Rehashing: $O(n)$ - rebuild hash table with larger capacity\n- Amortised cost: $O(1)$ - expensive rehashing is rare enough that average cost remains constant\n\nThis is why it can be said that Counter or set operations are \"Amortised $O(1)$\" - while individual operations might occasionally take longer, the average cost over many operations approaches $O(1)$.\n\n### Memory Allocation Pattern\n```\nInitial size: 4\nResize at: 5th element (8), 9th element (16)...\n\nTimeline:\n[1,2,3,4] → resize → [1,2,3,4,5,6,7,8] → resize → [1,2,3,4,5,6,7,8,9,...]\n```\n\n",
+    "supporting": [
+      "2024-12-17-is-anagram copy_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
