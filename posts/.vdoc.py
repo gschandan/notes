@@ -41,106 +41,123 @@
 #
 #
 #
-#
-#
+def isAnagram(s: str, t: str) -> bool:
 
-def hasDuplicate(nums: list[int]) -> bool:
-    items = set(nums)
-    return len(items) != len(nums)
-
-print('[1,2,3,3]',hasDuplicate([1,2,3,3]))
-print('[1,2,3,4]',hasDuplicate([1,2,3,4]))
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-
-def hasDuplicate(nums: list[int]) -> bool:
-    seen = set()
-    for num in nums:
-        if num in seen:
-            return True
-        seen.add(num)
-    return False
-
-print('[1,2,3,3]',hasDuplicate([1,2,3,3]))
-print('[1,2,3,4]',hasDuplicate([1,2,3,4]))
-#
-#
-#
-#
-#
-#
-#
-#
-#
-
-from collections import Counter
-
-def hasDuplicate(nums: list[int]) -> bool:
-    counter = Counter(nums)
-    return any(count > 1 for count in counter.values())
-
-print('[1,2,3,3]',hasDuplicate([1,2,3,3]))
-print('[1,2,3,4]',hasDuplicate([1,2,3,4]))
-#
-#
-#
-#
-#
-#
-#
-
-def hasDuplicate(nums: list[int]) -> bool:
-    if not nums:
+    if len(s) != len(t):
         return False
-    nums.sort()
-    return any(nums[i] == nums[i+1] for i in range(len(nums)-1))
 
-print('[1,2,3,3]',hasDuplicate([1,2,3,3]))
-print('[1,2,3,4]',hasDuplicate([1,2,3,4]))
-#
-#
-#
-#
-#
-#
-#
+    return sorted(s) == sorted(t)
 
-def hasDuplicate(nums: list[int]) -> bool:
-    n = len(nums)
-    for i in range(n):
-        index = abs(nums[i])  # Get the corresponding index
-        if index >= n:        # Skip if the index is out of range
-            continue
-        if nums[index] < 0:   # Duplicate found
-            return True
-        nums[index] = -nums[index]  # Mark the number as seen
-    return False
+print("Test 1:", isAnagram("racecar", "carrace"))
+print("Test 2:", isAnagram("jar", "jam"))
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+def isAnagram(s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+    
+    char_count = [0] * 26
+    for i in range(len(s)):
+        char_count[ord(s[i]) - ord('a')] += 1
+        char_count[ord(t[i]) - ord('a')] -= 1
+    
 
+    return all(count == 0 for count in char_count)
 
-print('[1,2,3,3]',hasDuplicate([1,2,3,3]))
-print('[1,2,3,4]',hasDuplicate([1,2,3,4]))
+print("Test 1:", isAnagram("racecar", "carrace")) 
+print("Test 2:", isAnagram("jar", "jam"))          
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+from collections import defaultdict
+
+def isAnagram(s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+    
+    char_count = defaultdict(int)
+    
+    # Count characters in both strings
+    for s_char, t_char in zip(s, t):
+        char_count[s_char] += 1
+        char_count[t_char] -= 1
+    
+    # Check if all counts are zero
+    return all(count == 0 for count in char_count.values())
+
+# Test cases
+print("Test 1:", isAnagram("racecar", "carrace"))  # True
+print("Test 2:", isAnagram("jar", "jam"))          # False
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #
 #
 #

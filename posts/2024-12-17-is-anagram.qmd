@@ -1,0 +1,189 @@
+---
+title: "Anagram"
+date: "2024-12-17"
+categories: 
+  - dsa
+  - algorithms
+  - data-structures
+  - basics
+description: "Analysis of different ways to solve finding out if two input strings are anagrams"
+toc: true
+layout: post
+format:
+  html:
+    html-math-method: katex
+jupyter: python3
+---
+
+# Valid Anagram
+
+## Problem Statement
+
+Given two strings `s` and `t`, determine if they are anagrams of each other.
+
+### Examples
+
+Example 1:
+```
+Input: s = "racecar", t = "carrace"
+Output: true
+Explanation: Both strings contain exactly the same characters: 'a', 'c', 'c', 'e', 'r', 'r'
+```
+
+### Constraints
+- Both strings consist only of lowercase English letters
+- The strings can be empty or have different lengths
+
+## Initial Solution - Sorting Approach
+
+The most intuitive approach might be to sort both strings and compare them:
+
+```{python}
+def isAnagram(s: str, t: str) -> bool:
+
+    if len(s) != len(t):
+        return False
+
+    return sorted(s) == sorted(t)
+
+print("Test 1:", isAnagram("racecar", "carrace"))
+print("Test 2:", isAnagram("jar", "jam"))
+```
+
+### Complexity Analysis
+
+1. Sorting each string:
+   - Python's default sorting algorithm (Timsort) has a time complexity of $O(n \log n)$
+   - Where n is the length of the string
+
+2. String comparison (sorted(s) == sorted(t)):
+   - Requires comparing each character: $O(n)$
+   - But this is overshadowed by the sorting complexity
+
+Overall:  
+- Time Complexity: $O(n \log n)$  
+- Space Complexity: $O(n)$ for creating new sorted strings
+
+## Optimised Solution - Character Count Approach
+
+We can achieve better time complexity using a character frequency counter:
+
+```{python}
+def isAnagram(s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+    
+    char_count = [0] * 26
+    for i in range(len(s)):
+        char_count[ord(s[i]) - ord('a')] += 1
+        char_count[ord(t[i]) - ord('a')] -= 1
+    
+
+    return all(count == 0 for count in char_count)
+
+print("Test 1:", isAnagram("racecar", "carrace")) 
+print("Test 2:", isAnagram("jar", "jam"))          
+```
+
+### Insights:
+
+1. An anagram must have exactly the same number of each character
+2. We only need to track 26 possible characters (lowercase letters)
+3. We can increment counts for one string and decrement for the other
+4. If the strings are anagrams, all final counts will be zero
+
+### Complexity Analysis
+
+1. Length comparison: $O(1)$
+2. Creating counter array: $O(1)$ (fixed size of 26)
+3. Counting characters: $O(n)$ where n is string length
+4. Checking final counts: $O(1)$ (always 26 comparisons)
+
+Overall:
+- Time Complexity: $O(n)$
+- Space Complexity: $O(1)$ (fixed size array)
+
+or alternatively:
+```{python}
+from collections import Counter
+
+def isAnagram(s: str, t: str) -> bool:
+    counter_s = Counter(s)
+    counter_t = Counter(t)
+    return counter_s == counter_t
+
+print("Test 1:", isAnagram("racecar", "carrace"))
+print("Test 2:", isAnagram("jar", "jam"))              
+```
+
+### Complexity Analysis
+
+The Counter approach has some key implementation details worth understanding:
+
+1. Counter Creation ($O(n)$):
+   - Each Counter() call iterates through its input string once
+   - Counter uses a hash table internally for frequency counting
+   - Each character insertion is amortised $O(1)$
+
+2. Counter Comparison ($O(n)$):
+   - Counter comparison checks if all elements and their frequencies match
+   - Must examine each unique character at least once
+
+Overall:  
+- Time Complexity: $O(n)$ where n is the length of the strings  
+- Space Complexity: $O(k)$ where k is the size of the character set (26 for lowercase letters)
+
+
+## Alternative Solution - Hash Map Approach
+
+For cases where we might have a larger character set (not just lowercase letters), we can use a hash map:
+
+```{python}
+from collections import defaultdict
+
+def isAnagram(s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+    
+    char_count = defaultdict(int)
+    
+    for s_char, t_char in zip(s, t):
+        char_count[s_char] += 1
+        char_count[t_char] -= 1
+    
+    return all(count == 0 for count in char_count.values())
+
+print("Test 1:", isAnagram("racecar", "carrace")) 
+print("Test 2:", isAnagram("jar", "jam"))
+```
+
+### Complexity Analysis
+
+1. Dictionary operations (defaultdict):
+   - Each insertion/lookup is amortised $O(1)$
+   
+2. Space considerations:
+   - Grows with unique characters in input
+   - Still $O(k)$ where k is the size of the character set
+
+Overall:  
+- Time Complexity: $O(n)$  
+- Space Complexity: $O(k)$ where k is the character set size  
+
+## Performance Comparison
+
+| Approach | Time Complexity | Space Complexity | Best Used When |
+|----------|----------------|------------------|----------------|
+| Sorting | $O(n \log n)$ | $O(n)$ | Simple solution needed |
+| Array Counter | $O(n)$ | $O(1)$ | Known small character set |
+| Hash Map | $O(n)$ | $O(k)$ | Large/unknown character set |
+
+## Takeaways
+
+1. The array counter approach is most efficient for this specific problem due to the constraint of lowercase letters only.
+2. The hash map approach is more flexible and can handle any character set.
+
+# References
+
+[1] [Valid Anagram](hhttps://neetcode.io/problems/is-anagram)  
+[2] [LeetCode Valid Anagram](https://leetcode.com/problems/valid-anagram/)
